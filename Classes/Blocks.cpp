@@ -8,6 +8,7 @@
 #include "Blocks.h"
 
 #include "KeyMgr.h"
+#include "MapMgr.h"
 
 #include "Define.h"
 
@@ -15,12 +16,16 @@ USING_NS_CC;
 
 Blocks::Blocks()
     : isDrop_(false)
+    , downSpeed_(4)
 {
     memset(blocks_, 0, sizeof(blocks_[0]) * BLOCKCNT);
 }
 
 Blocks::~Blocks()
 {
+    MapMgr::getInstance()->setNullCurBlocks();
+    for(auto& a : blocks_)
+        a->pSprite_->release();
 }
 
 void Blocks::move(int dir)
@@ -66,6 +71,22 @@ bool Blocks::checkLimitedPos(int dir)
     return false;
 }
 
+bool Blocks::checkLimintedRotate(cocos2d::Vec2* pos)
+{
+    for(int i = 0; i < BLOCKCNT; ++i)
+    {
+        if(MIN_WIDTH >= pos->x || MAX_WIDTH <= pos->x || MIN_HEIGHT >= pos->y)
+        {
+            KeyMgr::getInstance()->minusUpKeyPressedCnt();
+            return true;
+        }
+     
+        pos += i;
+    }
+    
+    return false;
+}
+
 void Blocks::drop()
 {
     if(false == isDrop_)
@@ -87,9 +108,9 @@ void Blocks::drop()
         
         if(MIN_HEIGHT >= posY)
         {
-            fixPos();
-            
+            fixPosY();
             isDrop_ = false;
+            delete this;
             return;
         }
     }
@@ -102,6 +123,7 @@ void Blocks::drop()
          float posY = block->pSprite_->getPositionY();
          posY -= BLOCKSIZE;
          block->pSprite_->setPositionY(posY);
+         block->setPosY(posY);
      }
 }
 
@@ -110,8 +132,52 @@ void Blocks::fixPos(cocos2d::Vec2 variance)
     for(auto& block : blocks_)
     {
         Vec2 curPos = block->pSprite_->getPosition();
-        curPos += variance;
         
+        curPos += variance;
         block->pSprite_->setPosition(curPos);
+        block->setPos(curPos);
+    }
+}
+ 
+void Blocks::fixPosY()
+{
+    for(auto& block : blocks_)
+    {
+        float posY = block->pSprite_->getPositionY();
+        
+        int quotientY = posY / BLOCKSIZE;
+
+        posY = (quotientY) * BLOCKSIZE;
+        
+        block->pSprite_->setPositionY(posY);
+        block->setPosY(posY);
+        
+        MapMgr::getInstance()->includeGridMapBlocks(block->pSprite_);
+    }
+    
+}
+
+void Blocks::autoMoveDown()
+{
+    if(true == isDrop_) //스페이스바 눌르면 이 함수는 작동 안하도록!
+        return;
+    
+    for(auto& block : blocks_)
+    {
+        float posY = block->pSprite_->getPositionY();
+        
+        if(MIN_HEIGHT >= posY)
+        {
+            fixPosY();
+            delete this;
+            return;
+        }
+    }
+    
+    for(auto& block : blocks_)
+    {
+        float posY = block->pSprite_->getPositionY();
+        block->pSprite_->setPositionY(posY - (BLOCKSIZE >> downSpeed_));
+        block->setPosY(posY - (BLOCKSIZE >> downSpeed_));
     }
 }

@@ -19,8 +19,8 @@ public:
     
 private:
     std::vector<bool> isExisting_[MAP_HEIGHT];
-    std::vector<Blocks*>  blocks[MAP_HEIGHT];
-    Blocks* pCurBlocks;
+    std::vector<cocos2d::Sprite*>  gridMapBlocks_[MAP_HEIGHT];
+    Blocks* pCurBlocks_;
     
 public:
     static MapMgr* getInstance();
@@ -31,12 +31,17 @@ public:
     
 public:
     void setIsDrop(bool isDrop);
+    void setNullCurBlocks() { pCurBlocks_ = nullptr; }
     
 public:
     Blocks* makeNewBlocks();
     void move(int dir);
     void rotate(int dir, int keyPressedCnt);
     void drop();
+    void autoMoveDown();
+    
+public:
+    void includeGridMapBlocks(cocos2d::Sprite*);
     
 private:
     MapMgr();

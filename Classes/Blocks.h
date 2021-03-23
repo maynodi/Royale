@@ -24,6 +24,16 @@ struct Block //최소 단위 1블럭 -> 얘가 4개 모여서 Blocks
         pSprite_->setPosition(pos_);
         pSprite_->setAnchorPoint(cocos2d::Vec2(1, 0));
     }
+    
+    void setPos(cocos2d::Vec2 pos)
+    {
+        pos_ = pos;
+    }
+    
+    void setPosY(float posY)
+    {
+        pos_.y = posY;
+    }
 };
 
 class Blocks
@@ -31,12 +41,13 @@ class Blocks
 protected:
     Block* blocks_[BLOCKCNT]; // Block을 4개 가지고 있는 변수
     bool isDrop_;
+    int downSpeed_;
     
 public:
     virtual bool init() = 0;
     
 public:
-    cocos2d::Sprite* getBlockSprite(int idx) { return blocks_[idx]->pSprite_; }
+    cocos2d::Sprite* getBlockSprite(int idx) { return (blocks_[idx])->pSprite_; }
        
 public:
     void setIsDrop(bool isDrop) { isDrop_ = isDrop; }
@@ -45,8 +56,11 @@ public:
     void move(int dir);
     bool checkLimitedPos(int dir);
     virtual void rotate(int dir, int keyPressedCnt) = 0;
+    bool checkLimintedRotate(cocos2d::Vec2* pos);
     void drop();
     void fixPos(cocos2d::Vec2 variance = cocos2d::Vec2::ZERO);
+    void fixPosY();
+    void autoMoveDown();
     
 public:
     Blocks();

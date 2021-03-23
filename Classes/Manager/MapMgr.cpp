@@ -46,34 +46,71 @@ void MapMgr::destroyInstance()
 
 void MapMgr::init()
 {
-   
+    for(int i = 0; i < MAP_HEIGHT; ++i)
+    {
+        gridMapBlocks_[i].resize(MAP_WIDTH, nullptr);
+        isExisting_[i].resize(MAP_WIDTH, false);
+    }
+
 }
 
 void MapMgr::setIsDrop(bool isDrop)
 {
-    pCurBlocks->setIsDrop(isDrop);
+    if(nullptr == pCurBlocks_)
+        return;
+    
+    pCurBlocks_->setIsDrop(isDrop);
 }
 
 Blocks* MapMgr::makeNewBlocks()
 {
     // enum으로 분기를 태워야되남...
     Blocks* pBlocks = Blocks_J::create();
-    pCurBlocks = pBlocks;
+    pCurBlocks_ = pBlocks;
     
-    return pCurBlocks;
+    return pCurBlocks_;
 }
 
 void MapMgr::move(int dir)
 {
-    pCurBlocks->move(dir);
+    if(nullptr == pCurBlocks_)
+        return;
+    
+    pCurBlocks_->move(dir);
 }
 
 void MapMgr::rotate(int dir, int keyPressedCnt)
 {
-    pCurBlocks->rotate(dir, keyPressedCnt);
+    if(nullptr == pCurBlocks_)
+        return;
+    
+    pCurBlocks_->rotate(dir, keyPressedCnt);
 }
 
 void MapMgr::drop()
 {
-    pCurBlocks->drop();
+    if(nullptr == pCurBlocks_)
+        return;
+    
+    pCurBlocks_->drop();
+}
+
+void MapMgr::autoMoveDown()
+{
+    if(nullptr == pCurBlocks_)
+        return;
+    
+    pCurBlocks_->autoMoveDown();
+}
+
+void MapMgr::includeGridMapBlocks(cocos2d::Sprite* sprite)
+{
+    sprite->retain();
+    
+    Vec2 pos = sprite->getPosition();
+    int rowIndex = pos.y / BLOCKSIZE - 1;
+    int colIndex = pos.x / BLOCKSIZE - 1;
+    
+    gridMapBlocks_[rowIndex][colIndex] = sprite;
+    
 }

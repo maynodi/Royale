@@ -28,6 +28,9 @@ public:
     virtual bool init() override;
     
 public:
+    void minusUpKeyPressedCnt() { upKeyPressedCnt_ -= 1; }
+    
+public:
     void onKeyPressed(KEY keyCode, cocos2d::Event* event);
     void onKeyReleased(KEY keyCode, cocos2d::Event* event);
     

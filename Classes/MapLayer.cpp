@@ -79,6 +79,7 @@ bool MapLayer::init()
 
 void MapLayer::update(float dt)
 {
+    MapMgr::getInstance()->autoMoveDown();    
     MapMgr::getInstance()->drop();
 }
 

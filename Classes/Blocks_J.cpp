@@ -60,14 +60,32 @@ bool Blocks_J::init()
 
 void Blocks_J::rotate(int dir, int keyPressedCnt)
 {
-    Vec2 newPos = {};
+    // 2개로 나눠야함
+    // 1. 아래 블록이 있는 경우
+    
+    
+    
+    
+    
+    // 2. 아래 아무것도 없는 경우
+    // 일단 미리 회전 후의 좌표를 계산해놓고
+    Vec2 newPos[BLOCKCNT] = {};
     for(int i = 0; i < BLOCKCNT; ++i)
     {
         Vec2 curPos = blocks_[i]->pSprite_->getPosition();
-
-        newPos.x = curPos.x + BLOCKSIZE * (posVariance::posVariance_J[keyPressedCnt][(i * 2)]);
-        newPos.y = curPos.y + BLOCKSIZE * (posVariance::posVariance_J[keyPressedCnt][(i * 2) + 1]);
-
-        blocks_[i]->pSprite_->setPosition(newPos);
+        
+        newPos[i].x = curPos.x + BLOCKSIZE * (posVariance::posVariance_J[keyPressedCnt][(i * 2)]);
+        newPos[i].y = curPos.y + BLOCKSIZE * (posVariance::posVariance_J[keyPressedCnt][(i * 2) + 1]);
     }
+    
+    // 회전에 제한이 걸리는 위치인가?
+    if(true == checkLimintedRotate(newPos))
+        return;
+    
+   for(int i = 0; i < BLOCKCNT; ++i)
+   {
+       blocks_[i]->pSprite_->setPosition(newPos[i]);
+       blocks_[i]->setPos(newPos[i]);
+   }
+    
 }
