@@ -14,45 +14,104 @@
 USING_NS_CC;
 
 Blocks::Blocks()
+    : isDrop_(false)
 {
+    memset(blocks_, 0, sizeof(blocks_[0]) * BLOCKCNT);
 }
 
 Blocks::~Blocks()
-{    
+{
 }
 
-void Blocks::move()
+void Blocks::move(int dir)
 {
-//    bool isLeft = KeyMgr::getInstance()->getIsPressed(KEY::KEY_LEFT_ARROW);
-//    bool isRight = KeyMgr::getInstance()->getIsPressed(KEY::KEY_RIGHT_ARROW);
-//    bool isUp= KeyMgr::getInstance()->getIsPressed(KEY::KEY_UP_ARROW);
-//    bool isDown = KeyMgr::getInstance()->getIsPressed(KEY::KEY_DOWN_ARROW);
-//
-//    Vec2 posVariance = {};
-//    if(true == isLeft)
-//    {
-//        posVariance = Vec2(-1, 0);
-//    }
-//    else if(true == isRight)
-//    {
-//        posVariance = Vec2(1, 0);
-//    }
-//    else if(true == isUp)
-//    {
-//        //회전
-//    }
-//    else if(true == isDown)
-//    {
-//        posVariance = Vec2(0, -1);
-//    }
-//
-//    posVariance *= BLOCKSIZE;
-//    for(int i = 0; i < BLOCKCNT; ++i)
-//    {
-//        Vec2 curPos = blocks_[i]->pSprite_->getPosition();
-//        Vec2 newPos = Vec2(curPos.x + posVariance.x, curPos.y + posVariance.y);
-//
-//        blocks_[i]->pSprite_->setPosition(newPos);
-//    }
+    // 더 이상 못 가는 곳인가?
+    if(true == checkLimitedPos(dir))
+        return;
     
+    Vec2 posVariance = {};
+    switch (dir) {
+        case DIR_LEFT:
+            posVariance = Vec2(-1, 0);
+            break;
+        case DIR_RIGHT:
+            posVariance = Vec2(1, 0);
+            break;
+        case DIR_DOWN:
+            posVariance = Vec2(0, -1);
+            break;
+        default:
+            break;
+    }
+    
+    posVariance *= BLOCKSIZE;
+    fixPos(posVariance);
+}
+
+bool Blocks::checkLimitedPos(int dir)
+{
+    for(auto& block : blocks_)
+    {
+        Vec2 curPos = block->pSprite_->getPosition();
+        
+        if((DIR_LEFT == dir && MIN_WIDTH >= curPos.x)
+           || (DIR_RIGHT == dir && MAX_WIDTH <= curPos.x)
+           || (DIR_DOWN == dir && MIN_HEIGHT >= curPos.y))
+        {
+            fixPos();
+            return true;
+        }
+    }
+    
+    return false;
+}
+
+void Blocks::drop()
+{
+    if(false == isDrop_)
+        return;
+    
+    // 2개로 나눠야함
+    // 1. 아래 블록이 있는 경우
+    
+    
+    
+    
+    
+    // 2. 아래 아무것도 없는 경우
+    // y가 하나라도 0보다 작거나 같아지면 스돕 -> 그 위치에 박제
+    // 포문돈다?
+    for(auto& block : blocks_)
+    {
+        float posY = block->pSprite_->getPositionY();
+        
+        if(MIN_HEIGHT >= posY)
+        {
+            fixPos();
+            
+            isDrop_ = false;
+            return;
+        }
+    }
+    
+    // 0되기 전까지는 계속 내려와야함
+    // 계속 내려오려면 얘가 계속 업뎃타야되는데..
+    // 업뎃을 돌수 있는 곳 맵레이어 , 겜신
+    for(auto& block : blocks_)
+     {
+         float posY = block->pSprite_->getPositionY();
+         posY -= BLOCKSIZE;
+         block->pSprite_->setPositionY(posY);
+     }
+}
+
+void Blocks::fixPos(cocos2d::Vec2 variance)
+{
+    for(auto& block : blocks_)
+    {
+        Vec2 curPos = block->pSprite_->getPosition();
+        curPos += variance;
+        
+        block->pSprite_->setPosition(curPos);
+    }
 }

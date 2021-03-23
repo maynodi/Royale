@@ -7,8 +7,13 @@
 
 #pragma once
 
-namespace location //기본위치
+namespace initPos
 {
+    int initPos_J[2] = {11, 36}; // x, y
+}
+namespace location // 기본위치
+{
+    // Block_J
     int location_J[2][BLOCKCNT] =
     {
         {0, 0, 0, -1}, // x

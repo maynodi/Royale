@@ -7,12 +7,15 @@
 
 #include "KeyMgr.h"
 
+#include "MapMgr.h"
+
 USING_NS_CC;
 
 KeyMgr* KeyMgr::pInstance_ = nullptr;
 
 KeyMgr::KeyMgr()
     : pListner_(nullptr)
+    , upKeyPressedCnt_(0)
 {
     
 }
@@ -27,7 +30,6 @@ KeyMgr*  KeyMgr::getInstance()
     if(nullptr == pInstance_)
     {
         pInstance_ = new(std::nothrow) KeyMgr;
-        pInstance_->autorelease();
         pInstance_->init();
     }
     
@@ -38,7 +40,7 @@ void KeyMgr::destroyInstance()
 {
     if(nullptr != pInstance_)
     {
-        delete pInstance_;
+        pInstance_->release();
         pInstance_ = nullptr;
     }
 }
@@ -55,12 +57,54 @@ bool KeyMgr::init()
     return true;
 }
 
-void KeyMgr::onKeyPressed(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event* event)
+void KeyMgr::onKeyPressed(KEY keyCode, cocos2d::Event* event)
 {
-    keyMap_[keyCode] = true;
+    switch (keyCode) {
+        case KEY::KEY_LEFT_ARROW:
+        {
+            MapMgr::getInstance()->move(DIR_LEFT);
+            break;
+        }
+        case KEY::KEY_RIGHT_ARROW:
+        {
+            MapMgr::getInstance()->move(DIR_RIGHT);
+            break;
+        }
+        case KEY::KEY_UP_ARROW: // 회전
+        {
+            if(3 < upKeyPressedCnt_)
+            {
+                upKeyPressedCnt_ = 0;
+            }
+            
+            MapMgr::getInstance()->rotate(DIR_UP, upKeyPressedCnt_);
+            break;
+        }
+        case KEY::KEY_DOWN_ARROW:
+        {
+            MapMgr::getInstance()->move(DIR_DOWN);
+            break;
+        }
+        case KEY::KEY_SPACE: // 쭉 내려오기
+        {
+            MapMgr::getInstance()->setIsDrop(true);
+            break;
+        }
+        default:
+            break;
+    }
+    
 }
 
-void KeyMgr::onKeyReleased(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event* event)
+void KeyMgr::onKeyReleased(KEY keyCode, cocos2d::Event* event)
 {
-    keyMap_[keyCode] = false;
+    switch (keyCode) {
+        case KEY::KEY_UP_ARROW: // 회전
+        {
+            upKeyPressedCnt_ += 1;
+            break;
+        }
+        default:
+            break;
+    }
 }

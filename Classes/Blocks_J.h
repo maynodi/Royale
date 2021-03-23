@@ -12,21 +12,18 @@
 
 class Blocks_J : public Blocks
 {
-//private:
-//   Block* blocks_[BLOCKCNT]; // Block을 4개 가지고 있는 변수
-
 public:
     static Blocks_J* create();
     
 public:
     virtual bool init() override;
     
-//public:
-//    virtual cocos2d::Sprite* getBlockSprite(int idx) override;    
+public:
+    virtual void rotate(int dir, int keyPressedCnt) override;
     
 public:
     Blocks_J();
-    ~Blocks_J();
+    virtual ~Blocks_J();
 };
 
 

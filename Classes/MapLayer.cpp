@@ -53,6 +53,9 @@ bool MapLayer::init()
     this->setContentSize(Size(MAP_WIDTH * BLOCKSIZE, MAP_HEIGHT * BLOCKSIZE));
     this->setPosition(Vec2(BLOCKSIZE, BLOCKSIZE));
     
+    KeyMgr* pKeyMgr = KeyMgr::getInstance();
+    this->addChild(pKeyMgr);
+    
     //map grid
     DrawGridMap();
  
@@ -76,7 +79,7 @@ bool MapLayer::init()
 
 void MapLayer::update(float dt)
 {
-    MapMgr::getInstance()->move();
+    MapMgr::getInstance()->drop();
 }
 
 void MapLayer::DrawGridMap()

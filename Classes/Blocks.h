@@ -30,23 +30,27 @@ class Blocks
 {
 protected:
     Block* blocks_[BLOCKCNT]; // Block을 4개 가지고 있는 변수
-
+    bool isDrop_;
+    
 public:
     virtual bool init() = 0;
-    // 이동함수나 회전함수도 여기 =0으로 넣을까..?
-    
-//public:
-//    virtual cocos2d::Sprite* getBlockSprite(int idx) = 0;
     
 public:
     cocos2d::Sprite* getBlockSprite(int idx) { return blocks_[idx]->pSprite_; }
+       
+public:
+    void setIsDrop(bool isDrop) { isDrop_ = isDrop; }
     
 public:
-    void move();
+    void move(int dir);
+    bool checkLimitedPos(int dir);
+    virtual void rotate(int dir, int keyPressedCnt) = 0;
+    void drop();
+    void fixPos(cocos2d::Vec2 variance = cocos2d::Vec2::ZERO);
     
 public:
     Blocks();
-    ~Blocks();
+    virtual ~Blocks();
 };
 
 

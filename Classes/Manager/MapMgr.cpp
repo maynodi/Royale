@@ -21,7 +21,7 @@ MapMgr::MapMgr()
 
 MapMgr::~MapMgr()
 {
-    
+    //블럭들 관련해서 해야하나?
 }
 
 MapMgr*  MapMgr::getInstance()
@@ -49,16 +49,31 @@ void MapMgr::init()
    
 }
 
+void MapMgr::setIsDrop(bool isDrop)
+{
+    pCurBlocks->setIsDrop(isDrop);
+}
+
 Blocks* MapMgr::makeNewBlocks()
 {
     // enum으로 분기를 태워야되남...
-    Blocks_J* pBlocks = Blocks_J::create();
+    Blocks* pBlocks = Blocks_J::create();
     pCurBlocks = pBlocks;
     
     return pCurBlocks;
 }
 
-void MapMgr::move()
+void MapMgr::move(int dir)
 {
-    pCurBlocks->move();
+    pCurBlocks->move(dir);
+}
+
+void MapMgr::rotate(int dir, int keyPressedCnt)
+{
+    pCurBlocks->rotate(dir, keyPressedCnt);
+}
+
+void MapMgr::drop()
+{
+    pCurBlocks->drop();
 }

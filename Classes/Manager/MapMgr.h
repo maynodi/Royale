@@ -30,8 +30,13 @@ public:
     void init();
     
 public:
+    void setIsDrop(bool isDrop);
+    
+public:
     Blocks* makeNewBlocks();
-    void move();
+    void move(int dir);
+    void rotate(int dir, int keyPressedCnt);
+    void drop();
     
 private:
     MapMgr();

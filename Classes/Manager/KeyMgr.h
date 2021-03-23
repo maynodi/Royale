@@ -18,7 +18,7 @@ public:
 
 private:
     cocos2d::EventListenerKeyboard* pListner_;
-    std::map<KEY, bool> keyMap_;
+    int upKeyPressedCnt_;
     
 public:
     static KeyMgr* getInstance();
@@ -26,9 +26,6 @@ public:
     
 public:
     virtual bool init() override;
-    
-public:
-    bool getIsPressed(KEY keyCode) { return keyMap_[keyCode]; }
     
 public:
     void onKeyPressed(KEY keyCode, cocos2d::Event* event);
