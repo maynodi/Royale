@@ -58,28 +58,24 @@ bool MapLayer::init()
     
     //map grid
     DrawGridMap();
- 
-    //------------------------------------ 나중에 위에서 떨어지게 해야함..
-    Blocks* pBlocks = MapMgr::getInstance()->makeNewBlocks();
-    
-    Sprite* pSprite = nullptr;
-    for(int i = 0; i < BLOCKCNT; ++i)
-    {
-        pSprite = pBlocks->getBlockSprite(i);
-            
-        this->addChild(pSprite);
-    }
-    //------------------------------------
-
-    
-    this->scheduleUpdate();
     
     return true;
 }
 
+void MapLayer::onEnter()
+{
+    Layer::onEnter();
+    
+    // 맨 처음 블럭 생성
+    MapMgr::getInstance()->makeNewBlocks(BLOCKTYPE::S);
+    
+    schedule(schedule_selector(MapLayer::autoMoveDown), 1.f);
+    this->scheduleUpdate();
+}
+
 void MapLayer::update(float dt)
 {
-    MapMgr::getInstance()->autoMoveDown();    
+    MapMgr::getInstance()->makeNewBlocks(rand() % BLOCKTYPE::END);
     MapMgr::getInstance()->drop();
 }
 
@@ -98,4 +94,9 @@ void MapLayer::DrawGridMap()
     }
     
     this->addChild(pNode);
+}
+
+void MapLayer::autoMoveDown(float dt)
+{
+    MapMgr::getInstance()->autoMoveDown();
 }

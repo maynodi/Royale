@@ -7,6 +7,7 @@
 
 #pragma once
 
+#define MAPLAYER_TAG 0
 #define KEY cocos2d::EventKeyboard::KeyCode
 
 #define MAP_WIDTH 20
@@ -26,3 +27,4 @@
 #define POS_Y 1
 
 enum DIR {DIR_LEFT, DIR_RIGHT, DIR_UP, DIR_DOWN};
+enum BLOCKTYPE { J, I, S, T, O, END};

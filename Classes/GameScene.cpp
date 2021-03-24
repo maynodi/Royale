@@ -1,5 +1,6 @@
 #include "GameScene.h"
 
+#include "Define.h"
 #include "SimpleAudioEngine.h"
 
 #include "MapLayer.h"
@@ -38,6 +39,7 @@ bool GameScene::init()
     }
 	
     Layer* pLayer = MapLayer::create();
+    pLayer->setTag(MAPLAYER_TAG);
     this->addChild(pLayer);
     
     return true;

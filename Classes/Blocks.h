@@ -11,7 +11,6 @@
 
 #include "Define.h"
 
-
 struct Block //최소 단위 1블럭 -> 얘가 4개 모여서 Blocks
 {
     cocos2d::Sprite* pSprite_;
@@ -41,7 +40,7 @@ class Blocks
 protected:
     Block* blocks_[BLOCKCNT]; // Block을 4개 가지고 있는 변수
     bool isDrop_;
-    int downSpeed_;
+    BLOCKTYPE blockType_;
     
 public:
     virtual bool init() = 0;
@@ -58,8 +57,8 @@ public:
     virtual void rotate(int dir, int keyPressedCnt) = 0;
     bool checkLimintedRotate(cocos2d::Vec2* pos);
     void drop();
-    void fixPos(cocos2d::Vec2 variance = cocos2d::Vec2::ZERO);
-    void fixPosY();
+    void changePos(cocos2d::Vec2 variance = cocos2d::Vec2::ZERO);
+    void fixBlockPos();
     void autoMoveDown();
     
 public:

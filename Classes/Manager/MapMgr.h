@@ -34,7 +34,7 @@ public:
     void setNullCurBlocks() { pCurBlocks_ = nullptr; }
     
 public:
-    Blocks* makeNewBlocks();
+    void makeNewBlocks(int blockType);
     void move(int dir);
     void rotate(int dir, int keyPressedCnt);
     void drop();
@@ -42,6 +42,7 @@ public:
     
 public:
     void includeGridMapBlocks(cocos2d::Sprite*);
+    void checkIsExisting(cocos2d::Sprite* sprite, bool isExist); // 맵배열 중 블럭의 유무를 bool로 결정하고 배열에 표시해주는 함수
     
 private:
     MapMgr();

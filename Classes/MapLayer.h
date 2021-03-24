@@ -16,10 +16,12 @@ public:
     
 public:
     virtual bool init() override;
+    virtual void onEnter() override;
     
 public:
     virtual void update(float dt) override;
     void DrawGridMap();
+    void autoMoveDown(float dt);
     
 public:
     MapLayer();

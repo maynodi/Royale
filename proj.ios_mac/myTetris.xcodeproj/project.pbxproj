@@ -40,6 +40,14 @@
 		5087E76B17EB910900C73F5D /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D44C620F132DFF4E0009C878 /* AudioToolbox.framework */; };
 		5087E78917EB974C00C73F5D /* AppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5087E78817EB974C00C73F5D /* AppKit.framework */; };
 		5087E78B17EB975400C73F5D /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5087E78A17EB975400C73F5D /* OpenGL.framework */; };
+		50B42909260ACD0000A74E10 /* Blocks_I.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 50B42908260ACCFF00A74E10 /* Blocks_I.cpp */; };
+		50B4290A260ACD0000A74E10 /* Blocks_I.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 50B42908260ACCFF00A74E10 /* Blocks_I.cpp */; };
+		50B4290D260AEBF500A74E10 /* Blocks_S.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 50B4290C260AEBF500A74E10 /* Blocks_S.cpp */; };
+		50B4290E260AEBF500A74E10 /* Blocks_S.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 50B4290C260AEBF500A74E10 /* Blocks_S.cpp */; };
+		50B42915260B222E00A74E10 /* Blocks_T.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 50B42910260B222E00A74E10 /* Blocks_T.cpp */; };
+		50B42916260B222E00A74E10 /* Blocks_T.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 50B42910260B222E00A74E10 /* Blocks_T.cpp */; };
+		50B42917260B222E00A74E10 /* Blocks_O.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 50B42912260B222E00A74E10 /* Blocks_O.cpp */; };
+		50B42918260B222E00A74E10 /* Blocks_O.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 50B42912260B222E00A74E10 /* Blocks_O.cpp */; };
 		50E46BDA25F9AEA100919209 /* sky.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 50E46BD925F9AEA100919209 /* sky.jpeg */; };
 		50E46BDB25F9AEA100919209 /* sky.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 50E46BD925F9AEA100919209 /* sky.jpeg */; };
 		50E46BE925F9BCF200919209 /* white.png in Resources */ = {isa = PBXBuildFile; fileRef = 50E46BE825F9BCF200919209 /* white.png */; };
@@ -146,6 +154,14 @@
 		5087E76F17EB910900C73F5D /* NewGame-desktop.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "NewGame-desktop.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5087E78817EB974C00C73F5D /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
 		5087E78A17EB975400C73F5D /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
+		50B42906260ACCFF00A74E10 /* Blocks_I.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Blocks_I.h; sourceTree = "<group>"; };
+		50B42908260ACCFF00A74E10 /* Blocks_I.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Blocks_I.cpp; sourceTree = "<group>"; };
+		50B4290B260AEBF500A74E10 /* Blocks_S.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Blocks_S.h; sourceTree = "<group>"; };
+		50B4290C260AEBF500A74E10 /* Blocks_S.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Blocks_S.cpp; sourceTree = "<group>"; };
+		50B42910260B222E00A74E10 /* Blocks_T.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Blocks_T.cpp; sourceTree = "<group>"; };
+		50B42912260B222E00A74E10 /* Blocks_O.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Blocks_O.cpp; sourceTree = "<group>"; };
+		50B42913260B222E00A74E10 /* Blocks_T.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Blocks_T.h; sourceTree = "<group>"; };
+		50B42914260B222E00A74E10 /* Blocks_O.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Blocks_O.h; sourceTree = "<group>"; };
 		50E46BD925F9AEA100919209 /* sky.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = sky.jpeg; sourceTree = "<group>"; };
 		50E46BE825F9BCF200919209 /* white.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = white.png; sourceTree = "<group>"; };
 		50E5D189260821360014EC25 /* GameScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameScene.h; sourceTree = "<group>"; };
@@ -336,6 +352,14 @@
 				50E5D19F2608498F0014EC25 /* Blocks.cpp */,
 				50E5D1A426086C7F0014EC25 /* Blocks_J.h */,
 				50E5D1A526086C7F0014EC25 /* Blocks_J.cpp */,
+				50B42906260ACCFF00A74E10 /* Blocks_I.h */,
+				50B42908260ACCFF00A74E10 /* Blocks_I.cpp */,
+				50B4290B260AEBF500A74E10 /* Blocks_S.h */,
+				50B4290C260AEBF500A74E10 /* Blocks_S.cpp */,
+				50B42913260B222E00A74E10 /* Blocks_T.h */,
+				50B42910260B222E00A74E10 /* Blocks_T.cpp */,
+				50B42914260B222E00A74E10 /* Blocks_O.h */,
+				50B42912260B222E00A74E10 /* Blocks_O.cpp */,
 				50E5D1A926087F4A0014EC25 /* BlocksSetting.h */,
 			);
 			name = Classes;
@@ -520,6 +544,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				50E5D198260839380014EC25 /* MapLayer.cpp in Sources */,
+				50B4290D260AEBF500A74E10 /* Blocks_S.cpp in Sources */,
 				50E5D18F260821360014EC25 /* TitleLobbyLayer.cpp in Sources */,
 				50E5D1A626086C7F0014EC25 /* Blocks_J.cpp in Sources */,
 				1AF87B781F6F77F7007BE51C /* AppController.mm in Sources */,
@@ -527,9 +552,12 @@
 				50E5D19C260844B90014EC25 /* MapMgr.cpp in Sources */,
 				50E5D1AC26088E2E0014EC25 /* KeyMgr.cpp in Sources */,
 				46880B8819C43A87006E1F66 /* AppDelegate.cpp in Sources */,
+				50B42917260B222E00A74E10 /* Blocks_O.cpp in Sources */,
+				50B42909260ACD0000A74E10 /* Blocks_I.cpp in Sources */,
 				50E5D193260821360014EC25 /* GameScene.cpp in Sources */,
 				1AF87B8A1F6F7822007BE51C /* main.m in Sources */,
 				50E5D191260821360014EC25 /* TitleScene.cpp in Sources */,
+				50B42915260B222E00A74E10 /* Blocks_T.cpp in Sources */,
 				50E5D1A02608498F0014EC25 /* Blocks.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -539,12 +567,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				50E5D194260821360014EC25 /* GameScene.cpp in Sources */,
+				50B4290E260AEBF500A74E10 /* Blocks_S.cpp in Sources */,
 				46880B8919C43A87006E1F66 /* AppDelegate.cpp in Sources */,
+				50B42918260B222E00A74E10 /* Blocks_O.cpp in Sources */,
 				503AE10517EB98FF00D1A890 /* main.cpp in Sources */,
 				50E5D190260821360014EC25 /* TitleLobbyLayer.cpp in Sources */,
 				50E5D1AD26088E2E0014EC25 /* KeyMgr.cpp in Sources */,
+				50B42916260B222E00A74E10 /* Blocks_T.cpp in Sources */,
 				50E5D1A726086C7F0014EC25 /* Blocks_J.cpp in Sources */,
 				50E5D199260839380014EC25 /* MapLayer.cpp in Sources */,
+				50B4290A260ACD0000A74E10 /* Blocks_I.cpp in Sources */,
 				50E5D1A12608498F0014EC25 /* Blocks.cpp in Sources */,
 				50E5D19D260844B90014EC25 /* MapMgr.cpp in Sources */,
 				50E5D192260821360014EC25 /* TitleScene.cpp in Sources */,

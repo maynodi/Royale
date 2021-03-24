@@ -7,14 +7,21 @@
 
 #include "MapMgr.h"
 
+#include "KeyMgr.h"
+
 #include "Blocks.h"
 #include "Blocks_J.h"
+#include "Blocks_I.h"
+#include "Blocks_S.h"
+#include "Blocks_T.h"
+#include "Blocks_O.h"
 
 USING_NS_CC;
 
 MapMgr* MapMgr::pInstance_ = nullptr;
 
 MapMgr::MapMgr()
+    : pCurBlocks_(nullptr)
 {
     
 }
@@ -62,13 +69,55 @@ void MapMgr::setIsDrop(bool isDrop)
     pCurBlocks_->setIsDrop(isDrop);
 }
 
-Blocks* MapMgr::makeNewBlocks()
+void MapMgr::makeNewBlocks(int blockType)
 {
-    // enum으로 분기를 태워야되남...
-    Blocks* pBlocks = Blocks_J::create();
+    if(nullptr != pCurBlocks_)
+        return;
+    
+    Blocks* pBlocks = nullptr;
+    switch (blockType)
+    {
+        case BLOCKTYPE::J:
+        {
+            pBlocks = Blocks_J::create();
+            break;
+        }
+        case BLOCKTYPE::I:
+        {
+            pBlocks = Blocks_I::create();
+            break;
+        }
+        case BLOCKTYPE::S:
+        {
+            pBlocks = Blocks_S::create();
+            break;
+        }
+        case BLOCKTYPE::T:
+        {
+            pBlocks = Blocks_T::create();
+            break;
+        }
+        case BLOCKTYPE::O:
+        {
+            pBlocks = Blocks_O::create();
+            break;
+        }
+        default:
+            break;
+    }
+    
     pCurBlocks_ = pBlocks;
     
-    return pCurBlocks_;
+    // 스프라이트를 mapLayer에 자식으로 추가
+    Scene* pCurScene = Director::getInstance()->getRunningScene();
+    Node* mapLayer = pCurScene->getChildByTag(MAPLAYER_TAG);
+    
+    Sprite* pSprite = nullptr;
+    for(int i = 0; i < BLOCKCNT; ++i)
+    {
+        pSprite = pCurBlocks_->getBlockSprite(i);
+        mapLayer->addChild(pSprite);
+    }
 }
 
 void MapMgr::move(int dir)
@@ -108,9 +157,18 @@ void MapMgr::includeGridMapBlocks(cocos2d::Sprite* sprite)
     sprite->retain();
     
     Vec2 pos = sprite->getPosition();
-    int rowIndex = pos.y / BLOCKSIZE - 1;
+    int rowIndex = pos.y / BLOCKSIZE;
     int colIndex = pos.x / BLOCKSIZE - 1;
     
     gridMapBlocks_[rowIndex][colIndex] = sprite;
     
+}
+
+void MapMgr::checkIsExisting(cocos2d::Sprite* sprite, bool isExist)
+{
+    Vec2 pos = sprite->getPosition();
+    int rowIndex = pos.y / BLOCKSIZE;
+    int colIndex = pos.x / BLOCKSIZE - 1;
+    
+    isExisting_[rowIndex][colIndex] = isExist;
 }

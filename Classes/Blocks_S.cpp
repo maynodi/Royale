@@ -1,27 +1,27 @@
 //
-//  Blocks_J.cpp
+//  Blocks_S.cpp
 //  myTetris
 //
 //  Created by CD-hj0949 on 2021/03/22.
 //
 
-#include "Blocks_J.h"
+#include "Blocks_S.h"
 
 #include "BlocksSetting.h"
 
 USING_NS_CC;
 
-Blocks_J::Blocks_J()
+Blocks_S::Blocks_S()
 {
 }
 
-Blocks_J::~Blocks_J()
+Blocks_S::~Blocks_S()
 {
 }
 
-Blocks_J* Blocks_J::create()
+Blocks_S* Blocks_S::create()
 {
-    Blocks_J* pRet = new(std::nothrow) Blocks_J;
+    Blocks_S* pRet = new(std::nothrow) Blocks_S;
     if (pRet && pRet->init())
     {
         //pRet->autorelease();
@@ -35,32 +35,32 @@ Blocks_J* Blocks_J::create()
     }
 }
 
-bool Blocks_J::init()
+bool Blocks_S::init()
 {
-     //Blocks 초기화
+    // Blocks 초기화
     Block* pBlock = nullptr;
     for(int i = 0; i < BLOCKCNT; ++i)
     {
-        Vec2 pos = Vec2(BLOCKSIZE * (location::J[POS_X][i] + initPos::pos[POS_X])
-                        , BLOCKSIZE * (location::J[POS_Y][i] + initPos::pos[POS_Y]));
+        Vec2 pos = Vec2(BLOCKSIZE * (location::S[POS_X][i] + initPos::pos[POS_X])
+                        , BLOCKSIZE * (location::S[POS_Y][i] + initPos::pos[POS_Y]));
         pBlock = new Block(pos);
 
         blocks_[i] = pBlock;
     }
-
-    blockType_ = BLOCKTYPE::J;
+    
+    blockType_ = BLOCKTYPE::S;
     
     return true;
 }
 
-void Blocks_J::rotate(int dir, int keyPressedCnt)
+void Blocks_S::rotate(int dir, int keyPressedCnt)
 {
     // 2개로 나눠야함
     // 1. 아래 블록이 있는 경우
-    
-    
-    
-    
+
+
+
+
 
     // 2. 아래 아무것도 없는 경우
     // 일단 미리 회전 후의 좌표를 계산해놓고
@@ -68,9 +68,9 @@ void Blocks_J::rotate(int dir, int keyPressedCnt)
     for(int i = 0; i < BLOCKCNT; ++i)
     {
         Vec2 curPos = blocks_[i]->pSprite_->getPosition();
-       
-        newPos[i].x = curPos.x + BLOCKSIZE * (posVariance::J[keyPressedCnt][(i * 2)]);
-        newPos[i].y = curPos.y + BLOCKSIZE * (posVariance::J[keyPressedCnt][(i * 2) + 1]);
+        
+        newPos[i].x = curPos.x + BLOCKSIZE * (posVariance::S[keyPressedCnt][(i * 2)]);
+        newPos[i].y = curPos.y + BLOCKSIZE * (posVariance::S[keyPressedCnt][(i * 2) + 1]);
     }
 
     // 회전에 제한이 걸리는 위치인가?
@@ -82,4 +82,5 @@ void Blocks_J::rotate(int dir, int keyPressedCnt)
        blocks_[i]->pSprite_->setPosition(newPos[i]);
        blocks_[i]->setPos(newPos[i]);
    }
+    
 }

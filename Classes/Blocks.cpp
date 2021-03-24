@@ -10,13 +10,10 @@
 #include "KeyMgr.h"
 #include "MapMgr.h"
 
-#include "Define.h"
-
 USING_NS_CC;
 
 Blocks::Blocks()
     : isDrop_(false)
-    , downSpeed_(4)
 {
     memset(blocks_, 0, sizeof(blocks_[0]) * BLOCKCNT);
 }
@@ -24,8 +21,10 @@ Blocks::Blocks()
 Blocks::~Blocks()
 {
     MapMgr::getInstance()->setNullCurBlocks();
-    for(auto& a : blocks_)
-        a->pSprite_->release();
+    for(auto& block : blocks_)
+    {
+        block->pSprite_->release();
+    }
 }
 
 void Blocks::move(int dir)
@@ -50,7 +49,7 @@ void Blocks::move(int dir)
     }
     
     posVariance *= BLOCKSIZE;
-    fixPos(posVariance);
+    changePos(posVariance);
 }
 
 bool Blocks::checkLimitedPos(int dir)
@@ -63,7 +62,7 @@ bool Blocks::checkLimitedPos(int dir)
            || (DIR_RIGHT == dir && MAX_WIDTH <= curPos.x)
            || (DIR_DOWN == dir && MIN_HEIGHT >= curPos.y))
         {
-            fixPos();
+            changePos();
             return true;
         }
     }
@@ -108,7 +107,7 @@ void Blocks::drop()
         
         if(MIN_HEIGHT >= posY)
         {
-            fixPosY();
+            fixBlockPos();
             isDrop_ = false;
             delete this;
             return;
@@ -127,7 +126,7 @@ void Blocks::drop()
      }
 }
 
-void Blocks::fixPos(cocos2d::Vec2 variance)
+void Blocks::changePos(cocos2d::Vec2 variance)
 {
     for(auto& block : blocks_)
     {
@@ -139,20 +138,21 @@ void Blocks::fixPos(cocos2d::Vec2 variance)
     }
 }
  
-void Blocks::fixPosY()
+void Blocks::fixBlockPos()
 {
     for(auto& block : blocks_)
     {
         float posY = block->pSprite_->getPositionY();
         
-        int quotientY = posY / BLOCKSIZE;
-
-        posY = (quotientY) * BLOCKSIZE;
+        //블록이 아래에 있는 경우 혹시 모르니까 냅둠 필요업승면 삭제ㄱㄱ
+        //int quotientY = posY / BLOCKSIZE;
+        //posY = (quotientY) * BLOCKSIZE;
         
         block->pSprite_->setPositionY(posY);
         block->setPosY(posY);
         
         MapMgr::getInstance()->includeGridMapBlocks(block->pSprite_);
+        MapMgr::getInstance()->checkIsExisting(block->pSprite_, true);
     }
     
 }
@@ -168,7 +168,7 @@ void Blocks::autoMoveDown()
         
         if(MIN_HEIGHT >= posY)
         {
-            fixPosY();
+            fixBlockPos();
             delete this;
             return;
         }
@@ -177,7 +177,7 @@ void Blocks::autoMoveDown()
     for(auto& block : blocks_)
     {
         float posY = block->pSprite_->getPositionY();
-        block->pSprite_->setPositionY(posY - (BLOCKSIZE >> downSpeed_));
-        block->setPosY(posY - (BLOCKSIZE >> downSpeed_));
+        block->pSprite_->setPositionY(posY - BLOCKSIZE);
+        block->setPosY(posY - BLOCKSIZE);
     }
 }
