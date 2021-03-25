@@ -28,6 +28,7 @@ public:
     virtual bool init() override;
     
 public:
+    void setZeroUpKeyPressedCnt() { upKeyPressedCnt_ = 0; }
     void minusUpKeyPressedCnt() { upKeyPressedCnt_ -= 1; }
     
 public:

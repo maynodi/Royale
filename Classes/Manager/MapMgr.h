@@ -21,6 +21,7 @@ private:
     std::vector<bool> isExisting_[MAP_HEIGHT];
     std::vector<cocos2d::Sprite*>  gridMapBlocks_[MAP_HEIGHT];
     Blocks* pCurBlocks_;
+    std::list<struct Block*> newBlockList_; // 맵의 블록과 부딪힐 가능성있는 블록 리스트
     
 public:
     static MapMgr* getInstance();
@@ -36,9 +37,14 @@ public:
 public:
     void makeNewBlocks(int blockType);
     void move(int dir);
-    void rotate(int dir, int keyPressedCnt);
+    void rotate(int keyPressedCnt);
     void drop();
     void autoMoveDown();
+    
+public:
+    bool checkUnderSomething(struct Block* block[]);
+    void getMaxRowOfUnderBlock(int* dist);
+    bool checkCanChange(float x, float y);
     
 public:
     void includeGridMapBlocks(cocos2d::Sprite*);

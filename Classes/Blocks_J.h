@@ -13,13 +13,13 @@
 class Blocks_J : public Blocks
 {
 public:
-    static Blocks_J* create();
+    static Blocks_J* create(cocos2d::Color3B color);
     
 public:
-    virtual bool init() override;
+    virtual bool init(cocos2d::Color3B color) override;
     
 public:
-    virtual void rotate(int dir, int keyPressedCnt) override;
+    virtual void rotate(int keyPressedCnt) override;
     
 public:
     Blocks_J();

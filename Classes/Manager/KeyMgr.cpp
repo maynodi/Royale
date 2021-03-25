@@ -77,7 +77,7 @@ void KeyMgr::onKeyPressed(KEY keyCode, cocos2d::Event* event)
                 upKeyPressedCnt_ = 0;
             }
             
-            MapMgr::getInstance()->rotate(DIR_UP, upKeyPressedCnt_);
+            MapMgr::getInstance()->rotate(upKeyPressedCnt_);
             break;
         }
         case KEY::KEY_DOWN_ARROW:

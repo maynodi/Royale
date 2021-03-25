@@ -19,10 +19,10 @@ Blocks_T::~Blocks_T()
 {
 }
 
-Blocks_T* Blocks_T::create()
+Blocks_T* Blocks_T::create(cocos2d::Color3B color)
 {
     Blocks_T* pRet = new(std::nothrow) Blocks_T;
-    if (pRet && pRet->init())
+    if (pRet && pRet->init(color))
     {
         //pRet->autorelease();
         return pRet;
@@ -35,7 +35,7 @@ Blocks_T* Blocks_T::create()
     }
 }
 
-bool Blocks_T::init()
+bool Blocks_T::init(cocos2d::Color3B color)
 {
     // Blocks 초기화
     Block* pBlock = nullptr;
@@ -43,8 +43,9 @@ bool Blocks_T::init()
     {
         Vec2 pos = Vec2(BLOCKSIZE * (location::T[POS_X][i] + initPos::pos[POS_X])
                         , BLOCKSIZE * (location::T[POS_Y][i] + initPos::pos[POS_Y]));
-        pBlock = new Block(pos);
+        pBlock = new Block(pos.x, pos.y);
 
+        pBlock->pSprite_->setColor(color);
         blocks_[i] = pBlock;
     }
     
@@ -53,7 +54,7 @@ bool Blocks_T::init()
     return true;
 }
 
-void Blocks_T::rotate(int dir, int keyPressedCnt)
+void Blocks_T::rotate(int keyPressedCnt)
 {
     // 2개로 나눠야함
     // 1. 아래 블록이 있는 경우
@@ -74,7 +75,7 @@ void Blocks_T::rotate(int dir, int keyPressedCnt)
     }
 
     // 회전에 제한이 걸리는 위치인가?
-    if(true == checkLimintedRotate(newPos))
+    if(true == checkLimitedRotate(newPos))
         return;
 
    for(int i = 0; i < BLOCKCNT; ++i)
