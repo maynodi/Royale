@@ -50,7 +50,7 @@ bool MapLayer::init()
         return false;
     }
     
-    this->setContentSize(Size(MAP_WIDTH * BLOCKSIZE, MAP_HEIGHT * BLOCKSIZE));
+    this->setContentSize(Size((MAP_WIDTH + 2) * BLOCKSIZE, (MAP_HEIGHT + 2) * BLOCKSIZE));
     this->setPosition(Vec2(BLOCKSIZE, BLOCKSIZE));
     
     KeyMgr* pKeyMgr = KeyMgr::getInstance();
@@ -76,7 +76,33 @@ void MapLayer::onEnter()
 void MapLayer::update(float dt)
 {
     MapMgr::getInstance()->reset();
-    MapMgr::getInstance()->makeNewBlocks(BLOCKTYPE::J/*rand() % BLOCKTYPE::END*/);
+    
+    if(GAMESTATE::OVER == MapMgr::getInstance()->getGameState())
+    {
+        unscheduleAllCallbacks();
+        
+        Vector<Node*> children = this->getChildren();
+        for(auto& child : children)
+        {
+            if(BLOCKSPRITE_TAG == child->getTag())
+            {
+                child->setOpacity(125);
+            }
+        }
+        
+        Label* label1 = Label::createWithTTF("GAME", FONTPATH, 60);
+        label1->setPosition(Vec2(MAX_WIDTH/2, MAX_HEIGHT/2 + 60));
+        label1->setTextColor(Color4B::WHITE);
+        this->addChild(label1);
+        
+        Label* label2 = Label::createWithTTF("OVER", FONTPATH, 60);
+        label2->setPosition(Vec2(MAX_WIDTH/2, MAX_HEIGHT/2));
+        label2->setTextColor(Color4B::WHITE);
+        this->addChild(label2);
+        
+    }
+    
+    MapMgr::getInstance()->makeNewBlocks(rand() % BLOCKTYPE::END);
     MapMgr::getInstance()->drop();
 }
 

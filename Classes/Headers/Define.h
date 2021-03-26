@@ -7,7 +7,10 @@
 
 #pragma once
 
+#define FONTPATH "fonts/arial.ttf"
+
 #define MAPLAYER_TAG 0
+#define BLOCKSPRITE_TAG 1
 #define KEY cocos2d::EventKeyboard::KeyCode
 
 #define MAP_WIDTH 10
@@ -21,6 +24,7 @@
 #define MIN_WIDTH BLOCKSIZE
 #define MAX_WIDTH (BLOCKSIZE)*(MAP_WIDTH)
 
+#define HALF_WIDTH (MAP_WIDTH / 2)
 
 
 #define POS_X 0
@@ -28,3 +32,4 @@
 
 enum DIR {DIR_LEFT, DIR_RIGHT, DIR_UP, DIR_DOWN};
 enum BLOCKTYPE { J, I, S, T, O, END};
+enum GAMESTATE {PLAY, OVER, WIN};

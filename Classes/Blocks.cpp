@@ -101,7 +101,7 @@ bool Blocks::checkLimitedRotate(cocos2d::Vec2* pos)
 {
     for(int i = 0; i < BLOCKCNT; ++i)
     {
-        if(MIN_WIDTH >= pos->x || MAX_WIDTH <= pos->x || MIN_HEIGHT >= pos->y)
+        if(MIN_WIDTH > pos->x || MAX_WIDTH < pos->x || MIN_HEIGHT >= pos->y)
         {
             KeyMgr::getInstance()->minusUpKeyPressedCnt();
             return true;
@@ -237,8 +237,15 @@ void Blocks::autoMoveDown()
         for(auto& block : blocks_)
         {
             float posY = block->pSprite_->getPositionY();
+            
             block->pSprite_->setPositionY(posY - BLOCKSIZE);
             block->setPosY(posY - BLOCKSIZE);
+            
+            // 맵 안에 들어오면 보여라!
+            if(MAX_HEIGHT > posY - BLOCKSIZE)
+            {
+                block->pSprite_->setVisible(true);
+            }
         }
         
     }
@@ -261,6 +268,13 @@ void Blocks::autoMoveDown()
             float posY = block->pSprite_->getPositionY();
             block->pSprite_->setPositionY(posY - BLOCKSIZE);
             block->setPosY(posY - BLOCKSIZE);
+           
+            // 맵 안에 들어오면 보여라!
+            if(MAX_HEIGHT >= posY)
+            {
+                block->pSprite_->setVisible(true);
+            }
+            
         }
     }
 }

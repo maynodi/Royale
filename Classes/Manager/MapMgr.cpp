@@ -9,6 +9,7 @@
 
 #include "KeyMgr.h"
 
+#include <algorithm>
 
 #include "Blocks.h"
 #include "Blocks_J.h"
@@ -23,6 +24,7 @@ MapMgr* MapMgr::pInstance_ = nullptr;
 
 MapMgr::MapMgr()
     : pCurBlocks_(nullptr)
+    , gameState_(PLAY)
 {
     
 }
@@ -117,6 +119,9 @@ void MapMgr::makeNewBlocks(int blockType)
     for(int i = 0; i < BLOCKCNT; ++i)
     {
         pSprite = pCurBlocks_->getBlockSprite(i);
+        pSprite->Node::setVisible(false);
+        pSprite->setTag(BLOCKSPRITE_TAG);
+        
         mapLayer->addChild(pSprite);
     }
 }
@@ -262,6 +267,13 @@ void MapMgr::includeGridMapBlocks(cocos2d::Sprite* sprite)
     int rowIndex = pos.y / BLOCKSIZE;
     int colIndex = pos.x / BLOCKSIZE - 1;
     
+    // 게임 오버 체크 -> 더이상 맵 배열에 넣을 수 없을 때
+    if(MAP_HEIGHT <= rowIndex)
+    {
+        gameState_ = OVER;
+        return;
+    }
+    
     gridMapBlocks_[rowIndex][colIndex] = sprite;
     
 }
@@ -271,6 +283,12 @@ void MapMgr::checkIsExisting(cocos2d::Sprite* sprite, bool isExist)
     Vec2 pos = sprite->getPosition();
     int rowIndex = pos.y / BLOCKSIZE;
     int colIndex = pos.x / BLOCKSIZE - 1;
+    
+    if(MAP_HEIGHT <= rowIndex)
+    {
+        gameState_ = OVER;
+        return;
+    }
     
     isExisting_[rowIndex][colIndex] = isExist;
 }
@@ -316,6 +334,13 @@ void MapMgr::reset()
             }
         }
     }
+    
+    // 게임오버 체크
+    if(true == checkGameOver())
+    {
+        gameState_ = OVER;
+    }
+    
 }
 
 void MapMgr::checkLineFull(std::list<int>* list)
@@ -348,4 +373,19 @@ void MapMgr::deleteLine(int row)
         
         isExisting_[row][i] = false;
     }
+}
+
+bool MapMgr::checkGameOver()
+{
+    if(nullptr != pCurBlocks_)
+        return false;
+    
+    // 마지막 칸이 다 찬 경우
+    int blockCnt = std::count(isExisting_[MAP_HEIGHT - 1].begin(), isExisting_[MAP_HEIGHT - 1].end(), true);
+    if(MAP_WIDTH == blockCnt)
+    {
+        return true;
+    }
+    
+    return false;
 }

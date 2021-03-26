@@ -6,9 +6,10 @@
 //
 
 #include "TitleLobbyLayer.h"
-#include "GameScene.h"
 
-#define FONTPATH "fonts/arial.ttf"
+#include "Define.h"
+
+#include "GameScene.h"
 
 USING_NS_CC;
 

@@ -22,6 +22,7 @@ private:
     std::vector<cocos2d::Sprite*>  gridMapBlocks_[MAP_HEIGHT];
     Blocks* pCurBlocks_;
     std::list<struct Block*> newBlockList_; // 맵의 블록과 부딪힐 가능성있는 블록 리스트
+    GAMESTATE gameState_;
     
 public:
     static MapMgr* getInstance();
@@ -33,6 +34,9 @@ public:
 public:
     void setIsDrop(bool isDrop);
     void setNullCurBlocks() { pCurBlocks_ = nullptr; }
+    
+public:
+    GAMESTATE getGameState() { return gameState_; }
     
 public:
     void makeNewBlocks(int blockType);
@@ -54,6 +58,9 @@ public:
     void reset();
     void checkLineFull(std::list<int>* list);
     void deleteLine(int row);
+    
+public:
+    bool checkGameOver();
     
 private:
     MapMgr();
