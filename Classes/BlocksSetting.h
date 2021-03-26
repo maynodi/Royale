@@ -9,7 +9,7 @@
 
 namespace initPos // 시작위치
 {
-    const int pos[2] = {11, 36}; // x, y
+    const int pos[2] = {5, 26}; // x, y 11 36
     
 }
 namespace location // 기본위치

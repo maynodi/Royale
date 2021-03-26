@@ -144,10 +144,7 @@ void Blocks::drop()
             return;
         }
         
-        // ** 공통된 부분 **
         // 0되기 전까지는 계속 내려와야함
-        // 계속 내려오려면 얘가 계속 업뎃타야되는데..
-        // 업뎃을 돌수 있는 곳 맵레이어 , 겜신
         for(auto& block : blocks_)
         {
             float posY = block->pSprite_->getPositionY();
@@ -208,10 +205,6 @@ void Blocks::fixBlockPos()
     for(auto& block : blocks_)
     {
         float posY = block->pSprite_->getPositionY();
-        
-        //블록이 아래에 있는 경우 혹시 모르니까 냅둠 필요업승면 삭제ㄱㄱ
-        //int quotientY = posY / BLOCKSIZE;
-        //posY = (quotientY) * BLOCKSIZE;
         
         block->pSprite_->setPositionY(posY);
         block->setPosY(posY);

@@ -75,7 +75,8 @@ void MapLayer::onEnter()
 
 void MapLayer::update(float dt)
 {
-    MapMgr::getInstance()->makeNewBlocks(rand() % BLOCKTYPE::END);
+    MapMgr::getInstance()->reset();
+    MapMgr::getInstance()->makeNewBlocks(BLOCKTYPE::J/*rand() % BLOCKTYPE::END*/);
     MapMgr::getInstance()->drop();
 }
 

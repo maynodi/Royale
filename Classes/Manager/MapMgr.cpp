@@ -210,6 +210,8 @@ bool MapMgr::checkUnderSomething(Block* block[])
 void MapMgr::getMaxRowOfUnderBlock(int* dist)
 {
     std::list<int> underBlock;
+    int blankCnt = 0;
+    
     for(auto& newBlock : newBlockList_)
     {
         int colIndex = newBlock->x_ / BLOCKSIZE - 1;
@@ -218,10 +220,20 @@ void MapMgr::getMaxRowOfUnderBlock(int* dist)
         for(int i = 0; i < MAP_HEIGHT; ++i)
         {
             if(false == isExisting_[i][colIndex])
+            {
+                blankCnt += 1;
                 continue;
+            }
             
             int dist = rowIndex - i;
             underBlock.emplace_back(dist);
+        }
+        
+        // j 의 경우
+        if(MAP_HEIGHT == blankCnt)
+        {
+            underBlock.emplace_back(rowIndex + 1);
+            blankCnt = 0;
         }
     }
     
@@ -261,4 +273,79 @@ void MapMgr::checkIsExisting(cocos2d::Sprite* sprite, bool isExist)
     int colIndex = pos.x / BLOCKSIZE - 1;
     
     isExisting_[rowIndex][colIndex] = isExist;
+}
+
+void MapMgr::reset()
+{
+    if(nullptr != pCurBlocks_)
+        return;
+ 
+    
+    std::list<int> rowList;
+    checkLineFull(&rowList);
+    
+    if(true == rowList.empty())
+        return;
+    
+    // 라인 삭제
+    for(auto& row : rowList)
+    {
+        deleteLine(row);
+        
+        //한 줄 내려오기
+        for(int i = row + 1; i< MAP_HEIGHT; ++i)
+        {
+            if(MIN_HEIGHT > i -1)
+                continue;
+                    
+            for(int col = 0; col< MAP_WIDTH; ++col)
+            {
+                gridMapBlocks_[i - 1][col] = gridMapBlocks_[i][col];
+                gridMapBlocks_[i][col] = nullptr;
+                
+                
+                if(nullptr != gridMapBlocks_[i - 1][col])
+                 {
+                     int posY = gridMapBlocks_[i - 1][col]->getPositionY();
+                     posY -= BLOCKSIZE;
+                     gridMapBlocks_[i - 1][col]->setPositionY(posY);
+                 }
+                
+                isExisting_[i - 1][col] = isExisting_[i][col];
+                isExisting_[i][col] = false;
+            }
+        }
+    }
+}
+
+void MapMgr::checkLineFull(std::list<int>* list)
+{
+    // 어느 라인이 없어질 라인인지 체크해서 변수에 넣어준다
+    for(int row = 0; row< MAP_HEIGHT; ++row)
+    {
+        int cnt = 0;
+        for(int col = 0; col< MAP_WIDTH; ++col)
+        {
+            if(false == isExisting_[row][col])
+                break;
+            
+            cnt += 1;
+        }
+        
+        if(MAP_WIDTH == cnt)
+        {
+            list->emplace_back(row);
+        }
+    }
+}
+
+void MapMgr::deleteLine(int row)
+{
+    for(int i = 0; i < MAP_WIDTH; ++i)
+    {
+        gridMapBlocks_[row][i]->removeFromParent();
+        gridMapBlocks_[row][i] = nullptr;
+        
+        isExisting_[row][i] = false;
+    }
 }

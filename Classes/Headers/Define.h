@@ -10,8 +10,8 @@
 #define MAPLAYER_TAG 0
 #define KEY cocos2d::EventKeyboard::KeyCode
 
-#define MAP_WIDTH 20
-#define MAP_HEIGHT 40
+#define MAP_WIDTH 10
+#define MAP_HEIGHT 30
 
 #define BLOCKSIZE 20
 #define BLOCKCNT 4

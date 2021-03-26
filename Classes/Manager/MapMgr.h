@@ -50,6 +50,11 @@ public:
     void includeGridMapBlocks(cocos2d::Sprite*);
     void checkIsExisting(cocos2d::Sprite* sprite, bool isExist); // 맵배열 중 블럭의 유무를 bool로 결정하고 배열에 표시해주는 함수
     
+public:
+    void reset();
+    void checkLineFull(std::list<int>* list);
+    void deleteLine(int row);
+    
 private:
     MapMgr();
     ~MapMgr();
