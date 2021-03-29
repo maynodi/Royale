@@ -20,6 +20,7 @@ public:
     
 public:
     virtual void update(float dt) override;
+    void setGameOver();
     void DrawGridMap();
     void autoMoveDown(float dt);
     

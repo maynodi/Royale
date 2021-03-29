@@ -10,6 +10,8 @@
 #include "KeyMgr.h"
 #include "MapMgr.h"
 
+#include <algorithm>
+
 USING_NS_CC;
 
 Blocks::Blocks()
@@ -17,6 +19,7 @@ Blocks::Blocks()
     , dist_(0)
 {
     memset(blocks_, 0, sizeof(blocks_[0]) * BLOCKCNT);
+    PreviewBlockDistVec_.reserve(BLOCKCNT);
 }
 
 Blocks::~Blocks()
@@ -26,6 +29,7 @@ Blocks::~Blocks()
     
     for(auto& block : blocks_)
     {
+        block->pSprite_->removeAllChildren();
         block->pSprite_->release();
     }
 }
@@ -101,7 +105,8 @@ bool Blocks::checkLimitedRotate(cocos2d::Vec2* pos)
 {
     for(int i = 0; i < BLOCKCNT; ++i)
     {
-        if(MIN_WIDTH > pos->x || MAX_WIDTH < pos->x || MIN_HEIGHT >= pos->y)
+        if(MIN_WIDTH > pos->x || MAX_WIDTH < pos->x
+           || MIN_HEIGHT >= pos->y || MAX_HEIGHT <= pos->y)
         {
             KeyMgr::getInstance()->minusUpKeyPressedCnt();
             return true;
@@ -124,12 +129,21 @@ void Blocks::drop()
     if(false == isDrop_)
         return;
     
+    // 맵에서 안 보일 때는 스페이스바가 안 먹히게
+    for(auto& block : blocks_)
+    {
+        if(MAX_HEIGHT <= block->y_)
+        {
+            isDrop_ = false;
+            return;
+        }
+    }
+
     
     // 2개 경우로 나눠야함
     if(true == MapMgr::getInstance()->checkUnderSomething(blocks_))
     {
         // 1. 아래 블록이 있는 경우   ========================================
-        
        // 블럭 아래에 한개라도 블럭이 있다면 여기에 도착..
        // 상황에 맞게 세팅해줘야되 포스를
         
@@ -152,7 +166,9 @@ void Blocks::drop()
             block->pSprite_->setPositionY(posY);
             block->setPosY(posY);
         }
-     
+        
+        // preview draw
+        setPosPreviewBlocks(dist_ - BLOCKSIZE);
     }
     else
     {
@@ -180,12 +196,17 @@ void Blocks::doWorkWhenIsUnderNothing()
     
     // 0되기 전까지는 계속 내려와야함
     for(auto& block : blocks_)
-     {
-         float posY = block->pSprite_->getPositionY();
-         posY -= BLOCKSIZE;
-         block->pSprite_->setPositionY(posY);
-         block->setPosY(posY);
-     }
+    {
+        float posY = block->pSprite_->getPositionY();
+        block->pSprite_->setPositionY(posY - BLOCKSIZE);
+        block->setPosY(posY - BLOCKSIZE);
+        
+        PreviewBlockDistVec_.emplace_back(int(posY - BLOCKSIZE));
+    }
+    
+    // preview draw
+    int min = *min_element(PreviewBlockDistVec_.begin(), PreviewBlockDistVec_.end());
+    setPosPreviewBlocks(min);
 }
 
 void Blocks::changePos(cocos2d::Vec2 variance)
@@ -212,7 +233,6 @@ void Blocks::fixBlockPos()
         MapMgr::getInstance()->includeGridMapBlocks(block->pSprite_);
         MapMgr::getInstance()->checkIsExisting(block->pSprite_, true);
     }
-    
 }
 
 void Blocks::autoMoveDown()
@@ -248,6 +268,8 @@ void Blocks::autoMoveDown()
             }
         }
         
+        // preview draw
+        setPosPreviewBlocks(dist_ - BLOCKSIZE);
     }
     else // 2. 블록 없는 경우
     {
@@ -269,12 +291,49 @@ void Blocks::autoMoveDown()
             block->pSprite_->setPositionY(posY - BLOCKSIZE);
             block->setPosY(posY - BLOCKSIZE);
            
+            PreviewBlockDistVec_.emplace_back(int(posY - BLOCKSIZE));
+            
             // 맵 안에 들어오면 보여라!
             if(MAX_HEIGHT >= posY)
             {
                 block->pSprite_->setVisible(true);
             }
-            
         }
+        
+        // preview draw
+        int min = *min_element(PreviewBlockDistVec_.begin(), PreviewBlockDistVec_.end());
+        setPosPreviewBlocks(min);
+    }
+}
+
+void Blocks::checkPreviewBlocks()
+{
+     // preview draw
+    if(true == MapMgr::getInstance()->checkUnderSomething(blocks_))
+    {
+        MapMgr::getInstance()->getMaxRowOfUnderBlock(&dist_);
+        
+       
+        setPosPreviewBlocks(dist_ - BLOCKSIZE);
+    }
+    else
+    {
+        if(true == PreviewBlockDistVec_.empty())
+            return;
+        
+        int min = *min_element(PreviewBlockDistVec_.begin(), PreviewBlockDistVec_.end());
+        setPosPreviewBlocks(min);
+        
+       PreviewBlockDistVec_.clear();
+       PreviewBlockDistVec_.shrink_to_fit();
+    }
+}
+
+void Blocks::setPosPreviewBlocks(int dist)
+{
+    for(int i = 0; i < BLOCKCNT; ++i)
+    {
+        Node* child = blocks_[i]->pSprite_->getChildByTag(BLOCKPREVIEW_TAG);
+        child->setPositionY(-1 * dist);
     }
 }

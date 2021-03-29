@@ -11,10 +11,9 @@
 
 #include "Define.h"
 
-struct Block //최소 단위 1블럭 -> 얘가 4개 모여서 Blocks
+typedef struct Block //최소 단위 1블럭 -> 얘가 4개 모여서 Blocks
 {
     cocos2d::Sprite* pSprite_;
-    //cocos2d::Vec2 pos_;
     int x_;
     int y_;
     
@@ -36,22 +35,24 @@ struct Block //최소 단위 1블럭 -> 얘가 4개 모여서 Blocks
     {
         y_ = posY;
     }
-};
+}BLOCK;
 
 class Blocks
 {
 protected:
-    Block* blocks_[BLOCKCNT]; // Block을 4개 가지고 있는 변수
+    BLOCK* blocks_[BLOCKCNT]; // BLOCK을 4개 가지고 있는 변수
     bool isDrop_;
     BLOCKTYPE blockType_;
     int dist_;
+    
+    std::vector<int> PreviewBlockDistVec_;
     
 public:
     virtual bool init(cocos2d::Color3B color) = 0;
     
 public:
     cocos2d::Sprite* getBlockSprite(int idx) { return (blocks_[idx])->pSprite_; }
-       
+    
 public:
     void setIsDrop(bool isDrop) { isDrop_ = isDrop; }
     
@@ -67,8 +68,8 @@ public:
     void autoMoveDown();
     
 public:
-    
-    
+    void checkPreviewBlocks();
+    void setPosPreviewBlocks(int dist);
     
 public:
     Blocks();

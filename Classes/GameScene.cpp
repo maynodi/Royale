@@ -5,6 +5,9 @@
 
 #include "MapLayer.h"
 
+#include "MapMgr.h"
+#include "KeyMgr.h"
+
 USING_NS_CC;
 
 GameScene::GameScene()

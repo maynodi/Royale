@@ -11,7 +11,6 @@
 
 #include <algorithm>
 
-#include "Blocks.h"
 #include "Blocks_J.h"
 #include "Blocks_I.h"
 #include "Blocks_S.h"
@@ -61,7 +60,7 @@ void MapMgr::init()
         gridMapBlocks_[i].resize(MAP_WIDTH, nullptr);
         isExisting_[i].resize(MAP_WIDTH, false);
     }
-
+    
 }
 
 void MapMgr::setIsDrop(bool isDrop)
@@ -158,7 +157,7 @@ void MapMgr::autoMoveDown()
     pCurBlocks_->autoMoveDown();
 }
 
-bool MapMgr::checkUnderSomething(Block* block[])
+bool MapMgr::checkUnderSomething(BLOCK* block[])
 {
     // 일단, 접촉할 부분을 미리 골라내
     newBlockList_.clear();
@@ -199,8 +198,9 @@ bool MapMgr::checkUnderSomething(Block* block[])
     for(auto& newBlock : newBlockList_)
     {
         int colIndex = newBlock->x_ / BLOCKSIZE - 1;
+        int rowIndex = newBlock->y_ / BLOCKSIZE;
         
-        for(int i = 0; i < MAP_HEIGHT; ++i)
+        for(int i = 0; i < rowIndex; ++i)
         {
             if(true == isExisting_[i][colIndex]) // 맵 아래에 블록이 있으면
             {
@@ -214,7 +214,7 @@ bool MapMgr::checkUnderSomething(Block* block[])
 
 void MapMgr::getMaxRowOfUnderBlock(int* dist)
 {
-    std::list<int> underBlock;
+    std::vector<int> underBlock;
     int blankCnt = 0;
     
     for(auto& newBlock : newBlockList_)
@@ -222,7 +222,7 @@ void MapMgr::getMaxRowOfUnderBlock(int* dist)
         int colIndex = newBlock->x_ / BLOCKSIZE - 1;
         int rowIndex = newBlock->y_ / BLOCKSIZE;
         
-        for(int i = 0; i < MAP_HEIGHT; ++i)
+        for(int i = 0; i < rowIndex; ++i)
         {
             if(false == isExisting_[i][colIndex])
             {
@@ -235,15 +235,15 @@ void MapMgr::getMaxRowOfUnderBlock(int* dist)
         }
         
         // j 의 경우
-        if(MAP_HEIGHT == blankCnt)
+        if(rowIndex == blankCnt)
         {
             underBlock.emplace_back(rowIndex + 1);
             blankCnt = 0;
         }
     }
     
-    underBlock.sort();
-    *dist = underBlock.front() * BLOCKSIZE;
+    int minDist = (*min_element(underBlock.begin(), underBlock.end())) * BLOCKSIZE;
+    *dist = minDist;
 }
 
 bool MapMgr::checkCanChange(float x, float y)
@@ -388,4 +388,9 @@ bool MapMgr::checkGameOver()
     }
     
     return false;
+}
+
+void MapMgr::checkPreviewBlocks()
+{
+    pCurBlocks_->checkPreviewBlocks();
 }

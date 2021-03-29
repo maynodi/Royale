@@ -37,16 +37,24 @@ Blocks_T* Blocks_T::create(cocos2d::Color3B color)
 
 bool Blocks_T::init(cocos2d::Color3B color)
 {
-    // Blocks 초기화
-    Block* pBlock = nullptr;
+    // BLOCK 초기화
+    BLOCK* pBlock = nullptr;
     for(int i = 0; i < BLOCKCNT; ++i)
     {
         Vec2 pos = Vec2(BLOCKSIZE * (location::T[POS_X][i] + initPos::pos[POS_X])
                         , BLOCKSIZE * (location::T[POS_Y][i] + initPos::pos[POS_Y]));
-        pBlock = new Block(pos.x, pos.y);
+        pBlock = new BLOCK(pos.x, pos.y);
 
         pBlock->pSprite_->setColor(color);
         blocks_[i] = pBlock;
+        
+        // preview Block
+        Sprite* pPreviewSprite = Sprite::create("white.png", Rect(0, 0, BLOCKSIZE, BLOCKSIZE));
+        pPreviewSprite->setTag(BLOCKPREVIEW_TAG);
+        pPreviewSprite->setAnchorPoint(Vec2(0, 0));
+        pPreviewSprite->setOpacity(125);
+        
+        pBlock->pSprite_->addChild(pPreviewSprite);
     }
     
     blockType_ = BLOCKTYPE::T;
@@ -56,14 +64,6 @@ bool Blocks_T::init(cocos2d::Color3B color)
 
 void Blocks_T::rotate(int keyPressedCnt)
 {
-    // 2개로 나눠야함
-    // 1. 아래 블록이 있는 경우
-
-
-
-
-
-    // 2. 아래 아무것도 없는 경우
     // 일단 미리 회전 후의 좌표를 계산해놓고
     Vec2 newPos[BLOCKCNT] = {};
     for(int i = 0; i < BLOCKCNT; ++i)

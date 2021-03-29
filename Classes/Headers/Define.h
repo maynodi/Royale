@@ -11,6 +11,8 @@
 
 #define MAPLAYER_TAG 0
 #define BLOCKSPRITE_TAG 1
+#define BLOCKPREVIEW_TAG 2
+
 #define KEY cocos2d::EventKeyboard::KeyCode
 
 #define MAP_WIDTH 10

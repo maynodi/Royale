@@ -8,9 +8,10 @@
 #pragma once
 
 #include "cocos2d.h"
+
 #include "Define.h"
 
-class Blocks;
+#include "Blocks.h"
 
 class MapMgr
 {
@@ -21,7 +22,7 @@ private:
     std::vector<bool> isExisting_[MAP_HEIGHT];
     std::vector<cocos2d::Sprite*>  gridMapBlocks_[MAP_HEIGHT];
     Blocks* pCurBlocks_;
-    std::list<struct Block*> newBlockList_; // 맵의 블록과 부딪힐 가능성있는 블록 리스트
+    std::list<BLOCK*> newBlockList_; // 맵의 블록과 부딪힐 가능성있는 블록 리스트
     GAMESTATE gameState_;
     
 public:
@@ -46,7 +47,7 @@ public:
     void autoMoveDown();
     
 public:
-    bool checkUnderSomething(struct Block* block[]);
+    bool checkUnderSomething(BLOCK* block[]);
     void getMaxRowOfUnderBlock(int* dist);
     bool checkCanChange(float x, float y);
     
@@ -61,6 +62,7 @@ public:
     
 public:
     bool checkGameOver();
+    void checkPreviewBlocks();
     
 private:
     MapMgr();

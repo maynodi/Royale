@@ -79,31 +79,36 @@ void MapLayer::update(float dt)
     
     if(GAMESTATE::OVER == MapMgr::getInstance()->getGameState())
     {
-        unscheduleAllCallbacks();
-        
-        Vector<Node*> children = this->getChildren();
-        for(auto& child : children)
-        {
-            if(BLOCKSPRITE_TAG == child->getTag())
-            {
-                child->setOpacity(125);
-            }
-        }
-        
-        Label* label1 = Label::createWithTTF("GAME", FONTPATH, 60);
-        label1->setPosition(Vec2(MAX_WIDTH/2, MAX_HEIGHT/2 + 60));
-        label1->setTextColor(Color4B::WHITE);
-        this->addChild(label1);
-        
-        Label* label2 = Label::createWithTTF("OVER", FONTPATH, 60);
-        label2->setPosition(Vec2(MAX_WIDTH/2, MAX_HEIGHT/2));
-        label2->setTextColor(Color4B::WHITE);
-        this->addChild(label2);
-        
+        setGameOver();
     }
     
     MapMgr::getInstance()->makeNewBlocks(rand() % BLOCKTYPE::END);
+    MapMgr::getInstance()->checkPreviewBlocks();
     MapMgr::getInstance()->drop();
+}
+
+void MapLayer::setGameOver()
+{
+    unscheduleAllCallbacks();
+    
+    Vector<Node*> children = this->getChildren();
+    for(auto& child : children)
+    {
+        if(BLOCKSPRITE_TAG == child->getTag())
+        {
+            child->setOpacity(125);
+        }
+    }
+    
+    Label* label1 = Label::createWithTTF("GAME", FONTPATH, 60);
+    label1->setPosition(Vec2(MAX_WIDTH/2, MAX_HEIGHT/2 + 60));
+    label1->setTextColor(Color4B::WHITE);
+    this->addChild(label1);
+    
+    Label* label2 = Label::createWithTTF("OVER", FONTPATH, 60);
+    label2->setPosition(Vec2(MAX_WIDTH/2, MAX_HEIGHT/2));
+    label2->setTextColor(Color4B::WHITE);
+    this->addChild(label2);
 }
 
 void MapLayer::DrawGridMap()
