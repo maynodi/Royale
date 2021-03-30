@@ -3,10 +3,12 @@
 #include "Define.h"
 #include "SimpleAudioEngine.h"
 
-#include "MapLayer.h"
-
 #include "MapMgr.h"
 #include "KeyMgr.h"
+
+#include "MapLayer.h"
+#include "BlockLayer.h"
+#include "UILayer.h"
 
 USING_NS_CC;
 
@@ -43,6 +45,14 @@ bool GameScene::init()
 	
     Layer* pLayer = MapLayer::create();
     pLayer->setTag(MAPLAYER_TAG);
+    this->addChild(pLayer);
+    
+    pLayer = UILayer::create();
+    pLayer->setTag(UILAYER_TAG);
+    this->addChild(pLayer);
+    
+    pLayer = BlockLayer::create();
+    pLayer->setTag(BLOCKLAYER_TAG);
     this->addChild(pLayer);
     
     return true;

@@ -20,20 +20,21 @@ typedef struct Block //최소 단위 1블럭 -> 얘가 4개 모여서 Blocks
     Block(int x, int y)
         : x_(x), y_(y)
     {
-        pSprite_ = cocos2d::Sprite::create("white.png",cocos2d::Rect(0, 0, BLOCKSIZE, BLOCKSIZE));
+        pSprite_ = cocos2d::Sprite::create("white.png");
+        //pSprite_->setScale(BLOCKSIZE, BLOCKSIZE);
         pSprite_->setPosition(cocos2d::Vec2(x_, y_));
         pSprite_->setAnchorPoint(cocos2d::Vec2(1, 0));
     }
     
     void setPos(cocos2d::Vec2 pos)
     {
-        x_ = pos.x;
-        y_ = pos.y;
+        x_ = (int)pos.x;
+        y_ = (int)pos.y;
     }
     
     void setPosY(float posY)
     {
-        y_ = posY;
+        y_ = (int)posY;
     }
 }BLOCK;
 
@@ -70,6 +71,7 @@ public:
 public:
     void checkPreviewBlocks();
     void setPosPreviewBlocks(int dist);
+    void setRotatePreviewBlocks();
     
 public:
     Blocks();

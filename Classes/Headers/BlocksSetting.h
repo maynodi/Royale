@@ -9,8 +9,8 @@
 
 namespace initPos // 시작위치
 {
-    const int pos[2] = {HALF_WIDTH , MAP_HEIGHT + 1}; // x, y 
-    
+    const int pos[2] = {HALF_WIDTH , MAP_HEIGHT}; // x, y
+    const int nextBlockPos[2] = {HALF_BLOCKLAYER_WIDTH + 1, BLOCKLAYER_HEIGHT - 1};
 }
 namespace location // 기본위치
 {

@@ -49,7 +49,8 @@ bool Blocks_J::init(cocos2d::Color3B color)
         blocks_[i] = pBlock;
         
         // preview Block
-        Sprite* pPreviewSprite = Sprite::create("white.png", Rect(0, 0, BLOCKSIZE, BLOCKSIZE));
+        Sprite* pPreviewSprite = Sprite::create("white.png");
+        //pPreviewSprite->setScale(BLOCKSIZE, BLOCKSIZE);
         pPreviewSprite->setTag(BLOCKPREVIEW_TAG);
         pPreviewSprite->setAnchorPoint(Vec2(0, 0));
         pPreviewSprite->setOpacity(125);

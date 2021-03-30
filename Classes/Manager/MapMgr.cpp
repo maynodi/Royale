@@ -8,6 +8,7 @@
 #include "MapMgr.h"
 
 #include "KeyMgr.h"
+#include "DataMgr.h"
 
 #include <algorithm>
 
@@ -24,6 +25,7 @@ MapMgr* MapMgr::pInstance_ = nullptr;
 MapMgr::MapMgr()
     : pCurBlocks_(nullptr)
     , gameState_(PLAY)
+    , nextBlockType_(BLOCKTYPE::S)
 {
     
 }
@@ -71,13 +73,13 @@ void MapMgr::setIsDrop(bool isDrop)
     pCurBlocks_->setIsDrop(isDrop);
 }
 
-void MapMgr::makeNewBlocks(int blockType)
+void MapMgr::makeNewBlocks()
 {
     if(nullptr != pCurBlocks_)
         return;
     
     Blocks* pBlocks = nullptr;
-    switch (blockType)
+    switch (nextBlockType_)
     {
         case BLOCKTYPE::J:
         {
@@ -91,7 +93,7 @@ void MapMgr::makeNewBlocks(int blockType)
         }
         case BLOCKTYPE::S:
         {
-            pBlocks = Blocks_S::create(Color3B::WHITE);
+            pBlocks = Blocks_S::create(Color3B::MAGENTA);
             break;
         }
         case BLOCKTYPE::T:
@@ -109,6 +111,7 @@ void MapMgr::makeNewBlocks(int blockType)
     }
     
     pCurBlocks_ = pBlocks;
+    nextBlockType_ = rand() % BLOCKTYPE::END;
     
     // 스프라이트를 mapLayer에 자식으로 추가
     Scene* pCurScene = Director::getInstance()->getRunningScene();
@@ -373,6 +376,11 @@ void MapMgr::deleteLine(int row)
         
         isExisting_[row][i] = false;
     }
+    
+    // 점수 체크
+    DataMgr::getInstance()->addScore(DELETELINE_SCORE);
+    // 라인 수 체크
+    DataMgr::getInstance()->setLineCnt();
 }
 
 bool MapMgr::checkGameOver()

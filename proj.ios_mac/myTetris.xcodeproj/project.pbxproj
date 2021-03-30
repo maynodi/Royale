@@ -29,6 +29,12 @@
 		46880B8219C43A67006E1F66 /* HelloWorld.png in Resources */ = {isa = PBXBuildFile; fileRef = 46880B7A19C43A67006E1F66 /* HelloWorld.png */; };
 		46880B8819C43A87006E1F66 /* AppDelegate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 46880B8419C43A87006E1F66 /* AppDelegate.cpp */; };
 		46880B8919C43A87006E1F66 /* AppDelegate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 46880B8419C43A87006E1F66 /* AppDelegate.cpp */; };
+		500BEAE72612C8F7008EEF74 /* BlockLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 500BEAE62612C8F7008EEF74 /* BlockLayer.cpp */; };
+		500BEAE82612C8F7008EEF74 /* BlockLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 500BEAE62612C8F7008EEF74 /* BlockLayer.cpp */; };
+		500BEAEB2613054F008EEF74 /* UILayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 500BEAE92613054F008EEF74 /* UILayer.cpp */; };
+		500BEAEC2613054F008EEF74 /* UILayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 500BEAE92613054F008EEF74 /* UILayer.cpp */; };
+		500BEAEF261314BD008EEF74 /* DataMgr.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 500BEAED261314BD008EEF74 /* DataMgr.cpp */; };
+		500BEAF0261314BD008EEF74 /* DataMgr.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 500BEAED261314BD008EEF74 /* DataMgr.cpp */; };
 		503AE0F817EB97AB00D1A890 /* Icon.icns in Resources */ = {isa = PBXBuildFile; fileRef = 503AE0F617EB97AB00D1A890 /* Icon.icns */; };
 		503AE10517EB98FF00D1A890 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 503AE10317EB98FF00D1A890 /* main.cpp */; };
 		503AE11B17EB9C5A00D1A890 /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 503AE11A17EB9C5A00D1A890 /* IOKit.framework */; };
@@ -145,6 +151,12 @@
 		46880B7A19C43A67006E1F66 /* HelloWorld.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = HelloWorld.png; sourceTree = "<group>"; };
 		46880B8419C43A87006E1F66 /* AppDelegate.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AppDelegate.cpp; sourceTree = "<group>"; };
 		46880B8519C43A87006E1F66 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		500BEAE52612C8F7008EEF74 /* BlockLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlockLayer.h; sourceTree = "<group>"; };
+		500BEAE62612C8F7008EEF74 /* BlockLayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BlockLayer.cpp; sourceTree = "<group>"; };
+		500BEAE92613054F008EEF74 /* UILayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = UILayer.cpp; sourceTree = "<group>"; };
+		500BEAEA2613054F008EEF74 /* UILayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UILayer.h; sourceTree = "<group>"; };
+		500BEAED261314BD008EEF74 /* DataMgr.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DataMgr.cpp; sourceTree = "<group>"; };
+		500BEAEE261314BD008EEF74 /* DataMgr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataMgr.h; sourceTree = "<group>"; };
 		503AE0F617EB97AB00D1A890 /* Icon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = Icon.icns; sourceTree = "<group>"; };
 		503AE0F717EB97AB00D1A890 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		503AE10317EB98FF00D1A890 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = mac/main.cpp; sourceTree = "<group>"; };
@@ -338,16 +350,16 @@
 			children = (
 				50E5D1A826086C860014EC25 /* Headers */,
 				50E5D1A22608499D0014EC25 /* Manager */,
-				46880B8419C43A87006E1F66 /* AppDelegate.cpp */,
-				46880B8519C43A87006E1F66 /* AppDelegate.h */,
-				50E5D18B260821360014EC25 /* TitleLobbyLayer.h */,
-				50E5D18A260821360014EC25 /* TitleLobbyLayer.cpp */,
-				50E5D18D260821360014EC25 /* TitleScene.h */,
-				50E5D18C260821360014EC25 /* TitleScene.cpp */,
-				50E5D189260821360014EC25 /* GameScene.h */,
-				50E5D18E260821360014EC25 /* GameScene.cpp */,
-				50E5D196260839380014EC25 /* MapLayer.h */,
-				50E5D197260839380014EC25 /* MapLayer.cpp */,
+				500BEAE42612C73F008EEF74 /* Scene */,
+				500BEAE22612C733008EEF74 /* Object */,
+			);
+			name = Classes;
+			path = ../Classes;
+			sourceTree = "<group>";
+		};
+		500BEAE22612C733008EEF74 /* Object */ = {
+			isa = PBXGroup;
+			children = (
 				50E5D19E2608498F0014EC25 /* Blocks.h */,
 				50E5D19F2608498F0014EC25 /* Blocks.cpp */,
 				50E5D1A426086C7F0014EC25 /* Blocks_J.h */,
@@ -360,10 +372,29 @@
 				50B42910260B222E00A74E10 /* Blocks_T.cpp */,
 				50B42914260B222E00A74E10 /* Blocks_O.h */,
 				50B42912260B222E00A74E10 /* Blocks_O.cpp */,
-				50E5D1A926087F4A0014EC25 /* BlocksSetting.h */,
 			);
-			name = Classes;
-			path = ../Classes;
+			path = Object;
+			sourceTree = "<group>";
+		};
+		500BEAE42612C73F008EEF74 /* Scene */ = {
+			isa = PBXGroup;
+			children = (
+				46880B8419C43A87006E1F66 /* AppDelegate.cpp */,
+				46880B8519C43A87006E1F66 /* AppDelegate.h */,
+				50E5D18D260821360014EC25 /* TitleScene.h */,
+				50E5D18C260821360014EC25 /* TitleScene.cpp */,
+				50E5D18B260821360014EC25 /* TitleLobbyLayer.h */,
+				50E5D18A260821360014EC25 /* TitleLobbyLayer.cpp */,
+				50E5D189260821360014EC25 /* GameScene.h */,
+				50E5D18E260821360014EC25 /* GameScene.cpp */,
+				50E5D196260839380014EC25 /* MapLayer.h */,
+				50E5D197260839380014EC25 /* MapLayer.cpp */,
+				500BEAE52612C8F7008EEF74 /* BlockLayer.h */,
+				500BEAE62612C8F7008EEF74 /* BlockLayer.cpp */,
+				500BEAEA2613054F008EEF74 /* UILayer.h */,
+				500BEAE92613054F008EEF74 /* UILayer.cpp */,
+			);
+			path = Scene;
 			sourceTree = "<group>";
 		};
 		503AE0F517EB97AB00D1A890 /* Icons */ = {
@@ -393,6 +424,8 @@
 				50E5D19B260844B90014EC25 /* MapMgr.cpp */,
 				50E5D1AA26088E2E0014EC25 /* KeyMgr.h */,
 				50E5D1AB26088E2E0014EC25 /* KeyMgr.cpp */,
+				500BEAEE261314BD008EEF74 /* DataMgr.h */,
+				500BEAED261314BD008EEF74 /* DataMgr.cpp */,
 			);
 			path = Manager;
 			sourceTree = "<group>";
@@ -402,6 +435,7 @@
 			children = (
 				50E5D195260837B20014EC25 /* Define.h */,
 				50E5D1A326085B610014EC25 /* Struct.h */,
+				50E5D1A926087F4A0014EC25 /* BlocksSetting.h */,
 			);
 			path = Headers;
 			sourceTree = "<group>";
@@ -553,12 +587,15 @@
 				50E5D1AC26088E2E0014EC25 /* KeyMgr.cpp in Sources */,
 				46880B8819C43A87006E1F66 /* AppDelegate.cpp in Sources */,
 				50B42917260B222E00A74E10 /* Blocks_O.cpp in Sources */,
+				500BEAEF261314BD008EEF74 /* DataMgr.cpp in Sources */,
 				50B42909260ACD0000A74E10 /* Blocks_I.cpp in Sources */,
 				50E5D193260821360014EC25 /* GameScene.cpp in Sources */,
+				500BEAE72612C8F7008EEF74 /* BlockLayer.cpp in Sources */,
 				1AF87B8A1F6F7822007BE51C /* main.m in Sources */,
 				50E5D191260821360014EC25 /* TitleScene.cpp in Sources */,
 				50B42915260B222E00A74E10 /* Blocks_T.cpp in Sources */,
 				50E5D1A02608498F0014EC25 /* Blocks.cpp in Sources */,
+				500BEAEB2613054F008EEF74 /* UILayer.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -571,8 +608,11 @@
 				46880B8919C43A87006E1F66 /* AppDelegate.cpp in Sources */,
 				50B42918260B222E00A74E10 /* Blocks_O.cpp in Sources */,
 				503AE10517EB98FF00D1A890 /* main.cpp in Sources */,
+				500BEAF0261314BD008EEF74 /* DataMgr.cpp in Sources */,
 				50E5D190260821360014EC25 /* TitleLobbyLayer.cpp in Sources */,
 				50E5D1AD26088E2E0014EC25 /* KeyMgr.cpp in Sources */,
+				500BEAEC2613054F008EEF74 /* UILayer.cpp in Sources */,
+				500BEAE82612C8F7008EEF74 /* BlockLayer.cpp in Sources */,
 				50B42916260B222E00A74E10 /* Blocks_T.cpp in Sources */,
 				50E5D1A726086C7F0014EC25 /* Blocks_J.cpp in Sources */,
 				50E5D199260839380014EC25 /* MapLayer.cpp in Sources */,

@@ -9,6 +9,7 @@
 
 #include "MapMgr.h"
 #include "KeyMgr.h"
+#include "DataMgr.h"
 
 #include "Define.h"
 
@@ -25,6 +26,7 @@ MapLayer::~MapLayer()
 {
     MapMgr::destroyInstance();
     KeyMgr::destroyInstance();
+    DataMgr::destroyInstance();
 }
 
 MapLayer* MapLayer::create()
@@ -50,7 +52,7 @@ bool MapLayer::init()
         return false;
     }
     
-    this->setContentSize(Size((MAP_WIDTH + 2) * BLOCKSIZE, (MAP_HEIGHT + 2) * BLOCKSIZE));
+    this->setContentSize(Size(MAPLAYER_SIZE_X, MAPLAYER_SIZE_Y));
     this->setPosition(Vec2(BLOCKSIZE, BLOCKSIZE));
     
     KeyMgr* pKeyMgr = KeyMgr::getInstance();
@@ -67,7 +69,7 @@ void MapLayer::onEnter()
     Layer::onEnter();
     
     // 맨 처음 블럭 생성
-    MapMgr::getInstance()->makeNewBlocks(BLOCKTYPE::S);
+    MapMgr::getInstance()->makeNewBlocks();
     
     schedule(schedule_selector(MapLayer::autoMoveDown), 1.f);
     this->scheduleUpdate();
@@ -76,13 +78,14 @@ void MapLayer::onEnter()
 void MapLayer::update(float dt)
 {
     MapMgr::getInstance()->reset();
+    DataMgr::getInstance()->updateData();
     
     if(GAMESTATE::OVER == MapMgr::getInstance()->getGameState())
     {
         setGameOver();
     }
     
-    MapMgr::getInstance()->makeNewBlocks(rand() % BLOCKTYPE::END);
+    MapMgr::getInstance()->makeNewBlocks();
     MapMgr::getInstance()->checkPreviewBlocks();
     MapMgr::getInstance()->drop();
 }

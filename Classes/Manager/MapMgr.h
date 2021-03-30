@@ -24,6 +24,7 @@ private:
     Blocks* pCurBlocks_;
     std::list<BLOCK*> newBlockList_; // 맵의 블록과 부딪힐 가능성있는 블록 리스트
     GAMESTATE gameState_;
+    int nextBlockType_;
     
 public:
     static MapMgr* getInstance();
@@ -35,12 +36,14 @@ public:
 public:
     void setIsDrop(bool isDrop);
     void setNullCurBlocks() { pCurBlocks_ = nullptr; }
+    void setNextBlockType(int Type) { nextBlockType_ = Type; }
     
 public:
     GAMESTATE getGameState() { return gameState_; }
+    int getNextBlockType() { return nextBlockType_; }
     
 public:
-    void makeNewBlocks(int blockType);
+    void makeNewBlocks();
     void move(int dir);
     void rotate(int keyPressedCnt);
     void drop();

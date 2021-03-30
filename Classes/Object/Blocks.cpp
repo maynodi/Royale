@@ -29,8 +29,8 @@ Blocks::~Blocks()
     
     for(auto& block : blocks_)
     {
-        block->pSprite_->removeAllChildren();
-        block->pSprite_->release();
+        block->pSprite_->removeAllChildrenWithCleanup(true);
+        //block->pSprite_->release();
     }
 }
 
@@ -57,6 +57,17 @@ void Blocks::move(int dir)
     
     posVariance *= BLOCKSIZE;
     changePos(posVariance);
+
+    // preview block
+    if(DIR_DOWN == dir)
+    {
+        for(auto& block : blocks_)
+        {
+            Node* previewNode = block->pSprite_->getChildByTag(BLOCKPREVIEW_TAG);
+            float posY = previewNode->getPositionY();
+            previewNode->setPositionY(posY + BLOCKSIZE);
+        }
+    }
 }
 
 bool Blocks::checkLimitedPos(int dir)
@@ -78,13 +89,13 @@ bool Blocks::checkLimitedPos(int dir)
         cocos2d::Vec2 newPos = {};
         switch (dir) {
             case DIR_LEFT:
-                newPos = curPos + Vec2(-1, 0);
+                newPos = curPos + Vec2(-BLOCKSIZE, 0);
                 break;
             case DIR_RIGHT:
-                newPos = curPos + Vec2(1, 0);
+                newPos = curPos + Vec2(BLOCKSIZE, 0);
                 break;
             case DIR_DOWN:
-                newPos = curPos + Vec2(0, -1);
+                newPos = curPos + Vec2(0, -BLOCKSIZE);
                 break;
             default:
                 break;
@@ -95,7 +106,6 @@ bool Blocks::checkLimitedPos(int dir)
             changePos();
             return true;
         }
-        
     }
     
     return false;
@@ -312,8 +322,6 @@ void Blocks::checkPreviewBlocks()
     if(true == MapMgr::getInstance()->checkUnderSomething(blocks_))
     {
         MapMgr::getInstance()->getMaxRowOfUnderBlock(&dist_);
-        
-       
         setPosPreviewBlocks(dist_ - BLOCKSIZE);
     }
     else
@@ -333,7 +341,18 @@ void Blocks::setPosPreviewBlocks(int dist)
 {
     for(int i = 0; i < BLOCKCNT; ++i)
     {
-        Node* child = blocks_[i]->pSprite_->getChildByTag(BLOCKPREVIEW_TAG);
-        child->setPositionY(-1 * dist);
+        Node* previewNode = blocks_[i]->pSprite_->getChildByTag(BLOCKPREVIEW_TAG);
+        previewNode->setPositionY(-1 * dist);
+    }
+}
+
+void Blocks::setRotatePreviewBlocks()
+{
+    for(auto& block : blocks_)
+    {
+        Node* previewNode = block->pSprite_->getChildByTag(BLOCKPREVIEW_TAG);
+        float posY = previewNode->getPositionY();
+        
+        previewNode->setPositionY(posY + BLOCKSIZE);
     }
 }

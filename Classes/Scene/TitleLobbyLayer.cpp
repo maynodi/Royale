@@ -42,7 +42,7 @@ TitleLobbyLayer* TitleLobbyLayer::create()
 
 bool TitleLobbyLayer::init()
 {
-    if ( !Layer::init() )
+    if ( false == Layer::init() )
     {
         return false;
     }
