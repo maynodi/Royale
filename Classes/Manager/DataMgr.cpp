@@ -17,7 +17,7 @@ DataMgr::~DataMgr()
 {
 }
 
-DataMgr*  DataMgr::getInstance()
+DataMgr* DataMgr::getInstance()
 {
     if(nullptr == pInstance_)
     {
@@ -39,15 +39,19 @@ void DataMgr::destroyInstance()
 
 void DataMgr::init()
 {
-    
+    bestScore_ = UserDefault::getInstance()->getIntegerForKey("bestScore");
 }
 
-void DataMgr::updateData()
+bool DataMgr::updateData()
 {
     if(limitLineCnt_ <= lineCnt_)
     {
         level_ += 1;
-        lineCnt_ = 0;
+        lineCnt_ -= limitLineCnt_;
         score_ += 1000;
+        
+        return true;
     }
+    
+    return false;
 }

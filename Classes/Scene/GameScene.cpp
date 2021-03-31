@@ -1,10 +1,11 @@
 #include "GameScene.h"
 
-#include "Define.h"
-#include "SimpleAudioEngine.h"
-
 #include "MapMgr.h"
 #include "KeyMgr.h"
+#include "DataMgr.h"
+
+#include "Define.h"
+#include "SimpleAudioEngine.h"
 
 #include "MapLayer.h"
 #include "BlockLayer.h"
@@ -18,6 +19,11 @@ GameScene::GameScene()
 
 GameScene::~GameScene()
 {
+    save();
+    
+    MapMgr::destroyInstance();
+    KeyMgr::destroyInstance();
+    DataMgr::destroyInstance();
 }
 
 GameScene* GameScene::create()
@@ -56,4 +62,19 @@ bool GameScene::init()
     this->addChild(pLayer);
     
     return true;
+}
+
+void GameScene::save()
+{
+    int bestScore = DataMgr::getInstance()->getBestScore();
+    int score = DataMgr::getInstance()->getScore();
+    
+    if(score >= bestScore)
+    {
+        bestScore = score;
+    }
+       
+    UserDefault::getInstance()->setIntegerForKey("bestScore", bestScore);
+    
+    UserDefault::getInstance()->flush();
 }

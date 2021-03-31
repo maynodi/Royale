@@ -31,7 +31,7 @@ public:
     void setLineCnt() { lineCnt_ += 1; }
     
 public:
-    void updateData();
+    bool updateData();
     void addScore(int score) { score_ += score; }
     
 private:

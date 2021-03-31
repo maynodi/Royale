@@ -11,6 +11,9 @@ public:
     virtual bool init() override;
     
 public:
+    void save();
+    
+public:
     GameScene();
     ~GameScene();
 };

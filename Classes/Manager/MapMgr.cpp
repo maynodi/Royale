@@ -128,10 +128,129 @@ void MapMgr::makeNewBlocks()
     }
 }
 
+void MapMgr::update()
+{
+    reset();
+    
+    if(true == DataMgr::getInstance()->updateData())
+    {
+        addLine();
+    }
+    
+    makeNewBlocks();
+    
+    pCurBlocks_->checkPreviewBlocks();
+    pCurBlocks_->drop();
+}
+
+void MapMgr::addLine()
+{
+    // 레벨업을 하면 이전 레벨의 수만큼 라인이 추가된다.
+    int curLevel = DataMgr::getInstance()->getLevel();
+    int addLineCnt = (curLevel - 1) * 2;
+    
+    // 먼저 있는 거부터 이동시키자
+    // 맨 꼭대기 인덱스가 필요해
+    int maxRow = 0;
+    maxRow = getMaxRowOfExistingBlocetMksInMap();
+    
+    if(0 < maxRow)
+    {
+        if(MAP_HEIGHT - 1 <= maxRow)
+        {
+            gameState_ = OVER;
+            return;
+        }
+        
+        // 맨 위부터 이동시킨다
+        for(int row = maxRow; row >= 0; --row)
+        {
+            for(int col = 0; col < MAP_WIDTH; ++col)
+            {
+                gridMapBlocks_[row + addLineCnt][col] = gridMapBlocks_[row][col];
+                gridMapBlocks_[row][col] = nullptr;
+                
+                if(nullptr != gridMapBlocks_[row + addLineCnt][col])
+                {
+                    int posY = (int)gridMapBlocks_[row + addLineCnt][col]->getPositionY();
+                    posY += (BLOCKSIZE * addLineCnt);
+                    gridMapBlocks_[row + addLineCnt][col]->setPositionY(posY);
+                }
+                
+                isExisting_[row + addLineCnt][col] = isExisting_[row][col];
+                isExisting_[row][col] = false;
+            }
+        }
+    }
+        
+    // 라인 추가
+    // 스프라이트 만들어서 하나씩 다 넣어주고
+    // 스프라이트 위치 정해주고, 앵커도
+    // 색깔랜덤
+    
+    Scene* pCurScene = Director::getInstance()->getRunningScene();
+    Node* mapLayer = pCurScene->getChildByTag(MAPLAYER_TAG);
+    
+    float posX = 0;
+    float posY = 0;
+    for(int i = 0; i < addLineCnt; ++i)
+    {
+        int randomBlank = rand() % MAP_WIDTH;
+        
+        for(int j = 0; j < MAP_WIDTH; ++j)
+        {
+            if(randomBlank == j) // 한줄에 한칸은 빈칸으로 하기위한 코드
+                continue;
+            
+            //위치
+            posX = (j + 1) * BLOCKSIZE;
+            posY = i * BLOCKSIZE;
+            
+            Sprite* pSprite = pSprite = Sprite::create("white.png");
+            pSprite->setPosition(Vec2(posX, posY));
+            pSprite->setAnchorPoint(Vec2(1, 0));
+            pSprite->setColor(Color3B::GRAY);
+            pSprite->setTag(BLOCKSPRITE_TAG);
+            
+            mapLayer->addChild(pSprite);
+            
+            gridMapBlocks_[i][j] = pSprite;
+            isExisting_[i][j] = true;
+        }
+    }
+    
+}
+
+int MapMgr::getMaxRowOfExistingBlocetMksInMap()
+{
+    for(int i = MAP_HEIGHT - 1; i > 0; --i)
+    {
+        for(int j = 0; j < MAP_WIDTH; ++j)
+        {
+            if(true == isExisting_[i][j])
+            {
+                return i;
+            }
+        }
+    }
+    
+    return 0;
+}
+
 void MapMgr::move(int dir)
 {
     if(nullptr == pCurBlocks_)
         return;
+    
+    // 아직 맵에 다 안 들어왔으면 움직이지마
+    for(int i = 0; i < BLOCKCNT; ++i)
+    {
+        int posY = (int)pCurBlocks_->getBlockSprite(i)->getPositionY();
+        if(MAX_HEIGHT <= posY)
+        {
+            return;
+        }
+    }
     
     pCurBlocks_->move(dir);
 }
@@ -144,13 +263,13 @@ void MapMgr::rotate(int keyPressedCnt)
     pCurBlocks_->rotate(keyPressedCnt);
 }
 
-void MapMgr::drop()
-{
-    if(nullptr == pCurBlocks_)
-        return;
-    
-    pCurBlocks_->drop();
-}
+//void MapMgr::drop()
+//{
+//    //if(nullptr == pCurBlocks_)
+//    //    return;
+//
+//    pCurBlocks_->drop();
+//}
 
 void MapMgr::autoMoveDown()
 {
@@ -300,13 +419,15 @@ void MapMgr::reset()
 {
     if(nullptr != pCurBlocks_)
         return;
- 
     
     std::list<int> rowList;
     checkLineFull(&rowList);
     
     if(true == rowList.empty())
         return;
+    
+    
+    rowList.reverse();
     
     // 라인 삭제
     for(auto& row : rowList)
@@ -343,7 +464,6 @@ void MapMgr::reset()
     {
         gameState_ = OVER;
     }
-    
 }
 
 void MapMgr::checkLineFull(std::list<int>* list)
@@ -396,9 +516,4 @@ bool MapMgr::checkGameOver()
     }
     
     return false;
-}
-
-void MapMgr::checkPreviewBlocks()
-{
-    pCurBlocks_->checkPreviewBlocks();
 }

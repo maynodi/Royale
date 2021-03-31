@@ -24,9 +24,6 @@ MapLayer::MapLayer()
 
 MapLayer::~MapLayer()
 {
-    MapMgr::destroyInstance();
-    KeyMgr::destroyInstance();
-    DataMgr::destroyInstance();
 }
 
 MapLayer* MapLayer::create()
@@ -77,17 +74,12 @@ void MapLayer::onEnter()
 
 void MapLayer::update(float dt)
 {
-    MapMgr::getInstance()->reset();
-    DataMgr::getInstance()->updateData();
-    
     if(GAMESTATE::OVER == MapMgr::getInstance()->getGameState())
     {
         setGameOver();
     }
     
-    MapMgr::getInstance()->makeNewBlocks();
-    MapMgr::getInstance()->checkPreviewBlocks();
-    MapMgr::getInstance()->drop();
+    MapMgr::getInstance()->update();
 }
 
 void MapLayer::setGameOver()

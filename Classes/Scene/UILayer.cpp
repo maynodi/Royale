@@ -85,14 +85,14 @@ void UILayer::createLabel()
 void UILayer::checkLabel()
 {
     int temp = DataMgr::getInstance()->getBestScore();
-    static_cast<Label*>(getChildByTag(BESTSCORE_TAG))->setString(StringUtils::format("%d",temp));
+    static_cast<Label*>(getChildByTag(BESTSCORE_TAG))->setString(std::to_string(temp));
     
     temp = DataMgr::getInstance()->getScore();
-    static_cast<Label*>(getChildByTag(SCORE_TAG))->setString(StringUtils::format("%d",temp));
+    static_cast<Label*>(getChildByTag(SCORE_TAG))->setString(std::to_string(temp));
     
     temp = DataMgr::getInstance()->getLevel();
-    static_cast<Label*>(getChildByTag(LEVEL_TAG))->setString(StringUtils::format("%d",temp));
+    static_cast<Label*>(getChildByTag(LEVEL_TAG))->setString(std::to_string(temp));
     
     temp = DataMgr::getInstance()->getLineCnt();
-    static_cast<Label*>(getChildByTag(LINECOUNT_TAG))->setString(StringUtils::format("%d",temp));
+    static_cast<Label*>(getChildByTag(LINECOUNT_TAG))->setString(std::to_string(temp));
 }

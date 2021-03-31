@@ -43,10 +43,14 @@ public:
     int getNextBlockType() { return nextBlockType_; }
     
 public:
+    void update();
+    void addLine();
+    int getMaxRowOfExistingBlocetMksInMap();
+    
+public:
     void makeNewBlocks();
     void move(int dir);
     void rotate(int keyPressedCnt);
-    void drop();
     void autoMoveDown();
     
 public:
@@ -65,7 +69,6 @@ public:
     
 public:
     bool checkGameOver();
-    void checkPreviewBlocks();
     
 private:
     MapMgr();
