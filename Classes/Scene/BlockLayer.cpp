@@ -54,8 +54,7 @@ bool BlockLayer::init()
     Sprite* pSprite = nullptr;
     for(int i = 0; i < BLOCKCNT; ++i)
     {
-        pSprite = Sprite::create("white.png");
-        //pSprite->setScale(BLOCKSIZE, BLOCKSIZE);
+        pSprite = Sprite::create("white.png");        
         pSprite->setAnchorPoint(cocos2d::Vec2(1, 0));
         pSprite->setTag(NEXTBLOCK_TAG);
         

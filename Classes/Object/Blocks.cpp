@@ -224,11 +224,14 @@ void Blocks::changePos(cocos2d::Vec2 variance)
     for(auto& block : blocks_)
     {
         Vec2 curPos = block->pSprite_->getPosition();
+        PreviewBlockDistVec_.emplace_back(curPos.y);
         
         curPos += variance;
         block->pSprite_->setPosition(curPos);
         block->setPos(curPos);
     }
+
+    checkPreviewBlocks();
 }
  
 void Blocks::fixBlockPos()

@@ -13,6 +13,9 @@
 
 class KeyMgr : public cocos2d::Node
 {
+private:
+    bool isItemKeyPressed_;
+    
 public:
     static KeyMgr* pInstance_;
 
@@ -28,11 +31,16 @@ public:
     virtual bool init() override;
     
 public:
+    bool getItemKeyPressed() { return isItemKeyPressed_; }
+    
+public:
     void setZeroUpKeyPressedCnt() { upKeyPressedCnt_ = 0; }
     void minusUpKeyPressedCnt() { upKeyPressedCnt_ -= 1; }
     
 public:
     void onKeyPressed(KEY keyCode, cocos2d::Event* event);
+    void selectBoxControl(KEY keyCode);
+    void blocksControl(KEY keyCode);    
     void onKeyReleased(KEY keyCode, cocos2d::Event* event);
     
 private:

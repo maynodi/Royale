@@ -38,6 +38,8 @@
 		503AE0F817EB97AB00D1A890 /* Icon.icns in Resources */ = {isa = PBXBuildFile; fileRef = 503AE0F617EB97AB00D1A890 /* Icon.icns */; };
 		503AE10517EB98FF00D1A890 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 503AE10317EB98FF00D1A890 /* main.cpp */; };
 		503AE11B17EB9C5A00D1A890 /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 503AE11A17EB9C5A00D1A890 /* IOKit.framework */; };
+		508036BB2615725400EA57C7 /* white.png in Resources */ = {isa = PBXBuildFile; fileRef = 508036BA2615725400EA57C7 /* white.png */; };
+		508036BC2615725400EA57C7 /* white.png in Resources */ = {isa = PBXBuildFile; fileRef = 508036BA2615725400EA57C7 /* white.png */; };
 		5087E76317EB910900C73F5D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
 		5087E76717EB910900C73F5D /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BF170DB412928DE900B8313A /* libz.dylib */; };
 		5087E76817EB910900C73F5D /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF1C47EA1293683800B63C5D /* QuartzCore.framework */; };
@@ -56,8 +58,6 @@
 		50B42918260B222E00A74E10 /* Blocks_O.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 50B42912260B222E00A74E10 /* Blocks_O.cpp */; };
 		50E46BDA25F9AEA100919209 /* sky.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 50E46BD925F9AEA100919209 /* sky.jpeg */; };
 		50E46BDB25F9AEA100919209 /* sky.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 50E46BD925F9AEA100919209 /* sky.jpeg */; };
-		50E46BE925F9BCF200919209 /* white.png in Resources */ = {isa = PBXBuildFile; fileRef = 50E46BE825F9BCF200919209 /* white.png */; };
-		50E46BEA25F9BCF200919209 /* white.png in Resources */ = {isa = PBXBuildFile; fileRef = 50E46BE825F9BCF200919209 /* white.png */; };
 		50E5D18F260821360014EC25 /* TitleLobbyLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 50E5D18A260821360014EC25 /* TitleLobbyLayer.cpp */; };
 		50E5D190260821360014EC25 /* TitleLobbyLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 50E5D18A260821360014EC25 /* TitleLobbyLayer.cpp */; };
 		50E5D191260821360014EC25 /* TitleScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 50E5D18C260821360014EC25 /* TitleScene.cpp */; };
@@ -163,6 +163,7 @@
 		503AE10417EB98FF00D1A890 /* Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Prefix.pch; path = mac/Prefix.pch; sourceTree = "<group>"; };
 		503AE11117EB99EE00D1A890 /* libcurl.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libcurl.dylib; path = usr/lib/libcurl.dylib; sourceTree = SDKROOT; };
 		503AE11A17EB9C5A00D1A890 /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = System/Library/Frameworks/IOKit.framework; sourceTree = SDKROOT; };
+		508036BA2615725400EA57C7 /* white.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = white.png; sourceTree = "<group>"; };
 		5087E76F17EB910900C73F5D /* NewGame-desktop.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "NewGame-desktop.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5087E78817EB974C00C73F5D /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
 		5087E78A17EB975400C73F5D /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
@@ -175,7 +176,6 @@
 		50B42913260B222E00A74E10 /* Blocks_T.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Blocks_T.h; sourceTree = "<group>"; };
 		50B42914260B222E00A74E10 /* Blocks_O.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Blocks_O.h; sourceTree = "<group>"; };
 		50E46BD925F9AEA100919209 /* sky.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = sky.jpeg; sourceTree = "<group>"; };
-		50E46BE825F9BCF200919209 /* white.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = white.png; sourceTree = "<group>"; };
 		50E5D189260821360014EC25 /* GameScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameScene.h; sourceTree = "<group>"; };
 		50E5D18A260821360014EC25 /* TitleLobbyLayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TitleLobbyLayer.cpp; sourceTree = "<group>"; };
 		50E5D18B260821360014EC25 /* TitleLobbyLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TitleLobbyLayer.h; sourceTree = "<group>"; };
@@ -338,8 +338,8 @@
 				46880B7619C43A67006E1F66 /* CloseNormal.png */,
 				46880B7719C43A67006E1F66 /* CloseSelected.png */,
 				50E46BD925F9AEA100919209 /* sky.jpeg */,
-				50E46BE825F9BCF200919209 /* white.png */,
 				46880B7A19C43A67006E1F66 /* HelloWorld.png */,
+				508036BA2615725400EA57C7 /* white.png */,
 			);
 			name = Resources;
 			path = ../Resources;
@@ -547,7 +547,7 @@
 				46880B7D19C43A67006E1F66 /* CloseSelected.png in Resources */,
 				521A8EA919F11F5000D177D7 /* fonts in Resources */,
 				3EACC98F19EE6D4300EB3C5E /* res in Resources */,
-				50E46BE925F9BCF200919209 /* white.png in Resources */,
+				508036BB2615725400EA57C7 /* white.png in Resources */,
 				1AF87B891F6F781D007BE51C /* LaunchScreenBackground.png in Resources */,
 				46880B7B19C43A67006E1F66 /* CloseNormal.png in Resources */,
 				1AF87B881F6F781D007BE51C /* LaunchScreen.storyboard in Resources */,
@@ -564,7 +564,7 @@
 				3EACC99019EE6D4300EB3C5E /* res in Resources */,
 				521A8EAA19F11F5000D177D7 /* fonts in Resources */,
 				46880B7C19C43A67006E1F66 /* CloseNormal.png in Resources */,
-				50E46BEA25F9BCF200919209 /* white.png in Resources */,
+				508036BC2615725400EA57C7 /* white.png in Resources */,
 				50E46BDB25F9AEA100919209 /* sky.jpeg in Resources */,
 				46880B7E19C43A67006E1F66 /* CloseSelected.png in Resources */,
 			);

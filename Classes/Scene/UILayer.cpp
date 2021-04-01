@@ -57,14 +57,14 @@ void UILayer::createLabel()
 {
     int halfSize = MAPLAYER_SIZE_Y / 2;
     
-    std::vector<std::string> arrLabel = {"BestScore :", "Score :", "Level :", "Line Count :"};
+    std::vector<std::string> arrLabel = {"BestScore :", "Score :", "Level :", "Line Count :", "Item Count :"};
     
     int posY = 0;
     Label* textLabel = nullptr;
     Label* dataLabel = nullptr;
     for(int i = 0; i < arrLabel.size(); ++i)
     {
-        posY = halfSize - (100 + (30 * i));
+        posY = halfSize - (50 + (30 * i));
         
         textLabel = Label::createWithTTF(arrLabel[i], FONTPATH, fontSize_);
         textLabel->setAnchorPoint(Vec2(0, 0));
@@ -95,4 +95,7 @@ void UILayer::checkLabel()
     
     temp = DataMgr::getInstance()->getLineCnt();
     static_cast<Label*>(getChildByTag(LINECOUNT_TAG))->setString(std::to_string(temp));
+    
+    temp = DataMgr::getInstance()->getItemCnt();
+    static_cast<Label*>(getChildByTag(ITEMCOUNT_TAG))->setString(std::to_string(temp));
 }

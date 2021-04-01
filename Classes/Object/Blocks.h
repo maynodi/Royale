@@ -21,7 +21,6 @@ typedef struct Block //최소 단위 1블럭 -> 얘가 4개 모여서 Blocks
         : x_(x), y_(y)
     {
         pSprite_ = cocos2d::Sprite::create("white.png");
-        //pSprite_->setScale(BLOCKSIZE, BLOCKSIZE);
         pSprite_->setPosition(cocos2d::Vec2(x_, y_));
         pSprite_->setAnchorPoint(cocos2d::Vec2(1, 0));
     }

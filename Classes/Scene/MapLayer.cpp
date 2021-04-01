@@ -18,8 +18,10 @@
 USING_NS_CC;
 
 MapLayer::MapLayer()
+    : time_(1.f)
+    , isChange_(false)
+    , selectBox_(nullptr)
 {
-    
 }
 
 MapLayer::~MapLayer()
@@ -68,7 +70,7 @@ void MapLayer::onEnter()
     // 맨 처음 블럭 생성
     MapMgr::getInstance()->makeNewBlocks();
     
-    schedule(schedule_selector(MapLayer::autoMoveDown), 1.f);
+    schedule(schedule_selector(MapLayer::autoMoveDown), time_);
     this->scheduleUpdate();
 }
 
@@ -80,6 +82,10 @@ void MapLayer::update(float dt)
     }
     
     MapMgr::getInstance()->update();
+    if(true == isChange_)
+    {
+        changeSpeed();
+    }
 }
 
 void MapLayer::setGameOver()
@@ -106,6 +112,17 @@ void MapLayer::setGameOver()
     this->addChild(label2);
 }
 
+void MapLayer::changeSpeed()
+{
+    int level = DataMgr::getInstance()->getLevel();
+    float time = time_ / level;
+    
+    unschedule(schedule_selector(MapLayer::autoMoveDown));
+    schedule(schedule_selector(MapLayer::autoMoveDown), time);
+    
+    isChange_ = false;
+}
+
 void MapLayer::DrawGridMap()
 {
     DrawNode* pNode = DrawNode::create();
@@ -120,7 +137,22 @@ void MapLayer::DrawGridMap()
         pNode->drawLine(Vec2(0, i * BLOCKSIZE), Vec2(MAP_WIDTH * BLOCKSIZE, i * BLOCKSIZE), Color4F::WHITE);
     }
     
+    pNode->setOpacity(125);
     this->addChild(pNode);
+}
+
+void MapLayer::createSelectBox()
+{
+    selectBox_ = Sprite::create("white.png");
+    selectBox_->setScale(17.f, 1.3f);
+    selectBox_->setAnchorPoint(Vec2(0, 0));
+    
+    selectBox_->setPosition(Vec2(0, 0));
+    selectBox_->setOpacity(200);
+    
+    selectBox_->setTag(SELECTBOX_TAG);
+    
+    this->addChild(selectBox_);
 }
 
 void MapLayer::autoMoveDown(float dt)

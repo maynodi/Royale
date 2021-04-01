@@ -15,11 +15,14 @@
 #define BLOCKSPRITE_TAG 3
 #define BLOCKPREVIEW_TAG 4
 #define NEXTBLOCK_TAG 5
+#define ITEMSPRITE_TAG 6
+#define SELECTBOX_TAG 7
 
 #define BESTSCORE_TAG 0
 #define SCORE_TAG 1
 #define LEVEL_TAG 2
 #define LINECOUNT_TAG 3
+#define ITEMCOUNT_TAG 4
 
 #define KEY cocos2d::EventKeyboard::KeyCode
 

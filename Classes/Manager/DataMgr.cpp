@@ -1,5 +1,9 @@
 #include "DataMgr.h"
 
+#include "Define.h"
+
+#include "MapLayer.h"
+
 USING_NS_CC;
 
 DataMgr* DataMgr::pInstance_ = nullptr;
@@ -9,7 +13,8 @@ DataMgr::DataMgr()
     , score_(0)
     , level_(1)
     , lineCnt_(0)
-    , limitLineCnt_(5)
+    , limitLineCnt_(1)
+    , itemCnt_(0)
 {
 }
 
@@ -49,6 +54,10 @@ bool DataMgr::updateData()
         level_ += 1;
         lineCnt_ -= limitLineCnt_;
         score_ += 1000;
+            
+        Scene* pScene = Director::getInstance()->getRunningScene();
+        MapLayer* pLayer = (MapLayer*)pScene->getChildByTag(MAPLAYER_TAG);
+        pLayer->setIsChange(true);
         
         return true;
     }

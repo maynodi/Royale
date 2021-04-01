@@ -9,6 +9,8 @@
 
 #include "MapMgr.h"
 
+#include "MapLayer.h"
+
 USING_NS_CC;
 
 KeyMgr* KeyMgr::pInstance_ = nullptr;
@@ -16,6 +18,7 @@ KeyMgr* KeyMgr::pInstance_ = nullptr;
 KeyMgr::KeyMgr()
     : pListner_(nullptr)
     , upKeyPressedCnt_(0)
+    , isItemKeyPressed_(false)
 {
     
 }
@@ -59,6 +62,55 @@ bool KeyMgr::init()
 
 void KeyMgr::onKeyPressed(KEY keyCode, cocos2d::Event* event)
 {
+    if(true == isItemKeyPressed_)
+    {
+        selectBoxControl(keyCode);
+    }
+    else
+    {
+        blocksControl(keyCode);
+    }
+}
+
+void KeyMgr::selectBoxControl(KEY keyCode)
+{
+    Scene* pScene = Director::getInstance()->getRunningScene();
+    MapLayer* pLayer = (MapLayer*)pScene->getChildByTag(MAPLAYER_TAG);
+    
+    Node* selectBox = pLayer->getChildByTag(SELECTBOX_TAG);
+    
+    switch (keyCode) {
+        case KEY::KEY_UP_ARROW:
+        {
+            int posY = selectBox->getPositionY();
+            posY += BLOCKSIZE;
+            
+            selectBox->setPositionY(posY);
+            break;
+        }
+        case KEY::KEY_DOWN_ARROW:
+        {
+            int posY = selectBox->getPositionY();
+            posY -= BLOCKSIZE;
+            
+            selectBox->setPositionY(posY);
+            break;
+        }
+        case KEY::KEY_C:
+        {
+            selectBox->removeFromParent();
+            pLayer->resume();
+            
+            isItemKeyPressed_ = !isItemKeyPressed_;
+            break;
+        }
+        default:
+            break;
+    }
+}
+
+void KeyMgr::blocksControl(KEY keyCode)
+{
     switch (keyCode) {
         case KEY::KEY_LEFT_ARROW:
         {
@@ -90,10 +142,20 @@ void KeyMgr::onKeyPressed(KEY keyCode, cocos2d::Event* event)
             MapMgr::getInstance()->setIsDrop(true);
             break;
         }
+        case KEY::KEY_C:
+        {
+            Scene* pScene = Director::getInstance()->getRunningScene();
+            MapLayer* pLayer = (MapLayer*)pScene->getChildByTag(MAPLAYER_TAG);
+
+            pLayer->pause();
+            pLayer->createSelectBox();
+            
+            isItemKeyPressed_ = !isItemKeyPressed_;
+            break;
+        }
         default:
             break;
     }
-    
 }
 
 void KeyMgr::onKeyReleased(KEY keyCode, cocos2d::Event* event)

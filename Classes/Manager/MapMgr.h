@@ -26,6 +26,7 @@ private:
     GAMESTATE gameState_;
     int nextBlockType_;
     
+    
 public:
     static MapMgr* getInstance();
     static void destroyInstance();
@@ -46,6 +47,7 @@ public:
     void update();
     void addLine();
     int getMaxRowOfExistingBlocetMksInMap();
+    cocos2d::Sprite* createItem(int col, int row);
     
 public:
     void makeNewBlocks();

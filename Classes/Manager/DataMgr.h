@@ -13,6 +13,7 @@ private:
     int level_;
     int lineCnt_;
     int limitLineCnt_;
+    int itemCnt_;
     
 public:
     static DataMgr* getInstance();
@@ -26,9 +27,11 @@ public:
     int getScore() { return score_; }
     int getLevel() { return level_; }
     int getLineCnt() { return lineCnt_; }
+    int getItemCnt() { return itemCnt_; }
     
 public:
     void setLineCnt() { lineCnt_ += 1; }
+    void setItemCnt() { itemCnt_ += 1; }
     
 public:
     bool updateData();

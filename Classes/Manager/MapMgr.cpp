@@ -62,7 +62,6 @@ void MapMgr::init()
         gridMapBlocks_[i].resize(MAP_WIDTH, nullptr);
         isExisting_[i].resize(MAP_WIDTH, false);
     }
-    
 }
 
 void MapMgr::setIsDrop(bool isDrop)
@@ -147,7 +146,7 @@ void MapMgr::addLine()
 {
     // 레벨업을 하면 이전 레벨의 수만큼 라인이 추가된다.
     int curLevel = DataMgr::getInstance()->getLevel();
-    int addLineCnt = (curLevel - 1) * 2;
+    int addLineCnt = (curLevel - 1);
     
     // 먼저 있는 거부터 이동시키자
     // 맨 꼭대기 인덱스가 필요해
@@ -186,13 +185,15 @@ void MapMgr::addLine()
     // 라인 추가
     // 스프라이트 만들어서 하나씩 다 넣어주고
     // 스프라이트 위치 정해주고, 앵커도
-    // 색깔랜덤
     
     Scene* pCurScene = Director::getInstance()->getRunningScene();
     Node* mapLayer = pCurScene->getChildByTag(MAPLAYER_TAG);
     
     float posX = 0;
     float posY = 0;
+    
+    int randomItem = rand() % addLineCnt;
+    
     for(int i = 0; i < addLineCnt; ++i)
     {
         int randomBlank = rand() % MAP_WIDTH;
@@ -202,6 +203,17 @@ void MapMgr::addLine()
             if(randomBlank == j) // 한줄에 한칸은 빈칸으로 하기위한 코드
                 continue;
             
+            if(randomItem == i && (HALF_WIDTH - randomItem) == j) // item 위치
+            {
+                Sprite* itemSprite = createItem(i, j);
+                mapLayer->addChild(itemSprite);
+                
+                gridMapBlocks_[i][j] = itemSprite;
+                isExisting_[i][j] = true;
+                
+                continue;
+            }
+                
             //위치
             posX = (j + 1) * BLOCKSIZE;
             posY = i * BLOCKSIZE;
@@ -219,6 +231,21 @@ void MapMgr::addLine()
         }
     }
     
+}
+
+cocos2d::Sprite* MapMgr::createItem(int col, int row)
+{
+    int posX = (row + 1) * BLOCKSIZE;
+    int posY = col * BLOCKSIZE;
+    
+    Sprite* pSprite = Sprite::create("HelloWorld.png");
+    
+    pSprite->setScale(0.13f, 0.14f);
+    pSprite->setPosition(Vec2(posX, posY));
+    pSprite->setAnchorPoint(Vec2(1, 0));
+    pSprite->setTag(ITEMSPRITE_TAG);
+
+    return pSprite;
 }
 
 int MapMgr::getMaxRowOfExistingBlocetMksInMap()
@@ -262,14 +289,6 @@ void MapMgr::rotate(int keyPressedCnt)
     
     pCurBlocks_->rotate(keyPressedCnt);
 }
-
-//void MapMgr::drop()
-//{
-//    //if(nullptr == pCurBlocks_)
-//    //    return;
-//
-//    pCurBlocks_->drop();
-//}
 
 void MapMgr::autoMoveDown()
 {
@@ -491,6 +510,11 @@ void MapMgr::deleteLine(int row)
 {
     for(int i = 0; i < MAP_WIDTH; ++i)
     {
+        if(ITEMSPRITE_TAG == gridMapBlocks_[row][i]->getTag())
+        {
+            DataMgr::getInstance()->setItemCnt();
+        }
+        
         gridMapBlocks_[row][i]->removeFromParent();
         gridMapBlocks_[row][i] = nullptr;
         

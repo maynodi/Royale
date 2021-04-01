@@ -49,6 +49,8 @@ bool GameScene::init()
         return false;
     }
 	
+    srand(time(NULL));
+    
     Layer* pLayer = MapLayer::create();
     pLayer->setTag(MAPLAYER_TAG);
     this->addChild(pLayer);
