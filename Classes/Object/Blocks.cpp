@@ -10,6 +10,7 @@
 #include "KeyMgr.h"
 #include "MapMgr.h"
 
+#include "SimpleAudioEngine.h"
 #include <algorithm>
 
 USING_NS_CC;
@@ -246,6 +247,9 @@ void Blocks::fixBlockPos()
         MapMgr::getInstance()->includeGridMapBlocks(block->pSprite_);
         MapMgr::getInstance()->checkIsExisting(block->pSprite_, true);
     }
+    
+    //소리
+    CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("drop.mp3");
 }
 
 void Blocks::autoMoveDown()
@@ -358,4 +362,16 @@ void Blocks::setRotatePreviewBlocks()
         
         previewNode->setPositionY(posY + BLOCKSIZE);
     }
+}
+
+bool Blocks::checkGameOverWhenCreate()
+{
+    if(true == MapMgr::getInstance()->checkUnderSomething(blocks_))
+    {
+        MapMgr::getInstance()->getMaxRowOfUnderBlock(&dist_);
+        if(BLOCKSIZE >= dist_)
+            return true;
+    }
+    
+    return false;
 }

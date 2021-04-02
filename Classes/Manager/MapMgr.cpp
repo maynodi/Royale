@@ -10,6 +10,7 @@
 #include "KeyMgr.h"
 #include "DataMgr.h"
 
+#include "SimpleAudioEngine.h"
 #include <algorithm>
 
 #include "Blocks_J.h"
@@ -82,27 +83,27 @@ void MapMgr::makeNewBlocks()
     {
         case BLOCKTYPE::J:
         {
-            pBlocks = Blocks_J::create(Color3B::ORANGE);
+            pBlocks = Blocks_J::create(BLOCK_J_COLOR);
             break;
         }
         case BLOCKTYPE::I:
         {
-            pBlocks = Blocks_I::create(Color3B::YELLOW);
+            pBlocks = Blocks_I::create(BLOCK_I_COLOR);
             break;
         }
         case BLOCKTYPE::S:
         {
-            pBlocks = Blocks_S::create(Color3B::MAGENTA);
+            pBlocks = Blocks_S::create(BLOCK_S_COLOR);
             break;
         }
         case BLOCKTYPE::T:
         {
-            pBlocks = Blocks_T::create(Color3B::GRAY);
+            pBlocks = Blocks_T::create(BLOCK_T_COLOR);
             break;
         }
         case BLOCKTYPE::O:
         {
-            pBlocks = Blocks_O::create(Color3B::GREEN);
+            pBlocks = Blocks_O::create(BLOCK_O_COLOR);
             break;
         }
         default:
@@ -125,6 +126,12 @@ void MapMgr::makeNewBlocks()
         
         mapLayer->addChild(pSprite);
     }
+    
+    // 생겼는데 바로 아래에 블록이 있다면??
+    if(true == pCurBlocks_->checkGameOverWhenCreate())
+    {
+        gameState_ = OVER;
+    }
 }
 
 void MapMgr::update()
@@ -137,6 +144,8 @@ void MapMgr::update()
     }
     
     makeNewBlocks();
+    if(OVER == gameState_)
+        return;
     
     pCurBlocks_->checkPreviewBlocks();
     pCurBlocks_->drop();
@@ -269,13 +278,16 @@ void MapMgr::move(int dir)
     if(nullptr == pCurBlocks_)
         return;
     
-    // 아직 맵에 다 안 들어왔으면 움직이지마
-    for(int i = 0; i < BLOCKCNT; ++i)
+    // 아직 맵에 다 안 들어왔으면 아래이동 금지! - 양옆 이동은 가능
+    if(DIR_DOWN == dir)
     {
-        int posY = (int)pCurBlocks_->getBlockSprite(i)->getPositionY();
-        if(MAX_HEIGHT <= posY)
+        for(int i = 0; i < BLOCKCNT; ++i)
         {
-            return;
+            int posY = (int)pCurBlocks_->getBlockSprite(i)->getPositionY();
+            if(MAX_HEIGHT <= posY)
+            {
+                return;
+            }
         }
     }
     
@@ -285,7 +297,9 @@ void MapMgr::move(int dir)
 void MapMgr::rotate(int keyPressedCnt)
 {
     if(nullptr == pCurBlocks_)
+    {
         return;
+    }
     
     pCurBlocks_->rotate(keyPressedCnt);
 }
@@ -445,37 +459,15 @@ void MapMgr::reset()
     if(true == rowList.empty())
         return;
     
-    
     rowList.reverse();
     
-    // 라인 삭제
     for(auto& row : rowList)
     {
+        // 라인 삭제
         deleteLine(row);
         
         //한 줄 내려오기
-        for(int i = row + 1; i< MAP_HEIGHT; ++i)
-        {
-            if(MIN_HEIGHT > i -1)
-                continue;
-                    
-            for(int col = 0; col< MAP_WIDTH; ++col)
-            {
-                gridMapBlocks_[i - 1][col] = gridMapBlocks_[i][col];
-                gridMapBlocks_[i][col] = nullptr;
-                
-                
-                if(nullptr != gridMapBlocks_[i - 1][col])
-                 {
-                     int posY = gridMapBlocks_[i - 1][col]->getPositionY();
-                     posY -= BLOCKSIZE;
-                     gridMapBlocks_[i - 1][col]->setPositionY(posY);
-                 }
-                
-                isExisting_[i - 1][col] = isExisting_[i][col];
-                isExisting_[i][col] = false;
-            }
-        }
+        lineGoDown(row);
     }
     
     // 게임오버 체크
@@ -508,11 +500,18 @@ void MapMgr::checkLineFull(std::list<int>* list)
 
 void MapMgr::deleteLine(int row)
 {
+    int blankCnt = 0;
     for(int i = 0; i < MAP_WIDTH; ++i)
     {
+        if(nullptr == gridMapBlocks_[row][i])
+        {
+            blankCnt += 1;   // item 사용 시 빈 라인일 경우 필요
+            continue;
+        }
+        
         if(ITEMSPRITE_TAG == gridMapBlocks_[row][i]->getTag())
         {
-            DataMgr::getInstance()->setItemCnt();
+            DataMgr::getInstance()->addLineCnt();
         }
         
         gridMapBlocks_[row][i]->removeFromParent();
@@ -521,10 +520,46 @@ void MapMgr::deleteLine(int row)
         isExisting_[row][i] = false;
     }
     
+    // 소리
+    CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("remove.wav");
+
+    if(MAP_WIDTH <= blankCnt)  // item 사용 시 빈 라인일 경우 필요
+    {
+        // 점수 체크
+        DataMgr::getInstance()->addScore(0);
+        return;
+    }
+    
     // 점수 체크
     DataMgr::getInstance()->addScore(DELETELINE_SCORE);
     // 라인 수 체크
-    DataMgr::getInstance()->setLineCnt();
+    DataMgr::getInstance()->addItemCnt();
+}
+
+void MapMgr::lineGoDown(int row)
+{
+    for(int i = row + 1; i< MAP_HEIGHT; ++i)
+    {
+        if(MIN_HEIGHT > i -1)
+            continue;
+        
+        for(int col = 0; col< MAP_WIDTH; ++col)
+        {
+            gridMapBlocks_[i - 1][col] = gridMapBlocks_[i][col];
+            gridMapBlocks_[i][col] = nullptr;
+            
+            
+            if(nullptr != gridMapBlocks_[i - 1][col])
+            {
+                int posY = gridMapBlocks_[i - 1][col]->getPositionY();
+                posY -= BLOCKSIZE;
+                gridMapBlocks_[i - 1][col]->setPositionY(posY);
+            }
+            
+            isExisting_[i - 1][col] = isExisting_[i][col];
+            isExisting_[i][col] = false;
+        }
+    }
 }
 
 bool MapMgr::checkGameOver()

@@ -28,14 +28,13 @@ public:
     int getLevel() { return level_; }
     int getLineCnt() { return lineCnt_; }
     int getItemCnt() { return itemCnt_; }
-    
-public:
-    void setLineCnt() { lineCnt_ += 1; }
-    void setItemCnt() { itemCnt_ += 1; }
-    
+
 public:
     bool updateData();
     void addScore(int score) { score_ += score; }
+    void addLineCnt() { lineCnt_ += 1; }
+    void addItemCnt() { itemCnt_ += 1; }
+    void minusItemCnt() { itemCnt_ -= 1; }
     
 private:
     DataMgr();

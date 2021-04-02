@@ -42,6 +42,7 @@ public:
 public:
     GAMESTATE getGameState() { return gameState_; }
     int getNextBlockType() { return nextBlockType_; }
+    Blocks* getCurBlocks() { return pCurBlocks_; }
     
 public:
     void update();
@@ -68,6 +69,7 @@ public:
     void reset();
     void checkLineFull(std::list<int>* list);
     void deleteLine(int row);
+    void lineGoDown(int row);
     
 public:
     bool checkGameOver();

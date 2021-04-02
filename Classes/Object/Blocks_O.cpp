@@ -83,13 +83,8 @@ void Blocks_O::rotate(int keyPressedCnt)
        blocks_[i]->pSprite_->setPosition(newPos[i]);
        blocks_[i]->setPos(newPos[i]);
        
-       Node* previewNode = blocks_[i]->pSprite_->getChildByTag(BLOCKPREVIEW_TAG);
-       float posY = previewNode->getPositionY();
-       int limit = posY + newPos[i].y;
-       
-       if(MIN_HEIGHT > limit)
-       {
-           setRotatePreviewBlocks();
-       }
+       PreviewBlockDistVec_.emplace_back(int(newPos[i].y));
    }
+    
+    checkPreviewBlocks();
 }

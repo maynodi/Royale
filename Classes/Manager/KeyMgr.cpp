@@ -8,6 +8,9 @@
 #include "KeyMgr.h"
 
 #include "MapMgr.h"
+#include "DataMgr.h"
+
+#include "SimpleAudioEngine.h"
 
 #include "MapLayer.h"
 
@@ -60,6 +63,11 @@ bool KeyMgr::init()
     return true;
 }
 
+void KeyMgr::minusUpKeyPressedCnt()
+{
+    upKeyPressedCnt_ -= 1;
+}
+
 void KeyMgr::onKeyPressed(KEY keyCode, cocos2d::Event* event)
 {
     if(true == isItemKeyPressed_)
@@ -82,6 +90,10 @@ void KeyMgr::selectBoxControl(KEY keyCode)
     switch (keyCode) {
         case KEY::KEY_UP_ARROW:
         {
+            // 소리
+            CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("selection.wav");
+            CocosDenshion::SimpleAudioEngine::getInstance()->setEffectsVolume(0.5f);
+            
             int posY = selectBox->getPositionY();
             posY += BLOCKSIZE;
             
@@ -90,6 +102,10 @@ void KeyMgr::selectBoxControl(KEY keyCode)
         }
         case KEY::KEY_DOWN_ARROW:
         {
+            // 소리
+            CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("selection.wav");
+            CocosDenshion::SimpleAudioEngine::getInstance()->setEffectsVolume(0.5f);
+            
             int posY = selectBox->getPositionY();
             posY -= BLOCKSIZE;
             
@@ -98,8 +114,18 @@ void KeyMgr::selectBoxControl(KEY keyCode)
         }
         case KEY::KEY_C:
         {
+            int posY = (int)selectBox->getPositionY();
+            int row = posY / BLOCKSIZE;
+            
+            // 라인 삭제 및 한줄아래이동
+            MapMgr::getInstance()->deleteLine(row);
+            MapMgr::getInstance()->lineGoDown(row);
+            
             selectBox->removeFromParent();
             pLayer->resume();
+            
+            // 아이템 갯수 감소
+            DataMgr::getInstance()->minusItemCnt();
             
             isItemKeyPressed_ = !isItemKeyPressed_;
             break;
@@ -111,6 +137,10 @@ void KeyMgr::selectBoxControl(KEY keyCode)
 
 void KeyMgr::blocksControl(KEY keyCode)
 {
+    Blocks* pCurBlocks = MapMgr::getInstance()->getCurBlocks();
+    if(nullptr == pCurBlocks)
+        return;
+    
     switch (keyCode) {
         case KEY::KEY_LEFT_ARROW:
         {
@@ -130,6 +160,7 @@ void KeyMgr::blocksControl(KEY keyCode)
             }
             
             MapMgr::getInstance()->rotate(upKeyPressedCnt_);
+            upKeyPressedCnt_ += 1;
             break;
         }
         case KEY::KEY_DOWN_ARROW:
@@ -144,6 +175,10 @@ void KeyMgr::blocksControl(KEY keyCode)
         }
         case KEY::KEY_C:
         {
+            int itemCnt = DataMgr::getInstance()->getItemCnt();
+            if(0 >= itemCnt)
+                break;
+            
             Scene* pScene = Director::getInstance()->getRunningScene();
             MapLayer* pLayer = (MapLayer*)pScene->getChildByTag(MAPLAYER_TAG);
 
@@ -153,6 +188,15 @@ void KeyMgr::blocksControl(KEY keyCode)
             isItemKeyPressed_ = !isItemKeyPressed_;
             break;
         }
+        case KEY::KEY_SHIFT:
+        {
+            // ========= hold 구현예정
+            break;
+        }
+        case KEY::KEY_0:
+        {
+            DataMgr::getInstance()->addItemCnt();
+        }
         default:
             break;
     }
@@ -160,13 +204,4 @@ void KeyMgr::blocksControl(KEY keyCode)
 
 void KeyMgr::onKeyReleased(KEY keyCode, cocos2d::Event* event)
 {
-    switch (keyCode) {
-        case KEY::KEY_UP_ARROW: // 회전
-        {
-            upKeyPressedCnt_ += 1;
-            break;
-        }
-        default:
-            break;
-    }
 }

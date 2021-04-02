@@ -1,5 +1,4 @@
 #include "TitleScene.h"
-#include "SimpleAudioEngine.h"
 #include "TitleLobbyLayer.h"
 
 USING_NS_CC;

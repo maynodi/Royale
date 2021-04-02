@@ -5,11 +5,11 @@
 #include "DataMgr.h"
 
 #include "Define.h"
-#include "SimpleAudioEngine.h"
 
 #include "MapLayer.h"
 #include "BlockLayer.h"
 #include "UILayer.h"
+#include "HoldLayer.h"
 
 USING_NS_CC;
 
@@ -61,6 +61,10 @@ bool GameScene::init()
     
     pLayer = BlockLayer::create();
     pLayer->setTag(BLOCKLAYER_TAG);
+    this->addChild(pLayer);
+    
+    pLayer = HoldLayer::create();
+    pLayer->setTag(HOLDLAYER_TAG);
     this->addChild(pLayer);
     
     return true;

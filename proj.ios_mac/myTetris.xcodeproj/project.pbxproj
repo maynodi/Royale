@@ -38,6 +38,18 @@
 		503AE0F817EB97AB00D1A890 /* Icon.icns in Resources */ = {isa = PBXBuildFile; fileRef = 503AE0F617EB97AB00D1A890 /* Icon.icns */; };
 		503AE10517EB98FF00D1A890 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 503AE10317EB98FF00D1A890 /* main.cpp */; };
 		503AE11B17EB9C5A00D1A890 /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 503AE11A17EB9C5A00D1A890 /* IOKit.framework */; };
+		505AF3FF2616F9700067B252 /* tetrisBGM.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 505AF3FB2616F9700067B252 /* tetrisBGM.mp3 */; };
+		505AF4002616F9700067B252 /* tetrisBGM.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 505AF3FB2616F9700067B252 /* tetrisBGM.mp3 */; };
+		505AF407261703550067B252 /* remove.wav in Resources */ = {isa = PBXBuildFile; fileRef = 505AF406261703550067B252 /* remove.wav */; };
+		505AF408261703550067B252 /* remove.wav in Resources */ = {isa = PBXBuildFile; fileRef = 505AF406261703550067B252 /* remove.wav */; };
+		505AF40A261703740067B252 /* gameover.wav in Resources */ = {isa = PBXBuildFile; fileRef = 505AF409261703740067B252 /* gameover.wav */; };
+		505AF40B261703740067B252 /* gameover.wav in Resources */ = {isa = PBXBuildFile; fileRef = 505AF409261703740067B252 /* gameover.wav */; };
+		505AF40D261703CE0067B252 /* drop.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 505AF40C261703CE0067B252 /* drop.mp3 */; };
+		505AF40E261703CE0067B252 /* drop.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 505AF40C261703CE0067B252 /* drop.mp3 */; };
+		505AF410261706C90067B252 /* selection.wav in Resources */ = {isa = PBXBuildFile; fileRef = 505AF40F261706C90067B252 /* selection.wav */; };
+		505AF411261706C90067B252 /* selection.wav in Resources */ = {isa = PBXBuildFile; fileRef = 505AF40F261706C90067B252 /* selection.wav */; };
+		505AF41426170BCF0067B252 /* HoldLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 505AF41226170BCF0067B252 /* HoldLayer.cpp */; };
+		505AF41526170BCF0067B252 /* HoldLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 505AF41226170BCF0067B252 /* HoldLayer.cpp */; };
 		508036BB2615725400EA57C7 /* white.png in Resources */ = {isa = PBXBuildFile; fileRef = 508036BA2615725400EA57C7 /* white.png */; };
 		508036BC2615725400EA57C7 /* white.png in Resources */ = {isa = PBXBuildFile; fileRef = 508036BA2615725400EA57C7 /* white.png */; };
 		5087E76317EB910900C73F5D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
@@ -163,6 +175,13 @@
 		503AE10417EB98FF00D1A890 /* Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Prefix.pch; path = mac/Prefix.pch; sourceTree = "<group>"; };
 		503AE11117EB99EE00D1A890 /* libcurl.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libcurl.dylib; path = usr/lib/libcurl.dylib; sourceTree = SDKROOT; };
 		503AE11A17EB9C5A00D1A890 /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = System/Library/Frameworks/IOKit.framework; sourceTree = SDKROOT; };
+		505AF3FB2616F9700067B252 /* tetrisBGM.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = tetrisBGM.mp3; sourceTree = "<group>"; };
+		505AF406261703550067B252 /* remove.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = remove.wav; sourceTree = "<group>"; };
+		505AF409261703740067B252 /* gameover.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = gameover.wav; sourceTree = "<group>"; };
+		505AF40C261703CE0067B252 /* drop.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = drop.mp3; sourceTree = "<group>"; };
+		505AF40F261706C90067B252 /* selection.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = selection.wav; sourceTree = "<group>"; };
+		505AF41226170BCF0067B252 /* HoldLayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = HoldLayer.cpp; sourceTree = "<group>"; };
+		505AF41326170BCF0067B252 /* HoldLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HoldLayer.h; sourceTree = "<group>"; };
 		508036BA2615725400EA57C7 /* white.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = white.png; sourceTree = "<group>"; };
 		5087E76F17EB910900C73F5D /* NewGame-desktop.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "NewGame-desktop.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5087E78817EB974C00C73F5D /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -340,6 +359,11 @@
 				50E46BD925F9AEA100919209 /* sky.jpeg */,
 				46880B7A19C43A67006E1F66 /* HelloWorld.png */,
 				508036BA2615725400EA57C7 /* white.png */,
+				505AF3FB2616F9700067B252 /* tetrisBGM.mp3 */,
+				505AF406261703550067B252 /* remove.wav */,
+				505AF409261703740067B252 /* gameover.wav */,
+				505AF40C261703CE0067B252 /* drop.mp3 */,
+				505AF40F261706C90067B252 /* selection.wav */,
 			);
 			name = Resources;
 			path = ../Resources;
@@ -393,6 +417,8 @@
 				500BEAE62612C8F7008EEF74 /* BlockLayer.cpp */,
 				500BEAEA2613054F008EEF74 /* UILayer.h */,
 				500BEAE92613054F008EEF74 /* UILayer.cpp */,
+				505AF41326170BCF0067B252 /* HoldLayer.h */,
+				505AF41226170BCF0067B252 /* HoldLayer.cpp */,
 			);
 			path = Scene;
 			sourceTree = "<group>";
@@ -546,12 +572,17 @@
 				1A88B2641FC3D9C9005C14AE /* Images.xcassets in Resources */,
 				46880B7D19C43A67006E1F66 /* CloseSelected.png in Resources */,
 				521A8EA919F11F5000D177D7 /* fonts in Resources */,
+				505AF407261703550067B252 /* remove.wav in Resources */,
 				3EACC98F19EE6D4300EB3C5E /* res in Resources */,
 				508036BB2615725400EA57C7 /* white.png in Resources */,
 				1AF87B891F6F781D007BE51C /* LaunchScreenBackground.png in Resources */,
+				505AF40A261703740067B252 /* gameover.wav in Resources */,
+				505AF410261706C90067B252 /* selection.wav in Resources */,
 				46880B7B19C43A67006E1F66 /* CloseNormal.png in Resources */,
+				505AF3FF2616F9700067B252 /* tetrisBGM.mp3 in Resources */,
 				1AF87B881F6F781D007BE51C /* LaunchScreen.storyboard in Resources */,
 				50E46BDA25F9AEA100919209 /* sky.jpeg in Resources */,
+				505AF40D261703CE0067B252 /* drop.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -559,14 +590,19 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				505AF40B261703740067B252 /* gameover.wav in Resources */,
 				46880B8219C43A67006E1F66 /* HelloWorld.png in Resources */,
 				503AE0F817EB97AB00D1A890 /* Icon.icns in Resources */,
 				3EACC99019EE6D4300EB3C5E /* res in Resources */,
 				521A8EAA19F11F5000D177D7 /* fonts in Resources */,
+				505AF408261703550067B252 /* remove.wav in Resources */,
 				46880B7C19C43A67006E1F66 /* CloseNormal.png in Resources */,
 				508036BC2615725400EA57C7 /* white.png in Resources */,
 				50E46BDB25F9AEA100919209 /* sky.jpeg in Resources */,
+				505AF4002616F9700067B252 /* tetrisBGM.mp3 in Resources */,
 				46880B7E19C43A67006E1F66 /* CloseSelected.png in Resources */,
+				505AF411261706C90067B252 /* selection.wav in Resources */,
+				505AF40E261703CE0067B252 /* drop.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -583,6 +619,7 @@
 				50E5D1A626086C7F0014EC25 /* Blocks_J.cpp in Sources */,
 				1AF87B781F6F77F7007BE51C /* AppController.mm in Sources */,
 				1AF87B8B1F6F782A007BE51C /* RootViewController.mm in Sources */,
+				505AF41426170BCF0067B252 /* HoldLayer.cpp in Sources */,
 				50E5D19C260844B90014EC25 /* MapMgr.cpp in Sources */,
 				50E5D1AC26088E2E0014EC25 /* KeyMgr.cpp in Sources */,
 				46880B8819C43A87006E1F66 /* AppDelegate.cpp in Sources */,
@@ -615,6 +652,7 @@
 				500BEAE82612C8F7008EEF74 /* BlockLayer.cpp in Sources */,
 				50B42916260B222E00A74E10 /* Blocks_T.cpp in Sources */,
 				50E5D1A726086C7F0014EC25 /* Blocks_J.cpp in Sources */,
+				505AF41526170BCF0067B252 /* HoldLayer.cpp in Sources */,
 				50E5D199260839380014EC25 /* MapLayer.cpp in Sources */,
 				50B4290A260ACD0000A74E10 /* Blocks_I.cpp in Sources */,
 				50E5D1A12608498F0014EC25 /* Blocks.cpp in Sources */,

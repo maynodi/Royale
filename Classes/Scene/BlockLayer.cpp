@@ -110,27 +110,27 @@ cocos2d::Color3B BlockLayer::findNextBlockColor()
     {
         case BLOCKTYPE::J:
         {
-            color = Color3B::ORANGE;
+            color = BLOCK_J_COLOR;
             break;
         }
         case BLOCKTYPE::I:
         {
-            color = Color3B::YELLOW;
+            color = BLOCK_I_COLOR;
             break;
         }
         case BLOCKTYPE::S:
         {
-            color = Color3B::MAGENTA;
+            color = BLOCK_S_COLOR;
             break;
         }
         case BLOCKTYPE::T:
         {
-            color = Color3B::GRAY;
+            color = BLOCK_T_COLOR;
             break;
         }
         case BLOCKTYPE::O:
         {
-            color = Color3B::GREEN;
+            color = BLOCK_O_COLOR;
             break;
         }
         default:

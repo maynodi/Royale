@@ -64,7 +64,7 @@ void UILayer::createLabel()
     Label* dataLabel = nullptr;
     for(int i = 0; i < arrLabel.size(); ++i)
     {
-        posY = halfSize - (50 + (30 * i));
+        posY = halfSize - (150 + (30 * i));
         
         textLabel = Label::createWithTTF(arrLabel[i], FONTPATH, fontSize_);
         textLabel->setAnchorPoint(Vec2(0, 0));

@@ -73,6 +73,9 @@ public:
     void setRotatePreviewBlocks();
     
 public:
+    bool checkGameOverWhenCreate();
+    
+public:
     Blocks();
     virtual ~Blocks();
 };

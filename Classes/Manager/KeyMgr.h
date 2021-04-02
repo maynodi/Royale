@@ -35,7 +35,7 @@ public:
     
 public:
     void setZeroUpKeyPressedCnt() { upKeyPressedCnt_ = 0; }
-    void minusUpKeyPressedCnt() { upKeyPressedCnt_ -= 1; }
+    void minusUpKeyPressedCnt();
     
 public:
     void onKeyPressed(KEY keyCode, cocos2d::Event* event);

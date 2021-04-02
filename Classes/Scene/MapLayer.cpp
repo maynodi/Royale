@@ -11,6 +11,7 @@
 #include "KeyMgr.h"
 #include "DataMgr.h"
 
+#include "SimpleAudioEngine.h"
 #include "Define.h"
 
 #include "Blocks.h"
@@ -57,8 +58,12 @@ bool MapLayer::init()
     KeyMgr* pKeyMgr = KeyMgr::getInstance();
     this->addChild(pKeyMgr);
     
-    //map grid
+    // map grid
     DrawGridMap();
+    
+    // 소리
+    CocosDenshion::SimpleAudioEngine::getInstance()->playBackgroundMusic("tetrisBGM.mp3");
+    CocosDenshion::SimpleAudioEngine::getInstance()->setBackgroundMusicVolume(0.3f);
     
     return true;
 }
@@ -90,6 +95,10 @@ void MapLayer::update(float dt)
 
 void MapLayer::setGameOver()
 {
+    // 소리
+    CocosDenshion::SimpleAudioEngine::getInstance()->stopBackgroundMusic();
+    CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("gameover.wav");
+    
     unscheduleAllCallbacks();
     
     Vector<Node*> children = this->getChildren();
@@ -144,10 +153,11 @@ void MapLayer::DrawGridMap()
 void MapLayer::createSelectBox()
 {
     selectBox_ = Sprite::create("white.png");
-    selectBox_->setScale(17.f, 1.3f);
+    selectBox_->setScale(16.f, 1.2f);
     selectBox_->setAnchorPoint(Vec2(0, 0));
-    
     selectBox_->setPosition(Vec2(0, 0));
+    
+    selectBox_->setColor(SELECTBOX_COLOR);
     selectBox_->setOpacity(200);
     
     selectBox_->setTag(SELECTBOX_TAG);

@@ -69,27 +69,22 @@ void Blocks_J::rotate(int keyPressedCnt)
     for(int i = 0; i < BLOCKCNT; ++i)
     {
         Vec2 curPos = blocks_[i]->pSprite_->getPosition();
-       
+        
         newPos[i].x = curPos.x + BLOCKSIZE * (posVariance::J[keyPressedCnt][(i * 2)]);
         newPos[i].y = curPos.y + BLOCKSIZE * (posVariance::J[keyPressedCnt][(i * 2) + 1]);
     }
-
+    
     // 회전에 제한이 걸리는 위치인가?
     if(true == checkLimitedRotate(newPos))
         return;
-
-   for(int i = 0; i < BLOCKCNT; ++i)
-   {
-       blocks_[i]->pSprite_->setPosition(newPos[i]);
-       blocks_[i]->setPos(newPos[i]);
-       
-       Node* previewNode = blocks_[i]->pSprite_->getChildByTag(BLOCKPREVIEW_TAG);
-       float posY = previewNode->getPositionY();
-       int limit = posY + newPos[i].y;
-       
-       if(MIN_HEIGHT > limit)
-       {
-           setRotatePreviewBlocks();
-       }
-   }
+    
+    for(int i = 0; i < BLOCKCNT; ++i)
+    {
+        blocks_[i]->pSprite_->setPosition(newPos[i]);
+        blocks_[i]->setPos(newPos[i]);
+        
+        PreviewBlockDistVec_.emplace_back(int(newPos[i].y));
+    }
+    
+    checkPreviewBlocks();
 }

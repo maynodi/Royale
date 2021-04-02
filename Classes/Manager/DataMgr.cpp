@@ -13,7 +13,7 @@ DataMgr::DataMgr()
     , score_(0)
     , level_(1)
     , lineCnt_(0)
-    , limitLineCnt_(1)
+    , limitLineCnt_(5)
     , itemCnt_(0)
 {
 }
