@@ -17,7 +17,6 @@ USING_NS_CC;
 BlockLayer::BlockLayer()
     : nextBlockType_(BLOCKTYPE::END)
 {
-    nextBlocks_.reserve(BLOCKCNT);
 }
 
 BlockLayer::~BlockLayer()
@@ -52,14 +51,20 @@ bool BlockLayer::init()
     
     // 스프라이트 최초로 생성
     Sprite* pSprite = nullptr;
-    for(int i = 0; i < BLOCKCNT; ++i)
+    
+    for(int arr = 0; arr < 2; ++arr)
     {
-        pSprite = Sprite::create("white.png");        
-        pSprite->setAnchorPoint(cocos2d::Vec2(1, 0));
-        pSprite->setTag(NEXTBLOCK_TAG);
+        nextBlocks_[arr].reserve(BLOCKCNT);
         
-        nextBlocks_.emplace_back(pSprite);
-        this->addChild(pSprite);
+        for(int i = 0; i < BLOCKCNT; ++i)
+        {
+            pSprite = Sprite::create("white.png");
+            pSprite->setAnchorPoint(cocos2d::Vec2(1, 0));
+            pSprite->setTag(NEXTBLOCK_TAG);
+            
+            nextBlocks_[arr].emplace_back(pSprite);
+            this->addChild(pSprite);
+        }
     }
     
     scheduleUpdate();
@@ -74,33 +79,36 @@ void BlockLayer::update(float dt)
 
 void BlockLayer::checkChangeNextBlock()
 {
-    int nextBlock = MapMgr::getInstance()->getNextBlockType();
+    std::list<int> list = MapMgr::getInstance()->getNextBlockTypeList();
+    std::list<int>::iterator iter = list.begin();
     
-    if(nextBlockType_ == nextBlock)
-        return;
-        
-    nextBlockType_ = nextBlock;
-    
-    Color3B color = findNextBlockColor();
-    std::vector<int> locationVec = findNextBlockLocation();
-
-    // 블럭 정보 다시 세팅
     int posX = 0;
     int posY = 0;
     int index = 0;
-    
-    for(int i = 0; i < BLOCKCNT; ++i)
+    int arrCnt = 0;
+    for(; iter != list.end(); ++iter)
     {
-        nextBlocks_[i]->setColor(color);
-     
-        index = i * 2;
-        posX = BLOCKSIZE * (locationVec[index] + initPos::nextBlockPos[POS_X]);
-        posY = BLOCKSIZE * (locationVec[index + 1] + initPos::nextBlockPos[POS_Y]);
+        if(2 < list.size())
+            continue;
         
-        nextBlocks_[i]->setPosition(posX, posY);
+        nextBlockType_ = *iter;
+        
+        Color3B color = findNextBlockColor();
+        std::vector<int> locationVec = findNextBlockLocation();
+        
+        for(int i = 0; i < BLOCKCNT; ++i)
+        {
+            nextBlocks_[arrCnt][i]->setColor(color);
+            
+            index = i * 2;
+            posX = BLOCKSIZE * (locationVec[index] + initPos::nextBlockPos[POS_X] + (arrCnt * 5));
+            posY = BLOCKSIZE * (locationVec[index + 1] + initPos::nextBlockPos[POS_Y]);
+            
+            nextBlocks_[arrCnt][i]->setPosition(posX, posY);
+        }
+        
+        arrCnt += 1;
     }
-    
-    
 }
 
 cocos2d::Color3B BlockLayer::findNextBlockColor()

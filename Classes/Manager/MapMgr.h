@@ -24,8 +24,11 @@ private:
     Blocks* pCurBlocks_;
     std::list<BLOCK*> newBlockList_; // 맵의 블록과 부딪힐 가능성있는 블록 리스트
     GAMESTATE gameState_;
-    int nextBlockType_;
     
+    std::list<int> nextBlockTypeList_;
+    
+private:
+    int twistTrapCnt_;
     
 public:
     static MapMgr* getInstance();
@@ -36,22 +39,24 @@ public:
     
 public:
     void setIsDrop(bool isDrop);
+    void setCurBlocksInfo(); // 블럭 사라지면서 값을 새로 세팅해주는 함수
     void setNullCurBlocks() { pCurBlocks_ = nullptr; }
-    void setNextBlockType(int Type) { nextBlockType_ = Type; }
     
 public:
     GAMESTATE getGameState() { return gameState_; }
-    int getNextBlockType() { return nextBlockType_; }
+    int getNextBlockType() { return nextBlockTypeList_.front(); }
     Blocks* getCurBlocks() { return pCurBlocks_; }
+    std::list<int> getNextBlockTypeList() { return nextBlockTypeList_; }
     
 public:
     void update();
     void addLine();
-    int getMaxRowOfExistingBlocetMksInMap();
+    int getMaxRowOfExistingBlocksInMap();
     cocos2d::Sprite* createItem(int col, int row);
     
 public:
     void makeNewBlocks();
+    void createTrap(cocos2d::Sprite* sprite);
     void move(int dir);
     void rotate(int keyPressedCnt);
     void autoMoveDown();
@@ -70,9 +75,13 @@ public:
     void checkLineFull(std::list<int>* list);
     void deleteLine(int row);
     void lineGoDown(int row);
+    void mixMapByTwistTrap();
     
 public:
     bool checkGameOver();
+    
+public:
+    void swapHoldBlock(int type);
     
 private:
     MapMgr();

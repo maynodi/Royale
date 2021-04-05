@@ -44,7 +44,6 @@ protected:
     bool isDrop_;
     BLOCKTYPE blockType_;
     int dist_;
-    
     std::vector<int> PreviewBlockDistVec_;
     
 public:
@@ -52,6 +51,7 @@ public:
     
 public:
     cocos2d::Sprite* getBlockSprite(int idx) { return (blocks_[idx])->pSprite_; }
+    int getCurBlockType() { return blockType_; }
     
 public:
     void setIsDrop(bool isDrop) { isDrop_ = isDrop; }

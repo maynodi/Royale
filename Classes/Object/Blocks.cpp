@@ -25,13 +25,12 @@ Blocks::Blocks()
 
 Blocks::~Blocks()
 {
-    MapMgr::getInstance()->setNullCurBlocks();
+    MapMgr::getInstance()->setCurBlocksInfo();
     KeyMgr::getInstance()->setZeroUpKeyPressedCnt();
     
     for(auto& block : blocks_)
     {
         block->pSprite_->removeAllChildrenWithCleanup(true);
-        //block->pSprite_->release();
     }
 }
 
@@ -277,12 +276,6 @@ void Blocks::autoMoveDown()
             
             block->pSprite_->setPositionY(posY - BLOCKSIZE);
             block->setPosY(posY - BLOCKSIZE);
-            
-            // 맵 안에 들어오면 보여라!
-            if(MAX_HEIGHT > posY - BLOCKSIZE)
-            {
-                block->pSprite_->setVisible(true);
-            }
         }
         
         // preview draw
@@ -309,12 +302,6 @@ void Blocks::autoMoveDown()
             block->setPosY(posY - BLOCKSIZE);
            
             PreviewBlockDistVec_.emplace_back(int(posY - BLOCKSIZE));
-            
-            // 맵 안에 들어오면 보여라!
-            if(MAX_HEIGHT >= posY)
-            {
-                block->pSprite_->setVisible(true);
-            }
         }
         
         // preview draw

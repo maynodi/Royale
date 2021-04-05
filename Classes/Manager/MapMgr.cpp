@@ -18,6 +18,7 @@
 #include "Blocks_S.h"
 #include "Blocks_T.h"
 #include "Blocks_O.h"
+#include "HoldLayer.h"
 
 USING_NS_CC;
 
@@ -26,7 +27,7 @@ MapMgr* MapMgr::pInstance_ = nullptr;
 MapMgr::MapMgr()
     : pCurBlocks_(nullptr)
     , gameState_(PLAY)
-    , nextBlockType_(BLOCKTYPE::S)
+    , twistTrapCnt_(0)
 {
     
 }
@@ -63,6 +64,9 @@ void MapMgr::init()
         gridMapBlocks_[i].resize(MAP_WIDTH, nullptr);
         isExisting_[i].resize(MAP_WIDTH, false);
     }
+    
+    nextBlockTypeList_.emplace_back(BLOCKTYPE::S);
+    nextBlockTypeList_.emplace_back(rand() % BLOCKTYPE::END);
 }
 
 void MapMgr::setIsDrop(bool isDrop)
@@ -73,65 +77,13 @@ void MapMgr::setIsDrop(bool isDrop)
     pCurBlocks_->setIsDrop(isDrop);
 }
 
-void MapMgr::makeNewBlocks()
+void MapMgr::setCurBlocksInfo()
 {
-    if(nullptr != pCurBlocks_)
-        return;
+    Scene* pScene = Director::getInstance()->getRunningScene();
+    HoldLayer* pHoldLayer = (HoldLayer*)pScene->getChildByTag(HOLDLAYER_TAG);
+    pHoldLayer->setHold(false);
     
-    Blocks* pBlocks = nullptr;
-    switch (nextBlockType_)
-    {
-        case BLOCKTYPE::J:
-        {
-            pBlocks = Blocks_J::create(BLOCK_J_COLOR);
-            break;
-        }
-        case BLOCKTYPE::I:
-        {
-            pBlocks = Blocks_I::create(BLOCK_I_COLOR);
-            break;
-        }
-        case BLOCKTYPE::S:
-        {
-            pBlocks = Blocks_S::create(BLOCK_S_COLOR);
-            break;
-        }
-        case BLOCKTYPE::T:
-        {
-            pBlocks = Blocks_T::create(BLOCK_T_COLOR);
-            break;
-        }
-        case BLOCKTYPE::O:
-        {
-            pBlocks = Blocks_O::create(BLOCK_O_COLOR);
-            break;
-        }
-        default:
-            break;
-    }
-    
-    pCurBlocks_ = pBlocks;
-    nextBlockType_ = rand() % BLOCKTYPE::END;
-    
-    // 스프라이트를 mapLayer에 자식으로 추가
-    Scene* pCurScene = Director::getInstance()->getRunningScene();
-    Node* mapLayer = pCurScene->getChildByTag(MAPLAYER_TAG);
-    
-    Sprite* pSprite = nullptr;
-    for(int i = 0; i < BLOCKCNT; ++i)
-    {
-        pSprite = pCurBlocks_->getBlockSprite(i);
-        pSprite->Node::setVisible(false);
-        pSprite->setTag(BLOCKSPRITE_TAG);
-        
-        mapLayer->addChild(pSprite);
-    }
-    
-    // 생겼는데 바로 아래에 블록이 있다면??
-    if(true == pCurBlocks_->checkGameOverWhenCreate())
-    {
-        gameState_ = OVER;
-    }
+    pCurBlocks_ = nullptr;
 }
 
 void MapMgr::update()
@@ -160,7 +112,7 @@ void MapMgr::addLine()
     // 먼저 있는 거부터 이동시키자
     // 맨 꼭대기 인덱스가 필요해
     int maxRow = 0;
-    maxRow = getMaxRowOfExistingBlocetMksInMap();
+    maxRow = getMaxRowOfExistingBlocksInMap();
     
     if(0 < maxRow)
     {
@@ -257,7 +209,7 @@ cocos2d::Sprite* MapMgr::createItem(int col, int row)
     return pSprite;
 }
 
-int MapMgr::getMaxRowOfExistingBlocetMksInMap()
+int MapMgr::getMaxRowOfExistingBlocksInMap()
 {
     for(int i = MAP_HEIGHT - 1; i > 0; --i)
     {
@@ -271,6 +223,88 @@ int MapMgr::getMaxRowOfExistingBlocetMksInMap()
     }
     
     return 0;
+}
+
+void MapMgr::makeNewBlocks()
+{
+    if(nullptr != pCurBlocks_)
+        return;
+    
+    Blocks* pBlocks = nullptr;
+    
+    int nextType = nextBlockTypeList_.front();
+    nextBlockTypeList_.pop_front();
+    
+    switch (nextType)
+    {
+        case BLOCKTYPE::J:
+        {
+            pBlocks = Blocks_J::create(BLOCK_J_COLOR);
+            break;
+        }
+        case BLOCKTYPE::I:
+        {
+            pBlocks = Blocks_I::create(BLOCK_I_COLOR);
+            break;
+        }
+        case BLOCKTYPE::S:
+        {
+            pBlocks = Blocks_S::create(BLOCK_S_COLOR);
+            break;
+        }
+        case BLOCKTYPE::T:
+        {
+            pBlocks = Blocks_T::create(BLOCK_T_COLOR);
+            break;
+        }
+        case BLOCKTYPE::O:
+        {
+            pBlocks = Blocks_O::create(BLOCK_O_COLOR);
+            break;
+        }
+        default:
+            break;
+    }
+    
+    pCurBlocks_ = pBlocks;
+    nextType = rand() % BLOCKTYPE::END;
+    
+    if(2 > nextBlockTypeList_.size())
+    {
+        nextBlockTypeList_.emplace_back(nextType);
+    }
+    
+    // 스프라이트를 mapLayer에 자식으로 추가
+    Scene* pCurScene = Director::getInstance()->getRunningScene();
+    Node* mapLayer = pCurScene->getChildByTag(MAPLAYER_TAG);
+    
+    Sprite* pSprite = nullptr;
+    int randomTrap = rand() % 10;
+    
+    for(int i = 0; i < BLOCKCNT; ++i)
+    {
+        pSprite = pCurBlocks_->getBlockSprite(i);
+        pSprite->setTag(BLOCKSPRITE_TAG);
+
+        if(i == randomTrap)
+        {
+            createTrap(pSprite);
+        }
+        
+        mapLayer->addChild(pSprite);
+    }
+    
+    // 생겼는데 바로 아래에 블록이 있다면??
+    if(true == pCurBlocks_->checkGameOverWhenCreate())
+    {
+        gameState_ = OVER;
+    }
+}
+
+void MapMgr::createTrap(cocos2d::Sprite* sprite)
+{
+    sprite->setTexture("twistTrap.png");
+    sprite->setTag(TWISTSPRITE_TAG);
 }
 
 void MapMgr::move(int dir)
@@ -470,6 +504,10 @@ void MapMgr::reset()
         lineGoDown(row);
     }
     
+    // 트위스트 함정
+    mixMapByTwistTrap();
+    
+    
     // 게임오버 체크
     if(true == checkGameOver())
     {
@@ -511,7 +549,13 @@ void MapMgr::deleteLine(int row)
         
         if(ITEMSPRITE_TAG == gridMapBlocks_[row][i]->getTag())
         {
-            DataMgr::getInstance()->addLineCnt();
+            // 아이템 수 체크
+            DataMgr::getInstance()->addItemCnt();
+        }
+        else if(TWISTSPRITE_TAG == gridMapBlocks_[row][i]->getTag())
+        {
+            // ====
+            twistTrapCnt_ += 1;
         }
         
         gridMapBlocks_[row][i]->removeFromParent();
@@ -523,22 +567,22 @@ void MapMgr::deleteLine(int row)
     // 소리
     CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("remove.wav");
 
-    if(MAP_WIDTH <= blankCnt)  // item 사용 시 빈 라인일 경우 필요
+    // item 사용 시 빈 라인일 경우
+    if(MAP_WIDTH <= blankCnt)
     {
-        // 점수 체크
-        DataMgr::getInstance()->addScore(0);
+        // 점수, 라인 수 체크 x
         return;
     }
     
     // 점수 체크
     DataMgr::getInstance()->addScore(DELETELINE_SCORE);
     // 라인 수 체크
-    DataMgr::getInstance()->addItemCnt();
+    DataMgr::getInstance()->addLineCnt();
 }
 
 void MapMgr::lineGoDown(int row)
 {
-    for(int i = row + 1; i< MAP_HEIGHT; ++i)
+    for(int i = row + 1; i < MAP_HEIGHT; ++i)
     {
         if(MIN_HEIGHT > i -1)
             continue;
@@ -562,6 +606,57 @@ void MapMgr::lineGoDown(int row)
     }
 }
 
+void MapMgr::mixMapByTwistTrap()
+{
+    if(0 >= twistTrapCnt_)
+        return;
+    
+    // 트랩개수만큼 블록이 오른쪽으로 이동
+    std::vector<Sprite*> bufferVec;
+
+    for(int row = 0; row < MAP_HEIGHT; ++row)
+    {
+        bufferVec.resize(twistTrapCnt_);
+        std::copy(gridMapBlocks_[row].end() - twistTrapCnt_, gridMapBlocks_[row].end(), bufferVec.begin());
+
+        int startNum = MAP_WIDTH - (twistTrapCnt_ + 1);
+        for(int col = startNum; col >= 0; --col)
+        {
+            gridMapBlocks_[row][col + twistTrapCnt_] = gridMapBlocks_[row][col];
+            gridMapBlocks_[row][col] = nullptr;
+            
+            if(nullptr != gridMapBlocks_[row][col + twistTrapCnt_])
+            {
+                int posX = gridMapBlocks_[row][col + twistTrapCnt_]->getPositionX();
+                posX += (BLOCKSIZE * twistTrapCnt_);
+                gridMapBlocks_[row][col + twistTrapCnt_]->setPositionX(posX);
+            }
+            
+            isExisting_[row][col + twistTrapCnt_] = isExisting_[row][col];
+            isExisting_[row][col] = false;
+            
+            if(twistTrapCnt_ > col)
+            {
+                gridMapBlocks_[row][col] = bufferVec[col];
+                isExisting_[row][col] = false;
+                
+                if(nullptr != gridMapBlocks_[row][col])
+                {
+                    int posX = (col + 1) * BLOCKSIZE;
+                    gridMapBlocks_[row][col]->setPositionX(posX);
+                    
+                    isExisting_[row][col] = true;
+                }
+            }
+        }
+        
+        bufferVec.clear();
+    }
+
+    // 이동 끝나고 나면 0 세팅!
+    twistTrapCnt_ = 0;
+}
+
 bool MapMgr::checkGameOver()
 {
     if(nullptr != pCurBlocks_)
@@ -575,4 +670,21 @@ bool MapMgr::checkGameOver()
     }
     
     return false;
+}
+
+void MapMgr::swapHoldBlock(int type)
+{
+    for(int i = 0; i < BLOCKCNT; ++i)
+    {
+        pCurBlocks_->getBlockSprite(i)->removeFromParent();
+    }
+    
+    pCurBlocks_ = nullptr;
+    
+    // type- end : 홀드칸이 빈칸이었다 -> 원래 생성되려고 하던 타입대로 블럭을 생성하면됨
+    // 그 외 : 홀드된 블럭의 type에 맞게 다시 생성
+    if(BLOCKTYPE::END != type)
+    {
+        nextBlockTypeList_.push_front(type);
+    }
 }

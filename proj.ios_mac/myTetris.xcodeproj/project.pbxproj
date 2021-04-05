@@ -38,6 +38,8 @@
 		503AE0F817EB97AB00D1A890 /* Icon.icns in Resources */ = {isa = PBXBuildFile; fileRef = 503AE0F617EB97AB00D1A890 /* Icon.icns */; };
 		503AE10517EB98FF00D1A890 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 503AE10317EB98FF00D1A890 /* main.cpp */; };
 		503AE11B17EB9C5A00D1A890 /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 503AE11A17EB9C5A00D1A890 /* IOKit.framework */; };
+		50567390261AD8AB00A08301 /* twistTrap.png in Resources */ = {isa = PBXBuildFile; fileRef = 5056738F261AD8AA00A08301 /* twistTrap.png */; };
+		50567391261AD8AB00A08301 /* twistTrap.png in Resources */ = {isa = PBXBuildFile; fileRef = 5056738F261AD8AA00A08301 /* twistTrap.png */; };
 		505AF3FF2616F9700067B252 /* tetrisBGM.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 505AF3FB2616F9700067B252 /* tetrisBGM.mp3 */; };
 		505AF4002616F9700067B252 /* tetrisBGM.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 505AF3FB2616F9700067B252 /* tetrisBGM.mp3 */; };
 		505AF407261703550067B252 /* remove.wav in Resources */ = {isa = PBXBuildFile; fileRef = 505AF406261703550067B252 /* remove.wav */; };
@@ -175,6 +177,7 @@
 		503AE10417EB98FF00D1A890 /* Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Prefix.pch; path = mac/Prefix.pch; sourceTree = "<group>"; };
 		503AE11117EB99EE00D1A890 /* libcurl.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libcurl.dylib; path = usr/lib/libcurl.dylib; sourceTree = SDKROOT; };
 		503AE11A17EB9C5A00D1A890 /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = System/Library/Frameworks/IOKit.framework; sourceTree = SDKROOT; };
+		5056738F261AD8AA00A08301 /* twistTrap.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = twistTrap.png; sourceTree = "<group>"; };
 		505AF3FB2616F9700067B252 /* tetrisBGM.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = tetrisBGM.mp3; sourceTree = "<group>"; };
 		505AF406261703550067B252 /* remove.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = remove.wav; sourceTree = "<group>"; };
 		505AF409261703740067B252 /* gameover.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = gameover.wav; sourceTree = "<group>"; };
@@ -358,6 +361,7 @@
 				46880B7719C43A67006E1F66 /* CloseSelected.png */,
 				50E46BD925F9AEA100919209 /* sky.jpeg */,
 				46880B7A19C43A67006E1F66 /* HelloWorld.png */,
+				5056738F261AD8AA00A08301 /* twistTrap.png */,
 				508036BA2615725400EA57C7 /* white.png */,
 				505AF3FB2616F9700067B252 /* tetrisBGM.mp3 */,
 				505AF406261703550067B252 /* remove.wav */,
@@ -570,6 +574,7 @@
 			files = (
 				46880B8119C43A67006E1F66 /* HelloWorld.png in Resources */,
 				1A88B2641FC3D9C9005C14AE /* Images.xcassets in Resources */,
+				50567390261AD8AB00A08301 /* twistTrap.png in Resources */,
 				46880B7D19C43A67006E1F66 /* CloseSelected.png in Resources */,
 				521A8EA919F11F5000D177D7 /* fonts in Resources */,
 				505AF407261703550067B252 /* remove.wav in Resources */,
@@ -602,6 +607,7 @@
 				505AF4002616F9700067B252 /* tetrisBGM.mp3 in Resources */,
 				46880B7E19C43A67006E1F66 /* CloseSelected.png in Resources */,
 				505AF411261706C90067B252 /* selection.wav in Resources */,
+				50567391261AD8AB00A08301 /* twistTrap.png in Resources */,
 				505AF40E261703CE0067B252 /* drop.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

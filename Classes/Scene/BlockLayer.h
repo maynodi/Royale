@@ -13,7 +13,7 @@ class BlockLayer : public cocos2d::LayerColor
 {
 private:
     int nextBlockType_;
-    std::vector<cocos2d::Sprite*> nextBlocks_;
+    std::vector<cocos2d::Sprite*> nextBlocks_[2];
     
 public:
     static BlockLayer* create();

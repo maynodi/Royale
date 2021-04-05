@@ -13,6 +13,7 @@
 #include "SimpleAudioEngine.h"
 
 #include "MapLayer.h"
+#include "holdLayer.h"
 
 USING_NS_CC;
 
@@ -180,17 +181,25 @@ void KeyMgr::blocksControl(KEY keyCode)
                 break;
             
             Scene* pScene = Director::getInstance()->getRunningScene();
-            MapLayer* pLayer = (MapLayer*)pScene->getChildByTag(MAPLAYER_TAG);
+            MapLayer* pMapLayer = (MapLayer*)pScene->getChildByTag(MAPLAYER_TAG);
 
-            pLayer->pause();
-            pLayer->createSelectBox();
+            pMapLayer->pause();
+            pMapLayer->createSelectBox();
             
             isItemKeyPressed_ = !isItemKeyPressed_;
             break;
         }
         case KEY::KEY_SHIFT:
         {
-            // ========= hold 구현예정
+            Blocks* pCurBlocks = MapMgr::getInstance()->getCurBlocks();
+            if(nullptr == pCurBlocks)
+                break;
+            
+            Scene* pScene = Director::getInstance()->getRunningScene();
+            HoldLayer* pHoldLayer = (HoldLayer*)pScene->getChildByTag(HOLDLAYER_TAG);
+            
+            int blockType = pCurBlocks->getCurBlockType();
+            pHoldLayer->ChangeHoldBlock(blockType);
             break;
         }
         case KEY::KEY_0:
