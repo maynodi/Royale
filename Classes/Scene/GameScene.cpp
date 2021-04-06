@@ -3,6 +3,7 @@
 #include "MapMgr.h"
 #include "KeyMgr.h"
 #include "DataMgr.h"
+#include "ParticleMgr.h"
 
 #include "Define.h"
 
@@ -21,6 +22,7 @@ GameScene::~GameScene()
 {
     save();
     
+    ParticleMgr::destroyInstance();
     MapMgr::destroyInstance();
     KeyMgr::destroyInstance();
     DataMgr::destroyInstance();

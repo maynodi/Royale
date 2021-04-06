@@ -42,6 +42,7 @@ bool UILayer::init()
     this->setPosition(Vec2(BLOCKLAYER_POS_X, BLOCKSIZE));
     
     createLabel();
+    createMenuLabel();
     
     scheduleUpdate();
     
@@ -51,6 +52,22 @@ bool UILayer::init()
 void UILayer::update(float dt)
 {
     checkLabel();
+}
+
+void UILayer::createMenuLabel()
+{
+    std::vector<std::string> menu = {"Next", "Hold"};
+    
+    Label* textLabel = nullptr;
+    for(int i = 0; i < menu.size(); ++i)
+    {
+        textLabel = Label::createWithTTF(menu[i], FONTPATH, fontSize_);
+        textLabel->setPosition(Vec2(BLOCKLAYER_SIZE_X / 2,
+                                    MAPLAYER_SIZE_Y - 50 - ((BLOCKLAYER_SIZE_Y + 50) * i)));
+        textLabel->setColor(Color3B::BLACK);
+        
+        this->addChild(textLabel);
+    }
 }
 
 void UILayer::createLabel()

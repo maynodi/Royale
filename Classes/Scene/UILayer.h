@@ -14,9 +14,11 @@ public:
     virtual bool init() override;
     
 public:
+    void createMenuLabel();
     virtual void update(float dt) override;
     void createLabel();
     void checkLabel();
+    
     
 public:
     UILayer();

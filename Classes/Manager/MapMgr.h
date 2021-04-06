@@ -22,13 +22,17 @@ private:
     std::vector<bool> isExisting_[MAP_HEIGHT];
     std::vector<cocos2d::Sprite*>  gridMapBlocks_[MAP_HEIGHT];
     Blocks* pCurBlocks_;
-    std::list<BLOCK*> newBlockList_; // 맵의 블록과 부딪힐 가능성있는 블록 리스트
+    std::list<BLOCK*> newBlockList_;      // 맵의 블록과 부딪힐 가능성있는 블록 리스트
     GAMESTATE gameState_;
+    std::list<int> nextBlockTypeList_;    // nextBlockLayer에 띄울 다음에 나올 블럭 정보를 담는 리스트
     
-    std::list<int> nextBlockTypeList_;
+private:
+    std::list<int> nextBlockRandomList_;  // 미리 랜덤으로 5종류의 블럭을 담아 놓는 리스트, 여기서 빼서 새로운 블럭 생성예정
+    std::list<int> TrapRandomList_;
     
 private:
     int twistTrapCnt_;
+    bool isSmogTrap_;
     
 public:
     static MapMgr* getInstance();
@@ -56,10 +60,11 @@ public:
     
 public:
     void makeNewBlocks();
-    void createTrap(cocos2d::Sprite* sprite);
+    int getRandom(std::list<int> list, int condition);
+    void createTrap(cocos2d::Sprite* sprite, int condition);
     void move(int dir);
     void rotate(int keyPressedCnt);
-    void autoMoveDown();
+    void autoMoveDown();    
     
 public:
     bool checkUnderSomething(BLOCK* block[]);
@@ -75,7 +80,8 @@ public:
     void checkLineFull(std::list<int>* list);
     void deleteLine(int row);
     void lineGoDown(int row);
-    void mixMapByTwistTrap();
+    void doByTwistTrap();  // 맵이 오른쪽으로 이동하는 함수
+    void doBySmogTrap();   // 안개 생기는 함정함수
     
 public:
     bool checkGameOver();

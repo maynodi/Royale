@@ -9,6 +9,7 @@
 
 #include "KeyMgr.h"
 #include "DataMgr.h"
+#include "ParticleMgr.h"
 
 #include "SimpleAudioEngine.h"
 #include <algorithm>
@@ -28,6 +29,7 @@ MapMgr::MapMgr()
     : pCurBlocks_(nullptr)
     , gameState_(PLAY)
     , twistTrapCnt_(0)
+    , isSmogTrap_(false)
 {
     
 }
@@ -88,7 +90,12 @@ void MapMgr::setCurBlocksInfo()
 
 void MapMgr::update()
 {
+    // 맵 정렬
     reset();
+    
+    // 함정 체크
+    doByTwistTrap();
+    doBySmogTrap();
     
     if(true == DataMgr::getInstance()->updateData())
     {
@@ -267,7 +274,7 @@ void MapMgr::makeNewBlocks()
     }
     
     pCurBlocks_ = pBlocks;
-    nextType = rand() % BLOCKTYPE::END;
+    nextType = getRandom(nextBlockRandomList_, BLOCKTYPE::END);
     
     if(2 > nextBlockTypeList_.size())
     {
@@ -279,7 +286,7 @@ void MapMgr::makeNewBlocks()
     Node* mapLayer = pCurScene->getChildByTag(MAPLAYER_TAG);
     
     Sprite* pSprite = nullptr;
-    int randomTrap = rand() % 10;
+    int randomTrap = getRandom(TrapRandomList_, 15);
     
     for(int i = 0; i < BLOCKCNT; ++i)
     {
@@ -288,7 +295,7 @@ void MapMgr::makeNewBlocks()
 
         if(i == randomTrap)
         {
-            createTrap(pSprite);
+            createTrap(pSprite, i);
         }
         
         mapLayer->addChild(pSprite);
@@ -301,10 +308,40 @@ void MapMgr::makeNewBlocks()
     }
 }
 
-void MapMgr::createTrap(cocos2d::Sprite* sprite)
+int MapMgr::getRandom(std::list<int> list, int condition)
 {
-    sprite->setTexture("twistTrap.png");
-    sprite->setTag(TWISTSPRITE_TAG);
+    if(true == list.empty())
+    {
+        while(condition > list.size())
+        {
+            int Random = rand() % condition;
+            
+            std::list<int>::iterator iter = std::find(list.begin(), list.end(), Random);
+            if(iter == list.end())
+            {
+                list.emplace_back(Random);
+            }
+        }
+    }
+            
+    int returnNumber = list.front();
+    list.pop_front();
+    
+    return returnNumber;
+}
+
+void MapMgr::createTrap(cocos2d::Sprite* sprite, int condition)
+{
+    if(0 == (condition % 2))
+    {
+        sprite->setTexture("twistTrap.png");
+        sprite->setTag(TWISTSPRITE_TAG);
+    }
+    else
+    {
+        sprite->setTexture("smogTrap.png");
+        sprite->setTag(SMOGSPRITE_TAG);
+    }
 }
 
 void MapMgr::move(int dir)
@@ -504,10 +541,6 @@ void MapMgr::reset()
         lineGoDown(row);
     }
     
-    // 트위스트 함정
-    mixMapByTwistTrap();
-    
-    
     // 게임오버 체크
     if(true == checkGameOver())
     {
@@ -538,6 +571,10 @@ void MapMgr::checkLineFull(std::list<int>* list)
 
 void MapMgr::deleteLine(int row)
 {
+    Scene* pScene = Director::getInstance()->getRunningScene();
+    Node* pLayer = pScene->getChildByTag(MAPLAYER_TAG);
+    
+    
     int blankCnt = 0;
     for(int i = 0; i < MAP_WIDTH; ++i)
     {
@@ -557,6 +594,14 @@ void MapMgr::deleteLine(int row)
             // ====
             twistTrapCnt_ += 1;
         }
+        else if(SMOGSPRITE_TAG == gridMapBlocks_[row][i]->getTag())
+        {
+            // ====
+            isSmogTrap_ = true;
+        }
+        
+        // 이펙트
+        ParticleMgr::getInstance()->particleExplosion(pLayer, gridMapBlocks_[row][i]->getPosition(), gridMapBlocks_[row][i]->getColor());
         
         gridMapBlocks_[row][i]->removeFromParent();
         gridMapBlocks_[row][i] = nullptr;
@@ -606,7 +651,7 @@ void MapMgr::lineGoDown(int row)
     }
 }
 
-void MapMgr::mixMapByTwistTrap()
+void MapMgr::doByTwistTrap()
 {
     if(0 >= twistTrapCnt_)
         return;
@@ -655,6 +700,29 @@ void MapMgr::mixMapByTwistTrap()
 
     // 이동 끝나고 나면 0 세팅!
     twistTrapCnt_ = 0;
+}
+
+void MapMgr::doBySmogTrap()
+{
+    if(false == isSmogTrap_)
+        return;
+
+    Scene* pScene = Director::getInstance()->getRunningScene();
+    Node* pLayer = pScene->getChildByTag(MAPLAYER_TAG);
+    
+    Vec2 pos = {};
+    for(int i = 0; i < 2; ++i)
+    {
+        pos.y = MAPLAYER_SIZE_Y / 2 - (i * 300);
+        
+        for(int j = 0; j< 5; ++j)
+        {
+            pos.x = BLOCKSIZE + ((j+1) * 50);
+            ParticleMgr::getInstance()->particleSmog(pLayer, pos);
+        }
+    }
+    
+    isSmogTrap_ = false;
 }
 
 bool MapMgr::checkGameOver()

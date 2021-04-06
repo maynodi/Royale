@@ -125,9 +125,6 @@ void KeyMgr::selectBoxControl(KEY keyCode)
             selectBox->removeFromParent();
             pLayer->resume();
             
-            // 아이템 갯수 감소
-            DataMgr::getInstance()->minusItemCnt();
-            
             isItemKeyPressed_ = !isItemKeyPressed_;
             break;
         }
@@ -185,6 +182,9 @@ void KeyMgr::blocksControl(KEY keyCode)
 
             pMapLayer->pause();
             pMapLayer->createSelectBox();
+            
+            // 아이템 갯수 감소
+            DataMgr::getInstance()->minusItemCnt();
             
             isItemKeyPressed_ = !isItemKeyPressed_;
             break;
