@@ -19,10 +19,10 @@ Blocks_S::~Blocks_S()
 {
 }
 
-Blocks_S* Blocks_S::create(cocos2d::Color3B color)
+Blocks_S* Blocks_S::create(cocos2d::Color3B color, int blockCnt)
 {
     Blocks_S* pRet = new(std::nothrow) Blocks_S;
-    if (pRet && pRet->init(color))
+    if (pRet && pRet->init(color, blockCnt))
     {
         //pRet->autorelease();
         return pRet;
@@ -35,8 +35,10 @@ Blocks_S* Blocks_S::create(cocos2d::Color3B color)
     }
 }
 
-bool Blocks_S::init(cocos2d::Color3B color)
+bool Blocks_S::init(cocos2d::Color3B color, int blockCnt)
 {
+    blocks_.resize(blockCnt);
+    
     // BLOCK 초기화
     BLOCK* pBlock = nullptr;
     for(int i = 0; i < BLOCKCNT; ++i)

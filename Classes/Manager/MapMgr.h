@@ -67,7 +67,7 @@ public:
     void autoMoveDown();    
     
 public:
-    bool checkUnderSomething(BLOCK* block[]);
+    bool checkUnderSomething(std::vector<BLOCK*> blockVec);
     void getMaxRowOfUnderBlock(int* dist);
     bool checkCanChange(float x, float y);
     

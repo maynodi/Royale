@@ -21,6 +21,11 @@
 #define TWISTSPRITE_TAG 9
 #define SMOGSPRITE_TAG 10
 
+#define TOOL_MAIN_TAG 0
+#define TOOL_BUTTON_TAG 1
+#define TOOL_BLOCK_TAG 2
+
+
 #define BESTSCORE_TAG 0
 #define SCORE_TAG 1
 #define LEVEL_TAG 2

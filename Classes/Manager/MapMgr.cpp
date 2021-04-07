@@ -13,6 +13,7 @@
 
 #include "SimpleAudioEngine.h"
 #include <algorithm>
+#include "BlocksSetting.h"
 
 #include "Blocks_J.h"
 #include "Blocks_I.h"
@@ -246,27 +247,27 @@ void MapMgr::makeNewBlocks()
     {
         case BLOCKTYPE::J:
         {
-            pBlocks = Blocks_J::create(BLOCK_J_COLOR);
+            pBlocks = Blocks_J::create(BLOCK_J_COLOR, BLOCKCNT);
             break;
         }
         case BLOCKTYPE::I:
         {
-            pBlocks = Blocks_I::create(BLOCK_I_COLOR);
+            pBlocks = Blocks_I::create(BLOCK_I_COLOR, BLOCKCNT);
             break;
         }
         case BLOCKTYPE::S:
         {
-            pBlocks = Blocks_S::create(BLOCK_S_COLOR);
+            pBlocks = Blocks_S::create(BLOCK_S_COLOR, BLOCKCNT);
             break;
         }
         case BLOCKTYPE::T:
         {
-            pBlocks = Blocks_T::create(BLOCK_T_COLOR);
+            pBlocks = Blocks_T::create(BLOCK_T_COLOR, BLOCKCNT);
             break;
         }
         case BLOCKTYPE::O:
         {
-            pBlocks = Blocks_O::create(BLOCK_O_COLOR);
+            pBlocks = Blocks_O::create(BLOCK_O_COLOR, BLOCKCNT);
             break;
         }
         default:
@@ -274,6 +275,23 @@ void MapMgr::makeNewBlocks()
     }
     
     pCurBlocks_ = pBlocks;
+    
+//  // 회전
+//    Mat4 mat;
+//    Mat4::createRotationZ(90 * 3.14 / 180, &mat);
+//    for(int i = 0; i < BLOCKCNT; ++i)
+//    {
+//        Vec2 pos = pCurBlocks_->getBlockSprite(i)->getPosition();
+//        pos.x -= BLOCKSIZE * (location::T[POS_X][i]);
+//        pos.y -= BLOCKSIZE * (location::T[POS_Y][i]);
+//
+//        Vec4 pos3 = Vec4(BLOCKSIZE * location::T[POS_X][i], BLOCKSIZE * location::T[POS_Y][i], 0, 1);
+//        Vec4 newpos = mat * pos3;
+//
+//        pCurBlocks_->getBlockSprite(i)->setPosition(pos.x + newpos.x, pos.y + newpos.y);
+//
+//    }
+    
     nextType = getRandom(nextBlockRandomList_, BLOCKTYPE::END);
     
     if(2 > nextBlockTypeList_.size())
@@ -383,8 +401,10 @@ void MapMgr::autoMoveDown()
     pCurBlocks_->autoMoveDown();
 }
 
-bool MapMgr::checkUnderSomething(BLOCK* block[])
+bool MapMgr::checkUnderSomething(std::vector<BLOCK*> blockVec)
 {
+    std::vector<BLOCK*> block = blockVec;
+    
     // 일단, 접촉할 부분을 미리 골라내
     newBlockList_.clear();
     
@@ -713,7 +733,7 @@ void MapMgr::doBySmogTrap()
     Vec2 pos = {};
     for(int i = 0; i < 2; ++i)
     {
-        pos.y = MAPLAYER_SIZE_Y / 2 - (i * 300);
+        pos.y = MAPLAYER_SIZE_Y / 2 - (i * 200);
         
         for(int j = 0; j< 5; ++j)
         {

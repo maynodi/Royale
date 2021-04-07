@@ -9,6 +9,7 @@
 
 #include "MapMgr.h"
 #include "DataMgr.h"
+#include "ParticleMgr.h"
 
 #include "SimpleAudioEngine.h"
 
@@ -205,6 +206,24 @@ void KeyMgr::blocksControl(KEY keyCode)
         case KEY::KEY_0:
         {
             DataMgr::getInstance()->addItemCnt();
+        }
+        case KEY::KEY_1:
+        {
+            // smogtrap test
+            Scene* pScene = Director::getInstance()->getRunningScene();
+            MapLayer* pMapLayer = (MapLayer*)pScene->getChildByTag(MAPLAYER_TAG);
+
+            Vec2 pos = {};
+            for(int i = 0; i < 2; ++i)
+            {
+                pos.y = MAPLAYER_SIZE_Y / 2 - (i * 200);
+                
+                for(int j = 0; j< 5; ++j)
+                {
+                    pos.x = BLOCKSIZE + ((j+1) * 50);
+                    ParticleMgr::getInstance()->particleSmog(pMapLayer, pos);
+                }
+            }
         }
         default:
             break;

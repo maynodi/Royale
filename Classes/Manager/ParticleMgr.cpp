@@ -49,7 +49,7 @@ void ParticleMgr::particleSmog(cocos2d::Node* node, cocos2d::Vec2 pos)
     pParticle->setStartSize(400);
     pParticle->setEndSize(200);
     
-    pParticle->setDuration(3.f);
+    pParticle->setDuration(2.f);
     pParticle->setSpeed(10);
 
     pParticle->setTotalParticles(10);

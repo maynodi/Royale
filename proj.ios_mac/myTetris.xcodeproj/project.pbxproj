@@ -66,6 +66,12 @@
 		5092F3D5261C2E1B0029FCF5 /* ParticleMgr.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5092F3D3261C2E1B0029FCF5 /* ParticleMgr.cpp */; };
 		5092F3D7261C33C10029FCF5 /* smogTrap.png in Resources */ = {isa = PBXBuildFile; fileRef = 5092F3D6261C33C10029FCF5 /* smogTrap.png */; };
 		5092F3D8261C33C10029FCF5 /* smogTrap.png in Resources */ = {isa = PBXBuildFile; fileRef = 5092F3D6261C33C10029FCF5 /* smogTrap.png */; };
+		509F9269261D75F6007A5C42 /* ToolScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 509F9266261D75F6007A5C42 /* ToolScene.cpp */; };
+		509F926A261D75F6007A5C42 /* ToolScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 509F9266261D75F6007A5C42 /* ToolScene.cpp */; };
+		509F926D261D781B007A5C42 /* ButtonLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 509F926B261D781B007A5C42 /* ButtonLayer.cpp */; };
+		509F926E261D781B007A5C42 /* ButtonLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 509F926B261D781B007A5C42 /* ButtonLayer.cpp */; };
+		509F9271261D9C04007A5C42 /* ToolMainLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 509F926F261D9C04007A5C42 /* ToolMainLayer.cpp */; };
+		509F9272261D9C04007A5C42 /* ToolMainLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 509F926F261D9C04007A5C42 /* ToolMainLayer.cpp */; };
 		50B42909260ACD0000A74E10 /* Blocks_I.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 50B42908260ACCFF00A74E10 /* Blocks_I.cpp */; };
 		50B4290A260ACD0000A74E10 /* Blocks_I.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 50B42908260ACCFF00A74E10 /* Blocks_I.cpp */; };
 		50B4290D260AEBF500A74E10 /* Blocks_S.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 50B4290C260AEBF500A74E10 /* Blocks_S.cpp */; };
@@ -196,6 +202,12 @@
 		5092F3D2261C2E1B0029FCF5 /* ParticleMgr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParticleMgr.h; sourceTree = "<group>"; };
 		5092F3D3261C2E1B0029FCF5 /* ParticleMgr.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ParticleMgr.cpp; sourceTree = "<group>"; };
 		5092F3D6261C33C10029FCF5 /* smogTrap.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = smogTrap.png; sourceTree = "<group>"; };
+		509F9266261D75F6007A5C42 /* ToolScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ToolScene.cpp; sourceTree = "<group>"; };
+		509F9268261D75F6007A5C42 /* ToolScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ToolScene.h; sourceTree = "<group>"; };
+		509F926B261D781B007A5C42 /* ButtonLayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ButtonLayer.cpp; sourceTree = "<group>"; };
+		509F926C261D781B007A5C42 /* ButtonLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ButtonLayer.h; sourceTree = "<group>"; };
+		509F926F261D9C04007A5C42 /* ToolMainLayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ToolMainLayer.cpp; sourceTree = "<group>"; };
+		509F9270261D9C04007A5C42 /* ToolMainLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ToolMainLayer.h; sourceTree = "<group>"; };
 		50B42906260ACCFF00A74E10 /* Blocks_I.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Blocks_I.h; sourceTree = "<group>"; };
 		50B42908260ACCFF00A74E10 /* Blocks_I.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Blocks_I.cpp; sourceTree = "<group>"; };
 		50B4290B260AEBF500A74E10 /* Blocks_S.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Blocks_S.h; sourceTree = "<group>"; };
@@ -431,6 +443,12 @@
 				500BEAE92613054F008EEF74 /* UILayer.cpp */,
 				505AF41326170BCF0067B252 /* HoldLayer.h */,
 				505AF41226170BCF0067B252 /* HoldLayer.cpp */,
+				509F9268261D75F6007A5C42 /* ToolScene.h */,
+				509F9266261D75F6007A5C42 /* ToolScene.cpp */,
+				509F9270261D9C04007A5C42 /* ToolMainLayer.h */,
+				509F926F261D9C04007A5C42 /* ToolMainLayer.cpp */,
+				509F926C261D781B007A5C42 /* ButtonLayer.h */,
+				509F926B261D781B007A5C42 /* ButtonLayer.cpp */,
 			);
 			path = Scene;
 			sourceTree = "<group>";
@@ -632,13 +650,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				50E5D198260839380014EC25 /* MapLayer.cpp in Sources */,
+				509F9269261D75F6007A5C42 /* ToolScene.cpp in Sources */,
 				50B4290D260AEBF500A74E10 /* Blocks_S.cpp in Sources */,
 				50E5D18F260821360014EC25 /* TitleLobbyLayer.cpp in Sources */,
 				50E5D1A626086C7F0014EC25 /* Blocks_J.cpp in Sources */,
 				1AF87B781F6F77F7007BE51C /* AppController.mm in Sources */,
 				1AF87B8B1F6F782A007BE51C /* RootViewController.mm in Sources */,
+				509F926D261D781B007A5C42 /* ButtonLayer.cpp in Sources */,
 				505AF41426170BCF0067B252 /* HoldLayer.cpp in Sources */,
 				50E5D19C260844B90014EC25 /* MapMgr.cpp in Sources */,
+				509F9271261D9C04007A5C42 /* ToolMainLayer.cpp in Sources */,
 				50E5D1AC26088E2E0014EC25 /* KeyMgr.cpp in Sources */,
 				46880B8819C43A87006E1F66 /* AppDelegate.cpp in Sources */,
 				50B42917260B222E00A74E10 /* Blocks_O.cpp in Sources */,
@@ -661,9 +682,11 @@
 			files = (
 				50E5D194260821360014EC25 /* GameScene.cpp in Sources */,
 				50B4290E260AEBF500A74E10 /* Blocks_S.cpp in Sources */,
+				509F9272261D9C04007A5C42 /* ToolMainLayer.cpp in Sources */,
 				46880B8919C43A87006E1F66 /* AppDelegate.cpp in Sources */,
 				50B42918260B222E00A74E10 /* Blocks_O.cpp in Sources */,
 				5092F3D5261C2E1B0029FCF5 /* ParticleMgr.cpp in Sources */,
+				509F926A261D75F6007A5C42 /* ToolScene.cpp in Sources */,
 				503AE10517EB98FF00D1A890 /* main.cpp in Sources */,
 				500BEAF0261314BD008EEF74 /* DataMgr.cpp in Sources */,
 				50E5D190260821360014EC25 /* TitleLobbyLayer.cpp in Sources */,
@@ -672,6 +695,7 @@
 				500BEAE82612C8F7008EEF74 /* BlockLayer.cpp in Sources */,
 				50B42916260B222E00A74E10 /* Blocks_T.cpp in Sources */,
 				50E5D1A726086C7F0014EC25 /* Blocks_J.cpp in Sources */,
+				509F926E261D781B007A5C42 /* ButtonLayer.cpp in Sources */,
 				505AF41526170BCF0067B252 /* HoldLayer.cpp in Sources */,
 				50E5D199260839380014EC25 /* MapLayer.cpp in Sources */,
 				50B4290A260ACD0000A74E10 /* Blocks_I.cpp in Sources */,

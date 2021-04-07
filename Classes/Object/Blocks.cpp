@@ -19,7 +19,7 @@ Blocks::Blocks()
     : isDrop_(false)
     , dist_(0)
 {
-    memset(blocks_, 0, sizeof(blocks_[0]) * BLOCKCNT);
+    //memset(blocks_, 0, sizeof(blocks_[0]) * BLOCKCNT);
     PreviewBlockDistVec_.reserve(BLOCKCNT);
 }
 
@@ -239,14 +239,14 @@ void Blocks::fixBlockPos()
     for(auto& block : blocks_)
     {
         float posY = block->pSprite_->getPositionY();
-        
+
         block->pSprite_->setPositionY(posY);
         block->setPosY(posY);
-        
+
         MapMgr::getInstance()->includeGridMapBlocks(block->pSprite_);
         MapMgr::getInstance()->checkIsExisting(block->pSprite_, true);
     }
-    
+
     //소리
     CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("drop.mp3");
 }

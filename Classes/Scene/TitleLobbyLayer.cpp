@@ -10,6 +10,7 @@
 #include "Define.h"
 
 #include "GameScene.h"
+#include "ToolScene.h"
 
 USING_NS_CC;
 
@@ -86,4 +87,6 @@ void TitleLobbyLayer::loadMenuClick(Ref* pSender)
 
 void TitleLobbyLayer::toolMenuClick(Ref* pSender)
 {
+    Scene* pScene = ToolScene::create();
+    Director::getInstance()->replaceScene(pScene);
 }
