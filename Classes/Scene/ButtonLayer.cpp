@@ -1,8 +1,12 @@
 #include "ButtonLayer.h"
 
+#include "libjson.h"
+#include <fstream>
+#include <algorithm>
 #include "Define.h"
 
 #include "TitleScene.h"
+#include "ToolMainLayer.h"
 
 USING_NS_CC;
 
@@ -67,11 +71,13 @@ void ButtonLayer::clickSaveButton(Ref* pSender)
     // 저장할 때 blocksize만큼 나눠서 저장해야지..
     
     Scene* pToolScene = Director::getInstance()->getRunningScene();
+    ToolMainLayer* pMainLayer = (ToolMainLayer*)pToolScene->getChildByTag(TOOL_MAIN_TAG);
+    
     Vector<Node*> children = pToolScene->getChildren();
-    int Size = children.size();
+    int specialBlockCnt = pMainLayer->getBlockCnt();
     
     std::vector<cocos2d::Vec2> posVec;
-    posVec.reserve(Size - 2); // toolmainlayer, buttonlayer 제외
+    posVec.reserve(specialBlockCnt);
     
     for(auto& child : children)
     {
@@ -85,8 +91,30 @@ void ButtonLayer::clickSaveButton(Ref* pSender)
         }
     }
     
-    // 파일저장
+    Vector<Node*>::iterator iter = find_if(children.begin(), children.end(), [&](Node* node){
+        return (TOOL_BLOCK_TAG == node->getTag());
+    });
     
+    // 데이터없으면 저장하지마
+    if(children.end() == iter)
+        return;
+    
+    // 파일저장
+    JSONNode node;
+    for(int i = 0; i < posVec.size(); ++i)
+    {
+        node.push_back(JSONNode("x" + std::to_string(i), posVec[i].x));
+        node.push_back(JSONNode("y"+ std::to_string(i), posVec[i].y));
+    }
+    
+    node.push_back(JSONNode("blockCnt", specialBlockCnt));
+    
+    std::fstream file;
+    std::string filePath = FileUtils::getInstance()->getWritablePath() + "blockData.json";
+    
+    file.open (filePath.c_str (), std::ios::out);
+    file<<node.write_formatted();
+    file.close ();
     
 }
 

@@ -8,6 +8,7 @@
 #include "BlockLayer.h"
 
 #include "MapMgr.h"
+#include "DataMgr.h"
 
 #include "Define.h"
 #include "BlocksSetting.h"
@@ -49,72 +50,115 @@ bool BlockLayer::init()
     this->setContentSize(Size(BLOCKLAYER_SIZE_X, BLOCKLAYER_SIZE_Y));
     this->setPosition(Vec2(BLOCKLAYER_POS_X, BLOCKLAYER_POS_Y));
     
-    // 스프라이트 최초로 생성
-    Sprite* pSprite = nullptr;
-    
-    for(int arr = 0; arr < 2; ++arr)
-    {
-        nextBlocks_[arr].reserve(BLOCKCNT);
-        
-        for(int i = 0; i < BLOCKCNT; ++i)
-        {
-            pSprite = Sprite::create("white.png");
-            pSprite->setAnchorPoint(cocos2d::Vec2(1, 0));
-            pSprite->setTag(NEXTBLOCK_TAG);
-            
-            nextBlocks_[arr].emplace_back(pSprite);
-            this->addChild(pSprite);
-        }
-    }
+    preSetting();
     
     scheduleUpdate();
     
     return true;
 }
 
-void BlockLayer::update(float dt)
+void BlockLayer::preSetting()
 {
-    checkChangeNextBlock();
-}
-
-void BlockLayer::checkChangeNextBlock()
-{
-    std::list<int> list = MapMgr::getInstance()->getNextBlockTypeList();
-    std::list<int>::iterator iter = list.begin();
-    
-    int posX = 0;
-    int posY = 0;
-    int index = 0;
-    int arrCnt = 0;
-    for(; iter != list.end(); ++iter)
+    Sprite* pSprite = nullptr;
+    for(int type = 0; type < BLOCKTYPE::END; ++type)
     {
-        if(2 < list.size())
-            continue;
+        int cnt = setNextBlockCnt(type);
+        Color3B color = findNextBlockColor(type);
         
-        nextBlockType_ = *iter;
+        findNextBlockLocation(type, cnt);
         
-        Color3B color = findNextBlockColor();
-        std::vector<int> locationVec = findNextBlockLocation();
+        std::vector<cocos2d::Sprite*> spriteVec;
+        spriteVec.resize(cnt);
         
-        for(int i = 0; i < BLOCKCNT; ++i)
+        for(int i = 0; i < cnt; ++i)
         {
-            nextBlocks_[arrCnt][i]->setColor(color);
+            pSprite = Sprite::create("white.png");
             
-            index = i * 2;
-            posX = BLOCKSIZE * (locationVec[index] + initPos::nextBlockPos[POS_X] + (arrCnt * 5));
-            posY = BLOCKSIZE * (locationVec[index + 1] + initPos::nextBlockPos[POS_Y]);
+            pSprite->setAnchorPoint(cocos2d::Vec2(1, 0));
+            pSprite->setPosition(Vec2(BLOCKSIZE * (locationMap_[type][i].x + initPos::nextBlockPos[POS_X])
+                                      , BLOCKSIZE * (locationMap_[type][i].y + initPos::nextBlockPos[POS_Y])));
             
-            nextBlocks_[arrCnt][i]->setPosition(posX, posY);
+            pSprite->setTag(NEXTBLOCK_TAG);
+            pSprite->setColor(color);
+            
+            pSprite->retain();
+            
+            spriteVec[i] = pSprite;
         }
-        
-        arrCnt += 1;
+            
+        poolMap_[type] = spriteVec;
     }
 }
 
-cocos2d::Color3B BlockLayer::findNextBlockColor()
+void BlockLayer::update(float dt)
+{
+    ChangeNextBlock();
+}
+
+int BlockLayer::setNextBlockCnt(int type)
+{
+    int cnt = 0;
+    switch (type)
+    {
+        case BLOCKTYPE::SPECIAL:
+        {
+            cnt = DataMgr::getInstance()->getSpecialBlockCnt();
+            return cnt;
+        }
+        default:
+        {
+            cnt = BLOCKCNT;
+            return cnt;
+        }
+    }
+}
+void BlockLayer::ChangeNextBlock()
+{
+    Blocks* curBlock = MapMgr::getInstance()->getCurBlocks();
+    if(nullptr != curBlock)
+        return;
+    
+    // 이전 그리던거 release
+    Vector<Node*> children = this->getChildren();
+    for(auto& child : children)
+    {
+        if(nullptr == child->getParent())
+            continue;
+
+        child->removeFromParent();
+    }
+    
+    std::list<int> nextBlockList = MapMgr::getInstance()->getNextBlockTypeList();
+    std::list<int>::iterator iter = nextBlockList.begin();
+    
+    int interval = 1; // 다음에 나올 블럭들이 간격을 두고 그려지게 하기 위한 변수
+    //for(; iter != nextBlockList.end(); ++iter)
+    //{
+    //    if(2 < nextBlockList.size())
+    //        continue;
+        
+        std::vector<cocos2d::Vec2> posVec = locationMap_[(*iter)];
+        
+        int blockCnt = poolMap_[(*iter)].size();
+        
+        for(int i = 0; i < blockCnt; ++i)
+        {
+            int posX = posVec[i].x;
+            posX += (interval * 5 * BLOCKSIZE);
+            
+            poolMap_[(*iter)][i]->setPositionX(posX);
+            
+            this->addChild(poolMap_[(*iter)][i]);
+        }
+        
+    //    interval += 1;
+    //}
+}
+
+cocos2d::Color3B BlockLayer::findNextBlockColor(int type)
 {
     Color3B color = Color3B(0, 0, 0);
-    switch (nextBlockType_)
+    switch (type)
     {
         case BLOCKTYPE::J:
         {
@@ -141,6 +185,11 @@ cocos2d::Color3B BlockLayer::findNextBlockColor()
             color = BLOCK_O_COLOR;
             break;
         }
+        case BLOCKTYPE::SPECIAL:
+        {
+            color = Color3B::RED;
+            break;
+        }
         default:
             break;
     }
@@ -148,98 +197,82 @@ cocos2d::Color3B BlockLayer::findNextBlockColor()
     return color;
 }
 
-std::vector<int> BlockLayer::findNextBlockLocation()
+void BlockLayer::findNextBlockLocation(int type, int blockCnt)
 {
-    std::vector<int> locationVec;
-    locationVec.resize(2 * BLOCKCNT);
+    locationMap_[type].resize(blockCnt);
     
-    switch (nextBlockType_)
+    switch (type)
     {
         case BLOCKTYPE::J:
         {
-            int posX = 0;
-            int posY = 0;
-            int index = 0;
-            
-            for(int i = 0; i < BLOCKCNT; ++i)
+            for(int i = 0; i < blockCnt; ++i)
             {
-                index = i * 2;
-                posX = location::J[POS_X][i];
-                posY = location::J[POS_Y][i];
+                int posX = location::J[POS_X][i];
+                int posY = location::J[POS_Y][i];
                 
-                locationVec[index] = posX;
-                locationVec[index + 1] = posY;
+                locationMap_[type][i] = cocos2d::Vec2(posX, posY);
             }
             break;
         }
         case BLOCKTYPE::I:
         {
-            int posX = 0;
-            int posY = 0;
-            int index = 0;
-            
-            for(int i = 0; i < BLOCKCNT; ++i)
+            for(int i = 0; i < blockCnt; ++i)
             {
-                index = i * 2;
-                posX = location::I[POS_X][i];
-                posY = location::I[POS_Y][i];
+                int posX = location::I[POS_X][i];
+                int posY = location::I[POS_Y][i];
                 
-                locationVec[index] = posX;
-                locationVec[index + 1] = posY;
+                locationMap_[type][i] = cocos2d::Vec2(posX, posY);
             }
             break;
         }
         case BLOCKTYPE::S:
         {
-            int posX = 0;
-            int posY = 0;
-            int index = 0;
-            for(int i = 0; i < BLOCKCNT; ++i)
+            for(int i = 0; i < blockCnt; ++i)
             {
-                index = i * 2;
-                posX = location::S[POS_X][i];
-                posY = location::S[POS_Y][i];
+                int posX = location::S[POS_X][i];
+                int posY = location::S[POS_Y][i];
                 
-                locationVec[index] = posX;
-                locationVec[index + 1] = posY;
+                locationMap_[type][i] = cocos2d::Vec2(posX, posY);
             }
             break;
         }
         case BLOCKTYPE::T:
         {
-            int posX = 0;
-            int posY = 0;
-            int index = 0;
-            for(int i = 0; i < BLOCKCNT; ++i)
+            for(int i = 0; i < blockCnt; ++i)
             {
-                index = i * 2;
-                posX = location::T[POS_X][i];
-                posY = location::T[POS_Y][i];
+                int posX = location::T[POS_X][i];
+                int posY = location::T[POS_Y][i];
                 
-                locationVec[index] = posX;
-                locationVec[index + 1] = posY;
+                locationMap_[type][i] = cocos2d::Vec2(posX, posY);
             }
             break;
         }
         case BLOCKTYPE::O:
         {
-            int posX = 0;
-            int posY = 0;
-            int index = 0;
-            for(int i = 0; i < BLOCKCNT; ++i)
+            for(int i = 0; i < blockCnt; ++i)
             {
-                index = i * 2;
-                posX = location::O[POS_X][i];
-                posY = location::O[POS_Y][i];
+                int posX = location::O[POS_X][i];
+                int posY = location::O[POS_Y][i];
                 
-                locationVec[index] = posX;
-                locationVec[index + 1] = posY;
+                locationMap_[type][i] = cocos2d::Vec2(posX, posY);
             }
+            break;
+        }
+        case BLOCKTYPE::SPECIAL:
+        {
+            std::vector<Vec2> posVec = DataMgr::getInstance()->getLoadInfoVec();
+            
+            for(int i = 0; i < blockCnt; ++i)
+            {
+                int posX = posVec[i].x;
+                int posY = posVec[i].y;
+                
+                locationMap_[type][i] = cocos2d::Vec2(posX, posY);
+            }
+            
             break;
         }
         default:
             break;
     }
-    
-    return locationVec;
 }

@@ -37,11 +37,12 @@ Blocks_T* Blocks_T::create(cocos2d::Color3B color, int blockCnt)
 
 bool Blocks_T::init(cocos2d::Color3B color, int blockCnt)
 {
-    blocks_.resize(blockCnt);
+    blockCnt_ = blockCnt;
+    blocks_.resize(blockCnt_);
     
     // BLOCK 초기화
     BLOCK* pBlock = nullptr;
-    for(int i = 0; i < BLOCKCNT; ++i)
+    for(int i = 0; i < blockCnt_; ++i)
     {
         Vec2 pos = Vec2(BLOCKSIZE * (location::T[POS_X][i] + initPos::pos[POS_X])
                         , BLOCKSIZE * (location::T[POS_Y][i] + initPos::pos[POS_Y]));
@@ -67,25 +68,29 @@ bool Blocks_T::init(cocos2d::Color3B color, int blockCnt)
 void Blocks_T::rotate(int keyPressedCnt)
 {
     // 일단 미리 회전 후의 좌표를 계산해놓고
-    Vec2 newPos[BLOCKCNT] = {};
-    for(int i = 0; i < BLOCKCNT; ++i)
+    std::vector<cocos2d::Vec2> newPosVec;
+    newPosVec.resize(blockCnt_);
+    
+    for(int i = 0; i < blockCnt_; ++i)
     {
         Vec2 curPos = blocks_[i]->pSprite_->getPosition();
         
-        newPos[i].x = curPos.x + BLOCKSIZE * (posVariance::T[keyPressedCnt][(i * 2)]);
-        newPos[i].y = curPos.y + BLOCKSIZE * (posVariance::T[keyPressedCnt][(i * 2) + 1]);
+        int posX = curPos.x + BLOCKSIZE * (posVariance::T[keyPressedCnt][(i * 2)]);
+        int posY = curPos.y + BLOCKSIZE * (posVariance::T[keyPressedCnt][(i * 2) + 1]);
+        
+        newPosVec[i] = Vec2(posX, posY);
     }
 
     // 회전에 제한이 걸리는 위치인가?
-    if(true == checkLimitedRotate(newPos))
+    if(true == checkLimitedRotate(newPosVec, blockCnt_))
         return;
 
-   for(int i = 0; i < BLOCKCNT; ++i)
+   for(int i = 0; i < blockCnt_; ++i)
    {
-       blocks_[i]->pSprite_->setPosition(newPos[i]);
-       blocks_[i]->setPos(newPos[i]);
+       blocks_[i]->pSprite_->setPosition(newPosVec[i]);
+       blocks_[i]->setPos(newPosVec[i]);
        
-       PreviewBlockDistVec_.emplace_back(int(newPos[i].y));
+       PreviewBlockDistVec_.emplace_back(int(newPosVec[i].y));
    }
     
     checkPreviewBlocks();

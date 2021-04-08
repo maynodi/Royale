@@ -5,6 +5,7 @@
 USING_NS_CC;
 
 ToolMainLayer::ToolMainLayer()
+    : blockCnt_(0)
 {
 }
 
@@ -73,6 +74,8 @@ void ToolMainLayer::createBlock(cocos2d::Vec2 pos)
     pSprite->setTag(TOOL_BLOCK_TAG);
     
     toolScene->addChild(pSprite);
+    
+    blockCnt_ += 1;
 }
 
 void ToolMainLayer::DrawRect()
@@ -94,7 +97,6 @@ void ToolMainLayer::DrawRect()
             this->addChild(pNode);
         }
     }
-    
 }
 
 void ToolMainLayer::onMouseUp(cocos2d::Event* event)

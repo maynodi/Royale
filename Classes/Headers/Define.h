@@ -25,7 +25,6 @@
 #define TOOL_BUTTON_TAG 1
 #define TOOL_BLOCK_TAG 2
 
-
 #define BESTSCORE_TAG 0
 #define SCORE_TAG 1
 #define LEVEL_TAG 2
@@ -75,7 +74,9 @@
 #define BLOCK_T_COLOR cocos2d::Color3B(204, 153, 255)  //연보라
 #define BLOCK_O_COLOR cocos2d::Color3B(204, 255, 153)  //연두
 
+#define ROT_Z_ANGLE -1 * 90 * 3.14 / 180
+
 enum DIR {DIR_LEFT, DIR_RIGHT, DIR_UP, DIR_DOWN};
-enum BLOCKTYPE { J, I, S, T, O, END};
+enum BLOCKTYPE { J, I, S, T, O, SPECIAL, END};
 enum GAMESTATE {PLAY, OVER, WIN};
 enum ZORDER {EXPLOSION = 10, SMOG};

@@ -40,19 +40,20 @@ typedef struct Block //최소 단위 1블럭 -> 얘가 4개 모여서 Blocks
 class Blocks
 {
 protected:
-    //BLOCK* blocks_[BLOCKCNT]; // BLOCK을 4개 가지고 있는 변수
     std::vector<BLOCK*> blocks_;
     bool isDrop_;
     BLOCKTYPE blockType_;
     int dist_;
     std::vector<int> PreviewBlockDistVec_;
+    int blockCnt_;
     
 public:
-    virtual bool init(cocos2d::Color3B color, int blockCnt) = 0;
+    virtual bool init(cocos2d::Color3B color, int blockCnt = 0) = 0;
     
 public:
     cocos2d::Sprite* getBlockSprite(int idx) { return (blocks_[idx])->pSprite_; }
     int getCurBlockType() { return blockType_; }
+    int getBlockCnt() { return blockCnt_; }
     
 public:
     void setIsDrop(bool isDrop) { isDrop_ = isDrop; }
@@ -61,7 +62,7 @@ public:
     void move(int dir);
     bool checkLimitedPos(int dir);
     virtual void rotate(int keyPressedCnt) = 0;
-    bool checkLimitedRotate(cocos2d::Vec2* pos);
+    bool checkLimitedRotate(std::vector<cocos2d::Vec2> posVec, int blockCnt);
     void drop();
     void doWorkWhenIsUnderNothing();
     void changePos(cocos2d::Vec2 variance = cocos2d::Vec2::ZERO);

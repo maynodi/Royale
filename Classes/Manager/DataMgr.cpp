@@ -1,5 +1,6 @@
 #include "DataMgr.h"
 
+#include "JsonUtils.h"
 #include "Define.h"
 
 #include "MapLayer.h"
@@ -15,6 +16,7 @@ DataMgr::DataMgr()
     , lineCnt_(0)
     , limitLineCnt_(5)
     , itemCnt_(0)
+    , specialBlockCnt_(0)
 {
 }
 
@@ -45,6 +47,10 @@ void DataMgr::destroyInstance()
 void DataMgr::init()
 {
     bestScore_ = UserDefault::getInstance()->getIntegerForKey("bestScore");
+    if(false == loadData())
+    {
+        log("dataMgr-loadData failed.");
+    }
 }
 
 bool DataMgr::updateData()
@@ -63,4 +69,29 @@ bool DataMgr::updateData()
     }
     
     return false;
+}
+
+bool DataMgr::loadData()
+{
+    std::string filePath = FileUtils::getInstance()->getWritablePath() + "blockData.json";
+    
+    __String* jsonInfo = __String::createWithContentsOfFile(filePath);
+    if(nullptr == jsonInfo)
+        return false;
+    
+    JSONNode node = libjson::parse(jsonInfo->getCString());
+    
+    specialBlockCnt_ = JsonUtils::getInt("blockCnt", node);
+    
+    loadInfoVec_.reserve(specialBlockCnt_);
+    
+    for(int i = 0; i < specialBlockCnt_; ++i)
+    {
+        int posX = JsonUtils::getInt("x" + std::to_string(i), node);
+        int posY = JsonUtils::getInt("y" + std::to_string(i), node);
+        
+        loadInfoVec_.emplace_back(Vec2(posX - 3, posY - 3));  // 중점 맞춰주려고 -3 했음
+    }
+    
+    return true;
 }

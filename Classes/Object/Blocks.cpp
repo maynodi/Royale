@@ -18,9 +18,8 @@ USING_NS_CC;
 Blocks::Blocks()
     : isDrop_(false)
     , dist_(0)
+    , blockCnt_(0)
 {
-    //memset(blocks_, 0, sizeof(blocks_[0]) * BLOCKCNT);
-    PreviewBlockDistVec_.reserve(BLOCKCNT);
 }
 
 Blocks::~Blocks()
@@ -111,24 +110,22 @@ bool Blocks::checkLimitedPos(int dir)
     return false;
 }
 
-bool Blocks::checkLimitedRotate(cocos2d::Vec2* pos)
+bool Blocks::checkLimitedRotate(std::vector<cocos2d::Vec2> posVec, int blockCnt)
 {
-    for(int i = 0; i < BLOCKCNT; ++i)
+    for(int i = 0; i < blockCnt; ++i)
     {
-        if(MIN_WIDTH > pos->x || MAX_WIDTH < pos->x
-           || MIN_HEIGHT >= pos->y || MAX_HEIGHT <= pos->y)
+        if(MIN_WIDTH > posVec[i].x || MAX_WIDTH < posVec[i].x
+           || MIN_HEIGHT >= posVec[i].y || MAX_HEIGHT <= posVec[i].y)
         {
             KeyMgr::getInstance()->minusUpKeyPressedCnt();
             return true;
         }
         
-        if(false == MapMgr::getInstance()->checkCanChange(pos->x, pos->y))
+        if(false == MapMgr::getInstance()->checkCanChange(posVec[i].x, posVec[i].y))
         {
             KeyMgr::getInstance()->minusUpKeyPressedCnt();
             return true;
         }
-     
-        pos += i;
     }
     
     return false;
@@ -333,7 +330,7 @@ void Blocks::checkPreviewBlocks()
 
 void Blocks::setPosPreviewBlocks(int dist)
 {
-    for(int i = 0; i < BLOCKCNT; ++i)
+    for(int i = 0; i < blockCnt_; ++i)
     {
         Node* previewNode = blocks_[i]->pSprite_->getChildByTag(BLOCKPREVIEW_TAG);
         previewNode->setPositionY(-1 * dist);

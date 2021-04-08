@@ -4,11 +4,17 @@
 
 class ToolMainLayer : public cocos2d::Layer
 {
+private:
+    int blockCnt_;
+    
 public:
     static ToolMainLayer* create();
     
 public:
     virtual bool init() override;
+    
+public:
+    int getBlockCnt() { return blockCnt_; }
     
 public:
     virtual void update(float dt) override;

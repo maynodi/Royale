@@ -20,6 +20,7 @@
 #include "Blocks_S.h"
 #include "Blocks_T.h"
 #include "Blocks_O.h"
+#include "SpecialBlock.h"
 #include "HoldLayer.h"
 
 USING_NS_CC;
@@ -270,33 +271,32 @@ void MapMgr::makeNewBlocks()
             pBlocks = Blocks_O::create(BLOCK_O_COLOR, BLOCKCNT);
             break;
         }
+        case BLOCKTYPE::SPECIAL:
+        {
+            pBlocks = SpecialBlock::create(Color3B::RED);
+            break;
+        }
         default:
             break;
     }
     
     pCurBlocks_ = pBlocks;
     
-//  // 회전
-//    Mat4 mat;
-//    Mat4::createRotationZ(90 * 3.14 / 180, &mat);
-//    for(int i = 0; i < BLOCKCNT; ++i)
-//    {
-//        Vec2 pos = pCurBlocks_->getBlockSprite(i)->getPosition();
-//        pos.x -= BLOCKSIZE * (location::T[POS_X][i]);
-//        pos.y -= BLOCKSIZE * (location::T[POS_Y][i]);
-//
-//        Vec4 pos3 = Vec4(BLOCKSIZE * location::T[POS_X][i], BLOCKSIZE * location::T[POS_Y][i], 0, 1);
-//        Vec4 newpos = mat * pos3;
-//
-//        pCurBlocks_->getBlockSprite(i)->setPosition(pos.x + newpos.x, pos.y + newpos.y);
-//
-//    }
-    
     nextType = getRandom(nextBlockRandomList_, BLOCKTYPE::END);
     
     if(2 > nextBlockTypeList_.size())
     {
-        nextBlockTypeList_.emplace_back(nextType);
+        // 넣기 전에 안에 있는 지 먼저 검사
+        std::list<int>::iterator iter = std::find(nextBlockTypeList_.begin(), nextBlockTypeList_.end(), nextType);
+        if(iter ==nextBlockTypeList_.end())
+        {
+            nextBlockTypeList_.emplace_back(nextType);
+        }
+        else
+        {
+            nextType = getRandom(nextBlockRandomList_, BLOCKTYPE::END);
+            nextBlockTypeList_.emplace_back(nextType);
+        }
     }
     
     // 스프라이트를 mapLayer에 자식으로 추가
@@ -306,7 +306,10 @@ void MapMgr::makeNewBlocks()
     Sprite* pSprite = nullptr;
     int randomTrap = getRandom(TrapRandomList_, 15);
     
-    for(int i = 0; i < BLOCKCNT; ++i)
+    
+    int curBlockCnt = pCurBlocks_->getBlockCnt();
+    
+    for(int i = 0; i < curBlockCnt; ++i)
     {
         pSprite = pCurBlocks_->getBlockSprite(i);
         pSprite->setTag(BLOCKSPRITE_TAG);
@@ -404,14 +407,15 @@ void MapMgr::autoMoveDown()
 bool MapMgr::checkUnderSomething(std::vector<BLOCK*> blockVec)
 {
     std::vector<BLOCK*> block = blockVec;
+    int blockCnt = block.size();
     
     // 일단, 접촉할 부분을 미리 골라내
     newBlockList_.clear();
     
-    for(int i = 0; i < BLOCKCNT; ++i)
+    for(int i = 0; i < blockCnt; ++i)
     {
         int exceptCnt = 0;
-        for(int j = i; j< BLOCKCNT; ++j)
+        for(int j = i; j< blockCnt; ++j)
         {
             // 자기 자신인 경우
             if(block[i]->x_ == block[j]->x_
@@ -427,7 +431,7 @@ bool MapMgr::checkUnderSomething(std::vector<BLOCK*> blockVec)
             }
 
             // 자신 아래에 블럭이 있는 경우
-            if((block[i]->y_ - BLOCKCNT) == block[j]->y_)
+            if((block[i]->y_ - BLOCKSIZE) == block[j]->y_)
             {
                 exceptCnt += 1;
             }
@@ -443,7 +447,7 @@ bool MapMgr::checkUnderSomething(std::vector<BLOCK*> blockVec)
     // 접촉 가능성 있는 블록만 for문을 통해, 맵 아래에 접촉될 블럭이 있는지를 조사한다.
     for(auto& newBlock : newBlockList_)
     {
-        int colIndex = newBlock->x_ / BLOCKSIZE - 1;
+        int colIndex = newBlock->x_ / BLOCKSIZE; //- 1;
         int rowIndex = newBlock->y_ / BLOCKSIZE;
         
         for(int i = 0; i < rowIndex; ++i)
@@ -465,7 +469,7 @@ void MapMgr::getMaxRowOfUnderBlock(int* dist)
     
     for(auto& newBlock : newBlockList_)
     {
-        int colIndex = newBlock->x_ / BLOCKSIZE - 1;
+        int colIndex = newBlock->x_ / BLOCKSIZE; //- 1;
         int rowIndex = newBlock->y_ / BLOCKSIZE;
         
         for(int i = 0; i < rowIndex; ++i)
@@ -762,7 +766,8 @@ bool MapMgr::checkGameOver()
 
 void MapMgr::swapHoldBlock(int type)
 {
-    for(int i = 0; i < BLOCKCNT; ++i)
+    int curBlockCnt = pCurBlocks_->getBlockCnt();
+    for(int i = 0; i < curBlockCnt; ++i)
     {
         pCurBlocks_->getBlockSprite(i)->removeFromParent();
     }

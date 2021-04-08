@@ -66,6 +66,80 @@
 		5092F3D5261C2E1B0029FCF5 /* ParticleMgr.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5092F3D3261C2E1B0029FCF5 /* ParticleMgr.cpp */; };
 		5092F3D7261C33C10029FCF5 /* smogTrap.png in Resources */ = {isa = PBXBuildFile; fileRef = 5092F3D6261C33C10029FCF5 /* smogTrap.png */; };
 		5092F3D8261C33C10029FCF5 /* smogTrap.png in Resources */ = {isa = PBXBuildFile; fileRef = 5092F3D6261C33C10029FCF5 /* smogTrap.png */; };
+		50938B27261E7FFA007A8873 /* shThemeFadeToGrey.css in Resources */ = {isa = PBXBuildFile; fileRef = 50938AD1261E7FFA007A8873 /* shThemeFadeToGrey.css */; };
+		50938B28261E7FFA007A8873 /* shThemeFadeToGrey.css in Resources */ = {isa = PBXBuildFile; fileRef = 50938AD1261E7FFA007A8873 /* shThemeFadeToGrey.css */; };
+		50938B29261E7FFA007A8873 /* shCoreMDUltra.css in Resources */ = {isa = PBXBuildFile; fileRef = 50938AD2261E7FFA007A8873 /* shCoreMDUltra.css */; };
+		50938B2A261E7FFA007A8873 /* shCoreMDUltra.css in Resources */ = {isa = PBXBuildFile; fileRef = 50938AD2261E7FFA007A8873 /* shCoreMDUltra.css */; };
+		50938B2B261E7FFA007A8873 /* shCoreFadeToGrey.css in Resources */ = {isa = PBXBuildFile; fileRef = 50938AD3261E7FFA007A8873 /* shCoreFadeToGrey.css */; };
+		50938B2C261E7FFA007A8873 /* shCoreFadeToGrey.css in Resources */ = {isa = PBXBuildFile; fileRef = 50938AD3261E7FFA007A8873 /* shCoreFadeToGrey.css */; };
+		50938B2D261E7FFA007A8873 /* shCoreMidnight.css in Resources */ = {isa = PBXBuildFile; fileRef = 50938AD4261E7FFA007A8873 /* shCoreMidnight.css */; };
+		50938B2E261E7FFA007A8873 /* shCoreMidnight.css in Resources */ = {isa = PBXBuildFile; fileRef = 50938AD4261E7FFA007A8873 /* shCoreMidnight.css */; };
+		50938B2F261E7FFA007A8873 /* shCoreEmacs.css in Resources */ = {isa = PBXBuildFile; fileRef = 50938AD5261E7FFA007A8873 /* shCoreEmacs.css */; };
+		50938B30261E7FFA007A8873 /* shCoreEmacs.css in Resources */ = {isa = PBXBuildFile; fileRef = 50938AD5261E7FFA007A8873 /* shCoreEmacs.css */; };
+		50938B31261E7FFA007A8873 /* shThemeMidnight.css in Resources */ = {isa = PBXBuildFile; fileRef = 50938AD6261E7FFA007A8873 /* shThemeMidnight.css */; };
+		50938B32261E7FFA007A8873 /* shThemeMidnight.css in Resources */ = {isa = PBXBuildFile; fileRef = 50938AD6261E7FFA007A8873 /* shThemeMidnight.css */; };
+		50938B33261E7FFA007A8873 /* shThemeRDark.css in Resources */ = {isa = PBXBuildFile; fileRef = 50938AD7261E7FFA007A8873 /* shThemeRDark.css */; };
+		50938B34261E7FFA007A8873 /* shThemeRDark.css in Resources */ = {isa = PBXBuildFile; fileRef = 50938AD7261E7FFA007A8873 /* shThemeRDark.css */; };
+		50938B35261E7FFA007A8873 /* shThemeMDUltra.css in Resources */ = {isa = PBXBuildFile; fileRef = 50938AD8261E7FFA007A8873 /* shThemeMDUltra.css */; };
+		50938B36261E7FFA007A8873 /* shThemeMDUltra.css in Resources */ = {isa = PBXBuildFile; fileRef = 50938AD8261E7FFA007A8873 /* shThemeMDUltra.css */; };
+		50938B37261E7FFA007A8873 /* shThemeEmacs.css in Resources */ = {isa = PBXBuildFile; fileRef = 50938AD9261E7FFA007A8873 /* shThemeEmacs.css */; };
+		50938B38261E7FFA007A8873 /* shThemeEmacs.css in Resources */ = {isa = PBXBuildFile; fileRef = 50938AD9261E7FFA007A8873 /* shThemeEmacs.css */; };
+		50938B39261E7FFA007A8873 /* shCore.css in Resources */ = {isa = PBXBuildFile; fileRef = 50938ADA261E7FFA007A8873 /* shCore.css */; };
+		50938B3A261E7FFA007A8873 /* shCore.css in Resources */ = {isa = PBXBuildFile; fileRef = 50938ADA261E7FFA007A8873 /* shCore.css */; };
+		50938B3B261E7FFA007A8873 /* shCoreDefault.css in Resources */ = {isa = PBXBuildFile; fileRef = 50938ADB261E7FFA007A8873 /* shCoreDefault.css */; };
+		50938B3C261E7FFA007A8873 /* shCoreDefault.css in Resources */ = {isa = PBXBuildFile; fileRef = 50938ADB261E7FFA007A8873 /* shCoreDefault.css */; };
+		50938B3D261E7FFA007A8873 /* shCoreEclipse.css in Resources */ = {isa = PBXBuildFile; fileRef = 50938ADC261E7FFA007A8873 /* shCoreEclipse.css */; };
+		50938B3E261E7FFA007A8873 /* shCoreEclipse.css in Resources */ = {isa = PBXBuildFile; fileRef = 50938ADC261E7FFA007A8873 /* shCoreEclipse.css */; };
+		50938B3F261E7FFA007A8873 /* shCoreRDark.css in Resources */ = {isa = PBXBuildFile; fileRef = 50938ADD261E7FFA007A8873 /* shCoreRDark.css */; };
+		50938B40261E7FFA007A8873 /* shCoreRDark.css in Resources */ = {isa = PBXBuildFile; fileRef = 50938ADD261E7FFA007A8873 /* shCoreRDark.css */; };
+		50938B41261E7FFA007A8873 /* shThemeEclipse.css in Resources */ = {isa = PBXBuildFile; fileRef = 50938ADE261E7FFA007A8873 /* shThemeEclipse.css */; };
+		50938B42261E7FFA007A8873 /* shThemeEclipse.css in Resources */ = {isa = PBXBuildFile; fileRef = 50938ADE261E7FFA007A8873 /* shThemeEclipse.css */; };
+		50938B43261E7FFA007A8873 /* shThemeDjango.css in Resources */ = {isa = PBXBuildFile; fileRef = 50938ADF261E7FFA007A8873 /* shThemeDjango.css */; };
+		50938B44261E7FFA007A8873 /* shThemeDjango.css in Resources */ = {isa = PBXBuildFile; fileRef = 50938ADF261E7FFA007A8873 /* shThemeDjango.css */; };
+		50938B45261E7FFA007A8873 /* shThemeDefault.css in Resources */ = {isa = PBXBuildFile; fileRef = 50938AE0261E7FFA007A8873 /* shThemeDefault.css */; };
+		50938B46261E7FFA007A8873 /* shThemeDefault.css in Resources */ = {isa = PBXBuildFile; fileRef = 50938AE0261E7FFA007A8873 /* shThemeDefault.css */; };
+		50938B47261E7FFA007A8873 /* shCoreDjango.css in Resources */ = {isa = PBXBuildFile; fileRef = 50938AE1261E7FFA007A8873 /* shCoreDjango.css */; };
+		50938B48261E7FFA007A8873 /* shCoreDjango.css in Resources */ = {isa = PBXBuildFile; fileRef = 50938AE1261E7FFA007A8873 /* shCoreDjango.css */; };
+		50938B49261E7FFA007A8873 /* shAutoloader.js in Resources */ = {isa = PBXBuildFile; fileRef = 50938AE3261E7FFA007A8873 /* shAutoloader.js */; };
+		50938B4A261E7FFA007A8873 /* shAutoloader.js in Resources */ = {isa = PBXBuildFile; fileRef = 50938AE3261E7FFA007A8873 /* shAutoloader.js */; };
+		50938B4B261E7FFA007A8873 /* shCore.js in Resources */ = {isa = PBXBuildFile; fileRef = 50938AE4261E7FFA007A8873 /* shCore.js */; };
+		50938B4C261E7FFA007A8873 /* shCore.js in Resources */ = {isa = PBXBuildFile; fileRef = 50938AE4261E7FFA007A8873 /* shCore.js */; };
+		50938B4D261E7FFA007A8873 /* shBrushCpp.js in Resources */ = {isa = PBXBuildFile; fileRef = 50938AE5261E7FFA007A8873 /* shBrushCpp.js */; };
+		50938B4E261E7FFA007A8873 /* shBrushCpp.js in Resources */ = {isa = PBXBuildFile; fileRef = 50938AE5261E7FFA007A8873 /* shBrushCpp.js */; };
+		50938B4F261E7FFA007A8873 /* shLegacy.js in Resources */ = {isa = PBXBuildFile; fileRef = 50938AE6261E7FFA007A8873 /* shLegacy.js */; };
+		50938B50261E7FFA007A8873 /* shLegacy.js in Resources */ = {isa = PBXBuildFile; fileRef = 50938AE6261E7FFA007A8873 /* shLegacy.js */; };
+		50938B51261E7FFA007A8873 /* internalJSONNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 50938AEA261E7FFA007A8873 /* internalJSONNode.cpp */; };
+		50938B52261E7FFA007A8873 /* internalJSONNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 50938AEA261E7FFA007A8873 /* internalJSONNode.cpp */; };
+		50938B53261E7FFA007A8873 /* JSONNode_Mutex.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 50938AEC261E7FFA007A8873 /* JSONNode_Mutex.cpp */; };
+		50938B54261E7FFA007A8873 /* JSONNode_Mutex.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 50938AEC261E7FFA007A8873 /* JSONNode_Mutex.cpp */; };
+		50938B55261E7FFA007A8873 /* JSONStream.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 50938AED261E7FFA007A8873 /* JSONStream.cpp */; };
+		50938B56261E7FFA007A8873 /* JSONStream.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 50938AED261E7FFA007A8873 /* JSONStream.cpp */; };
+		50938B57261E7FFA007A8873 /* JSONNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 50938AF4261E7FFA007A8873 /* JSONNode.cpp */; };
+		50938B58261E7FFA007A8873 /* JSONNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 50938AF4261E7FFA007A8873 /* JSONNode.cpp */; };
+		50938B59261E7FFA007A8873 /* JSONWriter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 50938AF5261E7FFA007A8873 /* JSONWriter.cpp */; };
+		50938B5A261E7FFA007A8873 /* JSONWriter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 50938AF5261E7FFA007A8873 /* JSONWriter.cpp */; };
+		50938B5B261E7FFA007A8873 /* JSONChildren.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 50938AF7261E7FFA007A8873 /* JSONChildren.cpp */; };
+		50938B5C261E7FFA007A8873 /* JSONChildren.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 50938AF7261E7FFA007A8873 /* JSONChildren.cpp */; };
+		50938B5D261E7FFA007A8873 /* JSONDebug.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 50938AF8261E7FFA007A8873 /* JSONDebug.cpp */; };
+		50938B5E261E7FFA007A8873 /* JSONDebug.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 50938AF8261E7FFA007A8873 /* JSONDebug.cpp */; };
+		50938B5F261E7FFA007A8873 /* JSONMemory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 50938AF9261E7FFA007A8873 /* JSONMemory.cpp */; };
+		50938B60261E7FFA007A8873 /* JSONMemory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 50938AF9261E7FFA007A8873 /* JSONMemory.cpp */; };
+		50938B61261E7FFA007A8873 /* JSONValidator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 50938AFA261E7FFA007A8873 /* JSONValidator.cpp */; };
+		50938B62261E7FFA007A8873 /* JSONValidator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 50938AFA261E7FFA007A8873 /* JSONValidator.cpp */; };
+		50938B63261E7FFA007A8873 /* libjson.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 50938B01261E7FFA007A8873 /* libjson.cpp */; };
+		50938B64261E7FFA007A8873 /* libjson.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 50938B01261E7FFA007A8873 /* libjson.cpp */; };
+		50938B65261E7FFA007A8873 /* JSONPreparse.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 50938B04261E7FFA007A8873 /* JSONPreparse.cpp */; };
+		50938B66261E7FFA007A8873 /* JSONPreparse.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 50938B04261E7FFA007A8873 /* JSONPreparse.cpp */; };
+		50938B67261E7FFA007A8873 /* JSONWorker.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 50938B05261E7FFA007A8873 /* JSONWorker.cpp */; };
+		50938B68261E7FFA007A8873 /* JSONWorker.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 50938B05261E7FFA007A8873 /* JSONWorker.cpp */; };
+		50938B69261E7FFA007A8873 /* JSONAllocator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 50938B07261E7FFA007A8873 /* JSONAllocator.cpp */; };
+		50938B6A261E7FFA007A8873 /* JSONAllocator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 50938B07261E7FFA007A8873 /* JSONAllocator.cpp */; };
+		50938B6B261E7FFA007A8873 /* JSONIterators.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 50938B08261E7FFA007A8873 /* JSONIterators.cpp */; };
+		50938B6C261E7FFA007A8873 /* JSONIterators.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 50938B08261E7FFA007A8873 /* JSONIterators.cpp */; };
+		50938B6D261E7FFA007A8873 /* Documentation.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 50938B13261E7FFA007A8873 /* Documentation.pdf */; };
+		50938B6E261E7FFA007A8873 /* Documentation.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 50938B13261E7FFA007A8873 /* Documentation.pdf */; };
+		50938B71261E8DA6007A8873 /* SpecialBlock.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 50938B70261E8DA6007A8873 /* SpecialBlock.cpp */; };
+		50938B72261E8DA6007A8873 /* SpecialBlock.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 50938B70261E8DA6007A8873 /* SpecialBlock.cpp */; };
 		509F9269261D75F6007A5C42 /* ToolScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 509F9266261D75F6007A5C42 /* ToolScene.cpp */; };
 		509F926A261D75F6007A5C42 /* ToolScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 509F9266261D75F6007A5C42 /* ToolScene.cpp */; };
 		509F926D261D781B007A5C42 /* ButtonLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 509F926B261D781B007A5C42 /* ButtonLayer.cpp */; };
@@ -202,6 +276,79 @@
 		5092F3D2261C2E1B0029FCF5 /* ParticleMgr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParticleMgr.h; sourceTree = "<group>"; };
 		5092F3D3261C2E1B0029FCF5 /* ParticleMgr.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ParticleMgr.cpp; sourceTree = "<group>"; };
 		5092F3D6261C33C10029FCF5 /* smogTrap.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = smogTrap.png; sourceTree = "<group>"; };
+		50938AC7261E7FFA007A8873 /* simple_write.htm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = simple_write.htm; sourceTree = "<group>"; };
+		50938AC8261E7FFA007A8873 /* array.htm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = array.htm; sourceTree = "<group>"; };
+		50938AC9261E7FFA007A8873 /* child_node.htm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = child_node.htm; sourceTree = "<group>"; };
+		50938ACA261E7FFA007A8873 /* basic_parser.htm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = basic_parser.htm; sourceTree = "<group>"; };
+		50938ACC261E7FFA007A8873 /* simple_write.htm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = simple_write.htm; sourceTree = "<group>"; };
+		50938ACD261E7FFA007A8873 /* array.htm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = array.htm; sourceTree = "<group>"; };
+		50938ACE261E7FFA007A8873 /* child_node.htm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = child_node.htm; sourceTree = "<group>"; };
+		50938ACF261E7FFA007A8873 /* basic_parser.htm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = basic_parser.htm; sourceTree = "<group>"; };
+		50938AD1261E7FFA007A8873 /* shThemeFadeToGrey.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = shThemeFadeToGrey.css; sourceTree = "<group>"; };
+		50938AD2261E7FFA007A8873 /* shCoreMDUltra.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = shCoreMDUltra.css; sourceTree = "<group>"; };
+		50938AD3261E7FFA007A8873 /* shCoreFadeToGrey.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = shCoreFadeToGrey.css; sourceTree = "<group>"; };
+		50938AD4261E7FFA007A8873 /* shCoreMidnight.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = shCoreMidnight.css; sourceTree = "<group>"; };
+		50938AD5261E7FFA007A8873 /* shCoreEmacs.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = shCoreEmacs.css; sourceTree = "<group>"; };
+		50938AD6261E7FFA007A8873 /* shThemeMidnight.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = shThemeMidnight.css; sourceTree = "<group>"; };
+		50938AD7261E7FFA007A8873 /* shThemeRDark.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = shThemeRDark.css; sourceTree = "<group>"; };
+		50938AD8261E7FFA007A8873 /* shThemeMDUltra.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = shThemeMDUltra.css; sourceTree = "<group>"; };
+		50938AD9261E7FFA007A8873 /* shThemeEmacs.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = shThemeEmacs.css; sourceTree = "<group>"; };
+		50938ADA261E7FFA007A8873 /* shCore.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = shCore.css; sourceTree = "<group>"; };
+		50938ADB261E7FFA007A8873 /* shCoreDefault.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = shCoreDefault.css; sourceTree = "<group>"; };
+		50938ADC261E7FFA007A8873 /* shCoreEclipse.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = shCoreEclipse.css; sourceTree = "<group>"; };
+		50938ADD261E7FFA007A8873 /* shCoreRDark.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = shCoreRDark.css; sourceTree = "<group>"; };
+		50938ADE261E7FFA007A8873 /* shThemeEclipse.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = shThemeEclipse.css; sourceTree = "<group>"; };
+		50938ADF261E7FFA007A8873 /* shThemeDjango.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = shThemeDjango.css; sourceTree = "<group>"; };
+		50938AE0261E7FFA007A8873 /* shThemeDefault.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = shThemeDefault.css; sourceTree = "<group>"; };
+		50938AE1261E7FFA007A8873 /* shCoreDjango.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = shCoreDjango.css; sourceTree = "<group>"; };
+		50938AE3261E7FFA007A8873 /* shAutoloader.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = shAutoloader.js; sourceTree = "<group>"; };
+		50938AE4261E7FFA007A8873 /* shCore.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = shCore.js; sourceTree = "<group>"; };
+		50938AE5261E7FFA007A8873 /* shBrushCpp.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = shBrushCpp.js; sourceTree = "<group>"; };
+		50938AE6261E7FFA007A8873 /* shLegacy.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = shLegacy.js; sourceTree = "<group>"; };
+		50938AE9261E7FFA007A8873 /* JSONDefs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONDefs.h; sourceTree = "<group>"; };
+		50938AEA261E7FFA007A8873 /* internalJSONNode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = internalJSONNode.cpp; sourceTree = "<group>"; };
+		50938AEB261E7FFA007A8873 /* JSONDebug.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONDebug.h; sourceTree = "<group>"; };
+		50938AEC261E7FFA007A8873 /* JSONNode_Mutex.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = JSONNode_Mutex.cpp; sourceTree = "<group>"; };
+		50938AED261E7FFA007A8873 /* JSONStream.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = JSONStream.cpp; sourceTree = "<group>"; };
+		50938AEE261E7FFA007A8873 /* JSONPreparse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONPreparse.h; sourceTree = "<group>"; };
+		50938AEF261E7FFA007A8873 /* JSONStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONStream.h; sourceTree = "<group>"; };
+		50938AF0261E7FFA007A8873 /* JSONGlobals.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONGlobals.h; sourceTree = "<group>"; };
+		50938AF1261E7FFA007A8873 /* NumberToString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NumberToString.h; sourceTree = "<group>"; };
+		50938AF2261E7FFA007A8873 /* JSONAllocator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONAllocator.h; sourceTree = "<group>"; };
+		50938AF3261E7FFA007A8873 /* JSON_Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSON_Base64.h; sourceTree = "<group>"; };
+		50938AF4261E7FFA007A8873 /* JSONNode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = JSONNode.cpp; sourceTree = "<group>"; };
+		50938AF5261E7FFA007A8873 /* JSONWriter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = JSONWriter.cpp; sourceTree = "<group>"; };
+		50938AF6261E7FFA007A8873 /* JSONNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONNode.h; sourceTree = "<group>"; };
+		50938AF7261E7FFA007A8873 /* JSONChildren.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = JSONChildren.cpp; sourceTree = "<group>"; };
+		50938AF8261E7FFA007A8873 /* JSONDebug.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = JSONDebug.cpp; sourceTree = "<group>"; };
+		50938AF9261E7FFA007A8873 /* JSONMemory.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = JSONMemory.cpp; sourceTree = "<group>"; };
+		50938AFA261E7FFA007A8873 /* JSONValidator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = JSONValidator.cpp; sourceTree = "<group>"; };
+		50938AFB261E7FFA007A8873 /* JSONMemory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONMemory.h; sourceTree = "<group>"; };
+		50938AFD261E7FFA007A8873 /* GNU_C.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GNU_C.h; sourceTree = "<group>"; };
+		50938AFE261E7FFA007A8873 /* Unknown_C.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Unknown_C.h; sourceTree = "<group>"; };
+		50938AFF261E7FFA007A8873 /* Strings_Defs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Strings_Defs.h; sourceTree = "<group>"; };
+		50938B00261E7FFA007A8873 /* Visual_C.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Visual_C.h; sourceTree = "<group>"; };
+		50938B01261E7FFA007A8873 /* libjson.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = libjson.cpp; sourceTree = "<group>"; };
+		50938B02261E7FFA007A8873 /* JSONWorker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONWorker.h; sourceTree = "<group>"; };
+		50938B03261E7FFA007A8873 /* JSONValidator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONValidator.h; sourceTree = "<group>"; };
+		50938B04261E7FFA007A8873 /* JSONPreparse.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = JSONPreparse.cpp; sourceTree = "<group>"; };
+		50938B05261E7FFA007A8873 /* JSONWorker.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = JSONWorker.cpp; sourceTree = "<group>"; };
+		50938B06261E7FFA007A8873 /* JSONSingleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONSingleton.h; sourceTree = "<group>"; };
+		50938B07261E7FFA007A8873 /* JSONAllocator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = JSONAllocator.cpp; sourceTree = "<group>"; };
+		50938B08261E7FFA007A8873 /* JSONIterators.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = JSONIterators.cpp; sourceTree = "<group>"; };
+		50938B09261E7FFA007A8873 /* JSONStats.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONStats.h; sourceTree = "<group>"; };
+		50938B0A261E7FFA007A8873 /* internalJSONNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = internalJSONNode.h; sourceTree = "<group>"; };
+		50938B0B261E7FFA007A8873 /* JSONSharedString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONSharedString.h; sourceTree = "<group>"; };
+		50938B0C261E7FFA007A8873 /* JSONMemoryPool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONMemoryPool.h; sourceTree = "<group>"; };
+		50938B0D261E7FFA007A8873 /* JSONChildren.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONChildren.h; sourceTree = "<group>"; };
+		50938B10261E7FFA007A8873 /* mempool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mempool.h; sourceTree = "<group>"; };
+		50938B12261E7FFA007A8873 /* libbase64++.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "libbase64++.h"; sourceTree = "<group>"; };
+		50938B13261E7FFA007A8873 /* Documentation.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = Documentation.pdf; sourceTree = "<group>"; };
+		50938B14261E7FFA007A8873 /* JSONOptions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONOptions.h; sourceTree = "<group>"; };
+		50938B15261E7FFA007A8873 /* libjson.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = libjson.h; sourceTree = "<group>"; };
+		50938B6F261E8DA6007A8873 /* SpecialBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpecialBlock.h; sourceTree = "<group>"; };
+		50938B70261E8DA6007A8873 /* SpecialBlock.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SpecialBlock.cpp; sourceTree = "<group>"; };
+		50938B73261E945D007A8873 /* JsonUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JsonUtils.h; sourceTree = "<group>"; };
 		509F9266261D75F6007A5C42 /* ToolScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ToolScene.cpp; sourceTree = "<group>"; };
 		509F9268261D75F6007A5C42 /* ToolScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ToolScene.h; sourceTree = "<group>"; };
 		509F926B261D781B007A5C42 /* ButtonLayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ButtonLayer.cpp; sourceTree = "<group>"; };
@@ -396,6 +543,7 @@
 		46880B8319C43A87006E1F66 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				50938AC4261E7FFA007A8873 /* libjson */,
 				50E5D1A826086C860014EC25 /* Headers */,
 				50E5D1A22608499D0014EC25 /* Manager */,
 				500BEAE42612C73F008EEF74 /* Scene */,
@@ -420,6 +568,8 @@
 				50B42910260B222E00A74E10 /* Blocks_T.cpp */,
 				50B42914260B222E00A74E10 /* Blocks_O.h */,
 				50B42912260B222E00A74E10 /* Blocks_O.cpp */,
+				50938B6F261E8DA6007A8873 /* SpecialBlock.h */,
+				50938B70261E8DA6007A8873 /* SpecialBlock.cpp */,
 			);
 			path = Object;
 			sourceTree = "<group>";
@@ -473,6 +623,171 @@
 			name = mac;
 			sourceTree = "<group>";
 		};
+		50938AC4261E7FFA007A8873 /* libjson */ = {
+			isa = PBXGroup;
+			children = (
+				50938AC5261E7FFA007A8873 /* Getting Started */,
+				50938AE7261E7FFA007A8873 /* _internal */,
+				50938B13261E7FFA007A8873 /* Documentation.pdf */,
+				50938B14261E7FFA007A8873 /* JSONOptions.h */,
+				50938B15261E7FFA007A8873 /* libjson.h */,
+			);
+			path = libjson;
+			sourceTree = "<group>";
+		};
+		50938AC5261E7FFA007A8873 /* Getting Started */ = {
+			isa = PBXGroup;
+			children = (
+				50938AC6261E7FFA007A8873 /* C++ Interface */,
+				50938ACB261E7FFA007A8873 /* Library Interface */,
+			);
+			path = "Getting Started";
+			sourceTree = "<group>";
+		};
+		50938AC6261E7FFA007A8873 /* C++ Interface */ = {
+			isa = PBXGroup;
+			children = (
+				50938AC7261E7FFA007A8873 /* simple_write.htm */,
+				50938AC8261E7FFA007A8873 /* array.htm */,
+				50938AC9261E7FFA007A8873 /* child_node.htm */,
+				50938ACA261E7FFA007A8873 /* basic_parser.htm */,
+			);
+			path = "C++ Interface";
+			sourceTree = "<group>";
+		};
+		50938ACB261E7FFA007A8873 /* Library Interface */ = {
+			isa = PBXGroup;
+			children = (
+				50938ACC261E7FFA007A8873 /* simple_write.htm */,
+				50938ACD261E7FFA007A8873 /* array.htm */,
+				50938ACE261E7FFA007A8873 /* child_node.htm */,
+				50938ACF261E7FFA007A8873 /* basic_parser.htm */,
+				50938AD0261E7FFA007A8873 /* styles */,
+				50938AE2261E7FFA007A8873 /* scripts */,
+			);
+			path = "Library Interface";
+			sourceTree = "<group>";
+		};
+		50938AD0261E7FFA007A8873 /* styles */ = {
+			isa = PBXGroup;
+			children = (
+				50938AD1261E7FFA007A8873 /* shThemeFadeToGrey.css */,
+				50938AD2261E7FFA007A8873 /* shCoreMDUltra.css */,
+				50938AD3261E7FFA007A8873 /* shCoreFadeToGrey.css */,
+				50938AD4261E7FFA007A8873 /* shCoreMidnight.css */,
+				50938AD5261E7FFA007A8873 /* shCoreEmacs.css */,
+				50938AD6261E7FFA007A8873 /* shThemeMidnight.css */,
+				50938AD7261E7FFA007A8873 /* shThemeRDark.css */,
+				50938AD8261E7FFA007A8873 /* shThemeMDUltra.css */,
+				50938AD9261E7FFA007A8873 /* shThemeEmacs.css */,
+				50938ADA261E7FFA007A8873 /* shCore.css */,
+				50938ADB261E7FFA007A8873 /* shCoreDefault.css */,
+				50938ADC261E7FFA007A8873 /* shCoreEclipse.css */,
+				50938ADD261E7FFA007A8873 /* shCoreRDark.css */,
+				50938ADE261E7FFA007A8873 /* shThemeEclipse.css */,
+				50938ADF261E7FFA007A8873 /* shThemeDjango.css */,
+				50938AE0261E7FFA007A8873 /* shThemeDefault.css */,
+				50938AE1261E7FFA007A8873 /* shCoreDjango.css */,
+			);
+			path = styles;
+			sourceTree = "<group>";
+		};
+		50938AE2261E7FFA007A8873 /* scripts */ = {
+			isa = PBXGroup;
+			children = (
+				50938AE3261E7FFA007A8873 /* shAutoloader.js */,
+				50938AE4261E7FFA007A8873 /* shCore.js */,
+				50938AE5261E7FFA007A8873 /* shBrushCpp.js */,
+				50938AE6261E7FFA007A8873 /* shLegacy.js */,
+			);
+			path = scripts;
+			sourceTree = "<group>";
+		};
+		50938AE7261E7FFA007A8873 /* _internal */ = {
+			isa = PBXGroup;
+			children = (
+				50938AE8261E7FFA007A8873 /* Source */,
+				50938B0E261E7FFA007A8873 /* Dependencies */,
+			);
+			path = _internal;
+			sourceTree = "<group>";
+		};
+		50938AE8261E7FFA007A8873 /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				50938AE9261E7FFA007A8873 /* JSONDefs.h */,
+				50938AEA261E7FFA007A8873 /* internalJSONNode.cpp */,
+				50938AEB261E7FFA007A8873 /* JSONDebug.h */,
+				50938AEC261E7FFA007A8873 /* JSONNode_Mutex.cpp */,
+				50938AED261E7FFA007A8873 /* JSONStream.cpp */,
+				50938AEE261E7FFA007A8873 /* JSONPreparse.h */,
+				50938AEF261E7FFA007A8873 /* JSONStream.h */,
+				50938AF0261E7FFA007A8873 /* JSONGlobals.h */,
+				50938AF1261E7FFA007A8873 /* NumberToString.h */,
+				50938AF2261E7FFA007A8873 /* JSONAllocator.h */,
+				50938AF3261E7FFA007A8873 /* JSON_Base64.h */,
+				50938AF4261E7FFA007A8873 /* JSONNode.cpp */,
+				50938AF5261E7FFA007A8873 /* JSONWriter.cpp */,
+				50938AF6261E7FFA007A8873 /* JSONNode.h */,
+				50938AF7261E7FFA007A8873 /* JSONChildren.cpp */,
+				50938AF8261E7FFA007A8873 /* JSONDebug.cpp */,
+				50938AF9261E7FFA007A8873 /* JSONMemory.cpp */,
+				50938AFA261E7FFA007A8873 /* JSONValidator.cpp */,
+				50938AFB261E7FFA007A8873 /* JSONMemory.h */,
+				50938AFC261E7FFA007A8873 /* JSONDefs */,
+				50938B01261E7FFA007A8873 /* libjson.cpp */,
+				50938B02261E7FFA007A8873 /* JSONWorker.h */,
+				50938B03261E7FFA007A8873 /* JSONValidator.h */,
+				50938B04261E7FFA007A8873 /* JSONPreparse.cpp */,
+				50938B05261E7FFA007A8873 /* JSONWorker.cpp */,
+				50938B06261E7FFA007A8873 /* JSONSingleton.h */,
+				50938B07261E7FFA007A8873 /* JSONAllocator.cpp */,
+				50938B08261E7FFA007A8873 /* JSONIterators.cpp */,
+				50938B09261E7FFA007A8873 /* JSONStats.h */,
+				50938B0A261E7FFA007A8873 /* internalJSONNode.h */,
+				50938B0B261E7FFA007A8873 /* JSONSharedString.h */,
+				50938B0C261E7FFA007A8873 /* JSONMemoryPool.h */,
+				50938B0D261E7FFA007A8873 /* JSONChildren.h */,
+			);
+			path = Source;
+			sourceTree = "<group>";
+		};
+		50938AFC261E7FFA007A8873 /* JSONDefs */ = {
+			isa = PBXGroup;
+			children = (
+				50938AFD261E7FFA007A8873 /* GNU_C.h */,
+				50938AFE261E7FFA007A8873 /* Unknown_C.h */,
+				50938AFF261E7FFA007A8873 /* Strings_Defs.h */,
+				50938B00261E7FFA007A8873 /* Visual_C.h */,
+			);
+			path = JSONDefs;
+			sourceTree = "<group>";
+		};
+		50938B0E261E7FFA007A8873 /* Dependencies */ = {
+			isa = PBXGroup;
+			children = (
+				50938B0F261E7FFA007A8873 /* mempool++ */,
+				50938B11261E7FFA007A8873 /* libbase64++ */,
+			);
+			path = Dependencies;
+			sourceTree = "<group>";
+		};
+		50938B0F261E7FFA007A8873 /* mempool++ */ = {
+			isa = PBXGroup;
+			children = (
+				50938B10261E7FFA007A8873 /* mempool.h */,
+			);
+			path = "mempool++";
+			sourceTree = "<group>";
+		};
+		50938B11261E7FFA007A8873 /* libbase64++ */ = {
+			isa = PBXGroup;
+			children = (
+				50938B12261E7FFA007A8873 /* libbase64++.h */,
+			);
+			path = "libbase64++";
+			sourceTree = "<group>";
+		};
 		50E5D1A22608499D0014EC25 /* Manager */ = {
 			isa = PBXGroup;
 			children = (
@@ -494,6 +809,7 @@
 				50E5D195260837B20014EC25 /* Define.h */,
 				50E5D1A326085B610014EC25 /* Struct.h */,
 				50E5D1A926087F4A0014EC25 /* BlocksSetting.h */,
+				50938B73261E945D007A8873 /* JsonUtils.h */,
 			);
 			path = Headers;
 			sourceTree = "<group>";
@@ -600,22 +916,44 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				50938B35261E7FFA007A8873 /* shThemeMDUltra.css in Resources */,
+				50938B43261E7FFA007A8873 /* shThemeDjango.css in Resources */,
 				46880B8119C43A67006E1F66 /* HelloWorld.png in Resources */,
+				50938B4D261E7FFA007A8873 /* shBrushCpp.js in Resources */,
+				50938B2D261E7FFA007A8873 /* shCoreMidnight.css in Resources */,
 				1A88B2641FC3D9C9005C14AE /* Images.xcassets in Resources */,
 				50567390261AD8AB00A08301 /* twistTrap.png in Resources */,
+				50938B45261E7FFA007A8873 /* shThemeDefault.css in Resources */,
+				50938B4B261E7FFA007A8873 /* shCore.js in Resources */,
 				46880B7D19C43A67006E1F66 /* CloseSelected.png in Resources */,
 				521A8EA919F11F5000D177D7 /* fonts in Resources */,
+				50938B47261E7FFA007A8873 /* shCoreDjango.css in Resources */,
+				50938B33261E7FFA007A8873 /* shThemeRDark.css in Resources */,
+				50938B2F261E7FFA007A8873 /* shCoreEmacs.css in Resources */,
 				505AF407261703550067B252 /* remove.wav in Resources */,
+				50938B29261E7FFA007A8873 /* shCoreMDUltra.css in Resources */,
 				3EACC98F19EE6D4300EB3C5E /* res in Resources */,
 				508036BB2615725400EA57C7 /* white.png in Resources */,
+				50938B39261E7FFA007A8873 /* shCore.css in Resources */,
 				1AF87B891F6F781D007BE51C /* LaunchScreenBackground.png in Resources */,
+				50938B41261E7FFA007A8873 /* shThemeEclipse.css in Resources */,
+				50938B6D261E7FFA007A8873 /* Documentation.pdf in Resources */,
 				505AF40A261703740067B252 /* gameover.wav in Resources */,
 				505AF410261706C90067B252 /* selection.wav in Resources */,
 				46880B7B19C43A67006E1F66 /* CloseNormal.png in Resources */,
 				505AF3FF2616F9700067B252 /* tetrisBGM.mp3 in Resources */,
+				50938B3F261E7FFA007A8873 /* shCoreRDark.css in Resources */,
+				50938B27261E7FFA007A8873 /* shThemeFadeToGrey.css in Resources */,
+				50938B31261E7FFA007A8873 /* shThemeMidnight.css in Resources */,
 				1AF87B881F6F781D007BE51C /* LaunchScreen.storyboard in Resources */,
 				50E46BDA25F9AEA100919209 /* sky.jpeg in Resources */,
+				50938B49261E7FFA007A8873 /* shAutoloader.js in Resources */,
+				50938B3D261E7FFA007A8873 /* shCoreEclipse.css in Resources */,
 				505AF40D261703CE0067B252 /* drop.mp3 in Resources */,
+				50938B2B261E7FFA007A8873 /* shCoreFadeToGrey.css in Resources */,
+				50938B4F261E7FFA007A8873 /* shLegacy.js in Resources */,
+				50938B3B261E7FFA007A8873 /* shCoreDefault.css in Resources */,
+				50938B37261E7FFA007A8873 /* shThemeEmacs.css in Resources */,
 				5092F3D7261C33C10029FCF5 /* smogTrap.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -625,11 +963,28 @@
 			buildActionMask = 2147483647;
 			files = (
 				505AF40B261703740067B252 /* gameover.wav in Resources */,
+				50938B3A261E7FFA007A8873 /* shCore.css in Resources */,
 				46880B8219C43A67006E1F66 /* HelloWorld.png in Resources */,
+				50938B2E261E7FFA007A8873 /* shCoreMidnight.css in Resources */,
+				50938B4C261E7FFA007A8873 /* shCore.js in Resources */,
+				50938B6E261E7FFA007A8873 /* Documentation.pdf in Resources */,
+				50938B30261E7FFA007A8873 /* shCoreEmacs.css in Resources */,
+				50938B40261E7FFA007A8873 /* shCoreRDark.css in Resources */,
 				503AE0F817EB97AB00D1A890 /* Icon.icns in Resources */,
 				3EACC99019EE6D4300EB3C5E /* res in Resources */,
 				521A8EAA19F11F5000D177D7 /* fonts in Resources */,
+				50938B3C261E7FFA007A8873 /* shCoreDefault.css in Resources */,
 				505AF408261703550067B252 /* remove.wav in Resources */,
+				50938B3E261E7FFA007A8873 /* shCoreEclipse.css in Resources */,
+				50938B42261E7FFA007A8873 /* shThemeEclipse.css in Resources */,
+				50938B4E261E7FFA007A8873 /* shBrushCpp.js in Resources */,
+				50938B46261E7FFA007A8873 /* shThemeDefault.css in Resources */,
+				50938B32261E7FFA007A8873 /* shThemeMidnight.css in Resources */,
+				50938B44261E7FFA007A8873 /* shThemeDjango.css in Resources */,
+				50938B4A261E7FFA007A8873 /* shAutoloader.js in Resources */,
+				50938B2C261E7FFA007A8873 /* shCoreFadeToGrey.css in Resources */,
+				50938B34261E7FFA007A8873 /* shThemeRDark.css in Resources */,
+				50938B2A261E7FFA007A8873 /* shCoreMDUltra.css in Resources */,
 				5092F3D8261C33C10029FCF5 /* smogTrap.png in Resources */,
 				46880B7C19C43A67006E1F66 /* CloseNormal.png in Resources */,
 				508036BC2615725400EA57C7 /* white.png in Resources */,
@@ -637,8 +992,13 @@
 				505AF4002616F9700067B252 /* tetrisBGM.mp3 in Resources */,
 				46880B7E19C43A67006E1F66 /* CloseSelected.png in Resources */,
 				505AF411261706C90067B252 /* selection.wav in Resources */,
+				50938B28261E7FFA007A8873 /* shThemeFadeToGrey.css in Resources */,
 				50567391261AD8AB00A08301 /* twistTrap.png in Resources */,
+				50938B50261E7FFA007A8873 /* shLegacy.js in Resources */,
 				505AF40E261703CE0067B252 /* drop.mp3 in Resources */,
+				50938B38261E7FFA007A8873 /* shThemeEmacs.css in Resources */,
+				50938B48261E7FFA007A8873 /* shCoreDjango.css in Resources */,
+				50938B36261E7FFA007A8873 /* shThemeMDUltra.css in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -649,30 +1009,45 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				50938B5B261E7FFA007A8873 /* JSONChildren.cpp in Sources */,
 				50E5D198260839380014EC25 /* MapLayer.cpp in Sources */,
 				509F9269261D75F6007A5C42 /* ToolScene.cpp in Sources */,
 				50B4290D260AEBF500A74E10 /* Blocks_S.cpp in Sources */,
 				50E5D18F260821360014EC25 /* TitleLobbyLayer.cpp in Sources */,
 				50E5D1A626086C7F0014EC25 /* Blocks_J.cpp in Sources */,
 				1AF87B781F6F77F7007BE51C /* AppController.mm in Sources */,
+				50938B6B261E7FFA007A8873 /* JSONIterators.cpp in Sources */,
+				50938B69261E7FFA007A8873 /* JSONAllocator.cpp in Sources */,
 				1AF87B8B1F6F782A007BE51C /* RootViewController.mm in Sources */,
 				509F926D261D781B007A5C42 /* ButtonLayer.cpp in Sources */,
 				505AF41426170BCF0067B252 /* HoldLayer.cpp in Sources */,
 				50E5D19C260844B90014EC25 /* MapMgr.cpp in Sources */,
+				50938B67261E7FFA007A8873 /* JSONWorker.cpp in Sources */,
 				509F9271261D9C04007A5C42 /* ToolMainLayer.cpp in Sources */,
+				50938B51261E7FFA007A8873 /* internalJSONNode.cpp in Sources */,
 				50E5D1AC26088E2E0014EC25 /* KeyMgr.cpp in Sources */,
+				50938B57261E7FFA007A8873 /* JSONNode.cpp in Sources */,
 				46880B8819C43A87006E1F66 /* AppDelegate.cpp in Sources */,
 				50B42917260B222E00A74E10 /* Blocks_O.cpp in Sources */,
 				500BEAEF261314BD008EEF74 /* DataMgr.cpp in Sources */,
+				50938B61261E7FFA007A8873 /* JSONValidator.cpp in Sources */,
+				50938B5F261E7FFA007A8873 /* JSONMemory.cpp in Sources */,
 				50B42909260ACD0000A74E10 /* Blocks_I.cpp in Sources */,
 				50E5D193260821360014EC25 /* GameScene.cpp in Sources */,
 				500BEAE72612C8F7008EEF74 /* BlockLayer.cpp in Sources */,
+				50938B63261E7FFA007A8873 /* libjson.cpp in Sources */,
 				1AF87B8A1F6F7822007BE51C /* main.m in Sources */,
+				50938B59261E7FFA007A8873 /* JSONWriter.cpp in Sources */,
 				5092F3D4261C2E1B0029FCF5 /* ParticleMgr.cpp in Sources */,
 				50E5D191260821360014EC25 /* TitleScene.cpp in Sources */,
 				50B42915260B222E00A74E10 /* Blocks_T.cpp in Sources */,
+				50938B65261E7FFA007A8873 /* JSONPreparse.cpp in Sources */,
+				50938B55261E7FFA007A8873 /* JSONStream.cpp in Sources */,
+				50938B5D261E7FFA007A8873 /* JSONDebug.cpp in Sources */,
+				50938B71261E8DA6007A8873 /* SpecialBlock.cpp in Sources */,
 				50E5D1A02608498F0014EC25 /* Blocks.cpp in Sources */,
 				500BEAEB2613054F008EEF74 /* UILayer.cpp in Sources */,
+				50938B53261E7FFA007A8873 /* JSONNode_Mutex.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -684,24 +1059,39 @@
 				50B4290E260AEBF500A74E10 /* Blocks_S.cpp in Sources */,
 				509F9272261D9C04007A5C42 /* ToolMainLayer.cpp in Sources */,
 				46880B8919C43A87006E1F66 /* AppDelegate.cpp in Sources */,
+				50938B5C261E7FFA007A8873 /* JSONChildren.cpp in Sources */,
+				50938B56261E7FFA007A8873 /* JSONStream.cpp in Sources */,
 				50B42918260B222E00A74E10 /* Blocks_O.cpp in Sources */,
+				50938B72261E8DA6007A8873 /* SpecialBlock.cpp in Sources */,
 				5092F3D5261C2E1B0029FCF5 /* ParticleMgr.cpp in Sources */,
 				509F926A261D75F6007A5C42 /* ToolScene.cpp in Sources */,
 				503AE10517EB98FF00D1A890 /* main.cpp in Sources */,
 				500BEAF0261314BD008EEF74 /* DataMgr.cpp in Sources */,
 				50E5D190260821360014EC25 /* TitleLobbyLayer.cpp in Sources */,
+				50938B58261E7FFA007A8873 /* JSONNode.cpp in Sources */,
+				50938B6C261E7FFA007A8873 /* JSONIterators.cpp in Sources */,
+				50938B68261E7FFA007A8873 /* JSONWorker.cpp in Sources */,
+				50938B64261E7FFA007A8873 /* libjson.cpp in Sources */,
 				50E5D1AD26088E2E0014EC25 /* KeyMgr.cpp in Sources */,
+				50938B5A261E7FFA007A8873 /* JSONWriter.cpp in Sources */,
 				500BEAEC2613054F008EEF74 /* UILayer.cpp in Sources */,
+				50938B62261E7FFA007A8873 /* JSONValidator.cpp in Sources */,
 				500BEAE82612C8F7008EEF74 /* BlockLayer.cpp in Sources */,
+				50938B54261E7FFA007A8873 /* JSONNode_Mutex.cpp in Sources */,
+				50938B60261E7FFA007A8873 /* JSONMemory.cpp in Sources */,
 				50B42916260B222E00A74E10 /* Blocks_T.cpp in Sources */,
+				50938B52261E7FFA007A8873 /* internalJSONNode.cpp in Sources */,
 				50E5D1A726086C7F0014EC25 /* Blocks_J.cpp in Sources */,
 				509F926E261D781B007A5C42 /* ButtonLayer.cpp in Sources */,
 				505AF41526170BCF0067B252 /* HoldLayer.cpp in Sources */,
 				50E5D199260839380014EC25 /* MapLayer.cpp in Sources */,
+				50938B6A261E7FFA007A8873 /* JSONAllocator.cpp in Sources */,
+				50938B66261E7FFA007A8873 /* JSONPreparse.cpp in Sources */,
 				50B4290A260ACD0000A74E10 /* Blocks_I.cpp in Sources */,
 				50E5D1A12608498F0014EC25 /* Blocks.cpp in Sources */,
 				50E5D19D260844B90014EC25 /* MapMgr.cpp in Sources */,
 				50E5D192260821360014EC25 /* TitleScene.cpp in Sources */,
+				50938B5E261E7FFA007A8873 /* JSONDebug.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

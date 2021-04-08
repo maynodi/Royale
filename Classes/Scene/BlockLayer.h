@@ -13,19 +13,24 @@ class BlockLayer : public cocos2d::LayerColor
 {
 private:
     int nextBlockType_;
-    std::vector<cocos2d::Sprite*> nextBlocks_[2];
+    std::map<int, std::vector<cocos2d::Vec2>> locationMap_; // 기본 위치
+    std::map<int, std::vector<cocos2d::Sprite*>> poolMap_;    
     
 public:
     static BlockLayer* create();
     
 public:
     virtual bool init() override;
+    void preSetting();
     
 public:
     virtual void update(float dt) override;
-    void checkChangeNextBlock();
-    cocos2d::Color3B findNextBlockColor();
-    std::vector<int> findNextBlockLocation();
+    
+public:
+    int setNextBlockCnt(int type);
+    cocos2d::Color3B findNextBlockColor(int type);
+    void findNextBlockLocation(int type, int blockCnt);
+    void ChangeNextBlock();
     
 public:
     BlockLayer();
