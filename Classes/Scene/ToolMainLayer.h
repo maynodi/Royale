@@ -7,6 +7,7 @@ class ToolMainLayer : public cocos2d::Layer
 private:
     int blockCnt_;
     
+    
 public:
     static ToolMainLayer* create();
     

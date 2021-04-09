@@ -447,7 +447,7 @@ bool MapMgr::checkUnderSomething(std::vector<BLOCK*> blockVec)
     // 접촉 가능성 있는 블록만 for문을 통해, 맵 아래에 접촉될 블럭이 있는지를 조사한다.
     for(auto& newBlock : newBlockList_)
     {
-        int colIndex = newBlock->x_ / BLOCKSIZE; //- 1;
+        int colIndex = newBlock->x_ / BLOCKSIZE - 1;
         int rowIndex = newBlock->y_ / BLOCKSIZE;
         
         for(int i = 0; i < rowIndex; ++i)
@@ -469,7 +469,7 @@ void MapMgr::getMaxRowOfUnderBlock(int* dist)
     
     for(auto& newBlock : newBlockList_)
     {
-        int colIndex = newBlock->x_ / BLOCKSIZE; //- 1;
+        int colIndex = newBlock->x_ / BLOCKSIZE - 1;
         int rowIndex = newBlock->y_ / BLOCKSIZE;
         
         for(int i = 0; i < rowIndex; ++i)

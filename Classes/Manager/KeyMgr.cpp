@@ -15,6 +15,7 @@
 
 #include "MapLayer.h"
 #include "holdLayer.h"
+#include "TitleScene.h"
 
 USING_NS_CC;
 
@@ -206,6 +207,7 @@ void KeyMgr::blocksControl(KEY keyCode)
         case KEY::KEY_0:
         {
             DataMgr::getInstance()->addItemCnt();
+            break;
         }
         case KEY::KEY_1:
         {
@@ -224,6 +226,13 @@ void KeyMgr::blocksControl(KEY keyCode)
                     ParticleMgr::getInstance()->particleSmog(pMapLayer, pos);
                 }
             }
+            break;
+        }
+        case KEY::KEY_2:
+        {
+            Scene* pScene = TitleScene::create();
+            Director::getInstance()->replaceScene(pScene);
+            break;
         }
         default:
             break;

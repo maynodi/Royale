@@ -16,7 +16,7 @@
 USING_NS_CC;
 
 BlockLayer::BlockLayer()
-    : nextBlockType_(BLOCKTYPE::END)
+: nextBlockType_(BLOCKTYPE::END)
 {
 }
 
@@ -85,7 +85,7 @@ void BlockLayer::preSetting()
             
             spriteVec[i] = pSprite;
         }
-            
+        
         poolMap_[type] = spriteVec;
     }
 }
@@ -124,35 +124,26 @@ void BlockLayer::ChangeNextBlock()
     {
         if(nullptr == child->getParent())
             continue;
-
+        
         child->removeFromParent();
     }
     
     std::list<int> nextBlockList = MapMgr::getInstance()->getNextBlockTypeList();
     std::list<int>::iterator iter = nextBlockList.begin();
     
-    int interval = 1; // 다음에 나올 블럭들이 간격을 두고 그려지게 하기 위한 변수
-    //for(; iter != nextBlockList.end(); ++iter)
-    //{
-    //    if(2 < nextBlockList.size())
-    //        continue;
+    std::vector<cocos2d::Vec2> posVec = locationMap_[(*iter)];
+    
+    int blockCnt = poolMap_[(*iter)].size();
+    
+    for(int i = 0; i < blockCnt; ++i)
+    {
         
-        std::vector<cocos2d::Vec2> posVec = locationMap_[(*iter)];
+        poolMap_[(*iter)][i]->setPosition(Vec2(BLOCKSIZE * (posVec[i].x + initPos::nextBlockPos[POS_X])
+                                               , BLOCKSIZE * (posVec[i].y + initPos::nextBlockPos[POS_Y])));
         
-        int blockCnt = poolMap_[(*iter)].size();
         
-        for(int i = 0; i < blockCnt; ++i)
-        {
-            int posX = posVec[i].x;
-            posX += (interval * 5 * BLOCKSIZE);
-            
-            poolMap_[(*iter)][i]->setPositionX(posX);
-            
-            this->addChild(poolMap_[(*iter)][i]);
-        }
-        
-    //    interval += 1;
-    //}
+        this->addChild(poolMap_[(*iter)][i]);
+    }
 }
 
 cocos2d::Color3B BlockLayer::findNextBlockColor(int type)

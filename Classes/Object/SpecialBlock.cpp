@@ -65,24 +65,6 @@ bool SpecialBlock::init(cocos2d::Color3B color, int blockCnt)
 
 void SpecialBlock::rotate(int keyPressedCnt)
 {
-    //  // 회전
-    //    Mat4 mat;
-    //    Mat4::createRotationZ(ROT_Z_ANGLE, &mat);
-    //    for(int i = 0; i < BLOCKCNT; ++i)
-    //    {
-    //        Vec2 pos = pCurBlocks_->getBlockSprite(i)->getPosition();
-    //        pos.x -= BLOCKSIZE * (location::T[POS_X][i]);
-    //        pos.y -= BLOCKSIZE * (location::T[POS_Y][i]);
-    //
-    //        Vec4 pos3 = Vec4(BLOCKSIZE * location::T[POS_X][i], BLOCKSIZE * location::T[POS_Y][i], 0, 1);
-    //        Vec4 newpos = mat * pos3;
-    //
-    //        pCurBlocks_->getBlockSprite(i)->setPosition(pos.x + newpos.x, pos.y + newpos.y);
-    //
-    //    }
-    // == == == == == == == == == == == == == == == == == == == ==
-    
-    
     // 일단 미리 회전 후의 좌표를 계산해놓고
     std::vector<cocos2d::Vec2> newPosVec;
     newPosVec.reserve(blockCnt_);
@@ -93,15 +75,26 @@ void SpecialBlock::rotate(int keyPressedCnt)
     {
         // 원점에서 이동한 거리
         Vec2 pos = blocks_[i]->pSprite_->getPosition();
+
         pos.x -= BLOCKSIZE * posVec_[i].x;
         pos.y -= BLOCKSIZE * posVec_[i].y;
         
-        Vec4 pos3 = Vec4(BLOCKSIZE * posVec_[i].x, BLOCKSIZE * posVec_[i].y, 0, 1);
+        Vec4 pos3 = Vec4( posVec_[i].x, posVec_[i].y, 0, 1);
         Vec4 newpos = mat * pos3;
+
+        newpos.x = floor(newpos.x + 0.5f);
+        newpos.y = floor(newpos.y + 0.5f);
         
+        // 원점에 대한 기본 좌표 변경
+        posVec_[i].x = newpos.x;
+        posVec_[i].y = newpos.y;
+
+        newpos *= BLOCKSIZE;
+
         newPosVec.emplace_back(Vec2(pos.x + newpos.x, pos.y + newpos.y));
     }
-    
+
+
     // 회전에 제한이 걸리는 위치인가?
     if(true == checkLimitedRotate(newPosVec, blockCnt_))
         return;

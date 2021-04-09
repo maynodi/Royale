@@ -62,7 +62,7 @@ bool MapLayer::init()
     DrawGridMap();
     
     // 소리
-    CocosDenshion::SimpleAudioEngine::getInstance()->playBackgroundMusic("tetrisBGM.mp3");
+    CocosDenshion::SimpleAudioEngine::getInstance()->playBackgroundMusic("tetrisBGM.mp3",true);
     CocosDenshion::SimpleAudioEngine::getInstance()->setBackgroundMusicVolume(0.2f);
     
     return true;
