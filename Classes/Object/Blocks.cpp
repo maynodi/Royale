@@ -308,7 +308,7 @@ void Blocks::autoMoveDown()
 }
 
 void Blocks::checkPreviewBlocks()
-{
+{    
      // preview draw
     if(true == MapMgr::getInstance()->checkUnderSomething(blocks_))
     {

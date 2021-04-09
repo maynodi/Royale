@@ -63,6 +63,9 @@ void BlockLayer::preSetting()
     for(int type = 0; type < BLOCKTYPE::END; ++type)
     {
         int cnt = setNextBlockCnt(type);
+        if(type == BLOCKTYPE::SPECIAL && cnt == -1) // 데이터 못 불러온 경우
+            continue;
+        
         Color3B color = findNextBlockColor(type);
         
         findNextBlockLocation(type, cnt);
@@ -130,7 +133,7 @@ void BlockLayer::ChangeNextBlock()
     
     std::list<int> nextBlockList = MapMgr::getInstance()->getNextBlockTypeList();
     std::list<int>::iterator iter = nextBlockList.begin();
-    
+        
     std::vector<cocos2d::Vec2> posVec = locationMap_[(*iter)];
     
     int blockCnt = poolMap_[(*iter)].size();

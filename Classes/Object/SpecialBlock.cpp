@@ -33,7 +33,12 @@ SpecialBlock* SpecialBlock::create(cocos2d::Color3B color)
 bool SpecialBlock::init(cocos2d::Color3B color, int blockCnt)
 {
     blockCnt_ = DataMgr::getInstance()->getSpecialBlockCnt();
+    if(-1 == blockCnt) // 데이터 못 불러온 경우
+        return false;
+    
     posVec_ = DataMgr::getInstance()->getLoadInfoVec();
+    if(true == posVec_.empty())
+        return false;
     
     blocks_.resize(blockCnt_);
     

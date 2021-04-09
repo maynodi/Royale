@@ -104,7 +104,9 @@ void MapMgr::update()
         addLine();
     }
     
-    makeNewBlocks();
+    if(false == makeNewBlocks())
+        return;
+        
     if(OVER == gameState_)
         return;
     
@@ -234,16 +236,23 @@ int MapMgr::getMaxRowOfExistingBlocksInMap()
     return 0;
 }
 
-void MapMgr::makeNewBlocks()
+bool MapMgr::makeNewBlocks()
 {
     if(nullptr != pCurBlocks_)
-        return;
+        return true;
     
     Blocks* pBlocks = nullptr;
+    int specialBlockCnt = DataMgr::getInstance()->getSpecialBlockCnt();
     
     int nextType = nextBlockTypeList_.front();
     nextBlockTypeList_.pop_front();
     
+    // special block 데이터 못 불러온 경우
+    if(BLOCKTYPE::SPECIAL == nextType && -1 == specialBlockCnt)
+    {
+        nextType = rand() % (BLOCKTYPE::END - 1);
+    }
+        
     switch (nextType)
     {
         case BLOCKTYPE::J:
@@ -286,17 +295,17 @@ void MapMgr::makeNewBlocks()
     
     if(2 > nextBlockTypeList_.size())
     {
-        // 넣기 전에 안에 있는 지 먼저 검사
-        std::list<int>::iterator iter = std::find(nextBlockTypeList_.begin(), nextBlockTypeList_.end(), nextType);
-        if(iter ==nextBlockTypeList_.end())
-        {
-            nextBlockTypeList_.emplace_back(nextType);
-        }
-        else
-        {
-            nextType = getRandom(nextBlockRandomList_, BLOCKTYPE::END);
-            nextBlockTypeList_.emplace_back(nextType);
-        }
+       // 넣기 전에 안에 있는 지 먼저 검사
+       std::list<int>::iterator iter = std::find(nextBlockTypeList_.begin(), nextBlockTypeList_.end(), nextType);
+       if(iter ==nextBlockTypeList_.end())
+       {
+         nextBlockTypeList_.emplace_back(nextType);
+       }
+       else
+       {
+           nextType = getRandom(nextBlockRandomList_, BLOCKTYPE::END);
+           nextBlockTypeList_.emplace_back(nextType);
+       }
     }
     
     // 스프라이트를 mapLayer에 자식으로 추가
@@ -305,7 +314,6 @@ void MapMgr::makeNewBlocks()
     
     Sprite* pSprite = nullptr;
     int randomTrap = getRandom(TrapRandomList_, 15);
-    
     
     int curBlockCnt = pCurBlocks_->getBlockCnt();
     
@@ -327,6 +335,8 @@ void MapMgr::makeNewBlocks()
     {
         gameState_ = OVER;
     }
+    
+    return true;
 }
 
 int MapMgr::getRandom(std::list<int> list, int condition)

@@ -16,7 +16,7 @@ DataMgr::DataMgr()
     , lineCnt_(0)
     , limitLineCnt_(5)
     , itemCnt_(0)
-    , specialBlockCnt_(0)
+    , specialBlockCnt_(-1)
 {
 }
 
@@ -76,7 +76,7 @@ bool DataMgr::loadData()
     std::string filePath = FileUtils::getInstance()->getWritablePath() + "blockData.json";
     
     __String* jsonInfo = __String::createWithContentsOfFile(filePath);
-    if(nullptr == jsonInfo)
+    if("" == jsonInfo->_string)
         return false;
     
     JSONNode node = libjson::parse(jsonInfo->getCString());

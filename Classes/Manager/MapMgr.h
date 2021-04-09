@@ -59,7 +59,7 @@ public:
     cocos2d::Sprite* createItem(int col, int row);
     
 public:
-    void makeNewBlocks();
+    bool makeNewBlocks();
     int getRandom(std::list<int> list, int condition);
     void createTrap(cocos2d::Sprite* sprite, int condition);
     void move(int dir);

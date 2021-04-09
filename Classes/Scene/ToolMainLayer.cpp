@@ -7,6 +7,10 @@ USING_NS_CC;
 ToolMainLayer::ToolMainLayer()
     : blockCnt_(0)
 {
+    for(int i = 0; i < 4; ++i)
+    {
+        isExisting_[i].resize(4);
+    }
 }
 
 ToolMainLayer::~ToolMainLayer()
@@ -45,10 +49,6 @@ bool ToolMainLayer::init()
     return true;
 }
 
-void ToolMainLayer::update(float dt)
-{
-}
-
 void ToolMainLayer::checkCollision(cocos2d::Vec2 mousePos)
 {
     Vector<Node*> children = getChildren();
@@ -58,6 +58,14 @@ void ToolMainLayer::checkCollision(cocos2d::Vec2 mousePos)
         {
             // 스프라이트 생성
             Vec2 childPos = child->getPosition();
+            
+            int colIndex = childPos.x / BLOCKSIZE - 1;
+            int rowIndex = childPos.y / BLOCKSIZE;
+            
+            // 이미 스프라이트가 존재하면 리턴
+            if(true == isExisting_[rowIndex][colIndex])
+                return;
+            
             createBlock(childPos);
             return;
         }
@@ -74,6 +82,11 @@ void ToolMainLayer::createBlock(cocos2d::Vec2 pos)
     pSprite->setTag(TOOL_BLOCK_TAG);
     
     toolScene->addChild(pSprite);
+    
+    int colIndex = pos.x / BLOCKSIZE - 1;
+    int rowIndex = pos.y / BLOCKSIZE;
+    
+    isExisting_[rowIndex][colIndex] = true;
     
     blockCnt_ += 1;
 }
